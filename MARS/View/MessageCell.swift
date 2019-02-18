@@ -12,11 +12,13 @@ class MessageCell: BaseTableViewCell {
     
     var isIncoming: Bool! {
         didSet {
-            cellShapeView.backgroundColor = isIncoming ? secondaryColor : secondaryRedColor
+            cellShapeView.backgroundColor = isIncoming ? secondaryColor : primaryRedColor
             label.textColor = isIncoming ? primaryFontColor : primaryColor
             if isIncoming {
+                NSLayoutConstraint.deactivate(trailingConstraints)
                 NSLayoutConstraint.activate(leadingConstraints)
             } else {
+                NSLayoutConstraint.deactivate(leadingConstraints)
                 NSLayoutConstraint.activate(trailingConstraints)
             }
         }

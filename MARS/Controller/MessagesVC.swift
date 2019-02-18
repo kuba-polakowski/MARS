@@ -38,29 +38,47 @@ class MessagesVC: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let lastIndexPath = IndexPath(row: messages.count - 1, section: 0)
-        tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-        
+        if let lastSection = messages.last {
+            let lastSectionIndex = messages.count - 1
+            let lastRowIndex = lastSection.count - 1
+            let lastIndexPath = IndexPath(row: lastRowIndex, section: lastSectionIndex)
+            tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return messages.count
+    }
+    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return messages[section].first?.date.toString()
+//    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = MessagesHeaderView()
+        headerView.label.text = messages[section].first?.date.toString()
+        return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
+        return messages[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: messagesCellId, for: indexPath) as! MessageCell
-        let message = messages[indexPath.row]
+        let message = messages[indexPath.section][indexPath.row]
         
         cell.label.text = message.text
         cell.authorLabel.text = message.author
         cell.isIncoming = message.author != "Peter"
         
         if indexPath.row > 0 {
-            cell.isContinuing = message.author == "Peter" || message.author == messages[indexPath.row - 1].author
+            let previousMessage = messages[indexPath.section][indexPath.row - 1]
+            cell.isContinuing = message.author == "Peter" || message.author == previousMessage.author
         } else {
             cell.isContinuing = false
         }

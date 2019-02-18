@@ -8,17 +8,16 @@
 
 import Foundation
 
-let foodMessages: [Message] = [Message(author: "Homer", date: Date(), text: "3 Campari Cocktails You Don't Need a Gazillion Ingredients to Make"),
-                               Message(author: "Abe", date: Date(), text: "The Most-Used Knife In My Kitchen Only Cost $7"),
-                               Message(author: "Abe", date: Date(), text: "Most-Used Knife In My Kitchen Only Cost $7"),
-                               Message(author: "Abe", date: Date(), text: "The Knife In My Kitchen Only Cost $7"),
-                               Message(author: "Frink", date: Date(), text: "I Learned Some Lessons Spatchcocking a Chicken\nA flat bird is (usually) a good bird—except when you ignore the directions."),
-                               Message(author: "Moe", date: Date(), text: "This Lamb Tagine Is More Warming Than Your Fireplace App"),
-                               Message(author: "Moe", date: Date(), text: "Just so you know"),
-                               Message(author: "Peter", date: Date(), text: "At home, no one goes full molten chocolate cake. It requires making a cake, and a ganache, and doing all kinds of cake gymnastics to make sure the sponge is tender and cooked,"),
-                               Message(author: "Peter", date: Date(), text: "The ganache properly melted and silky."),
-                               Message(author: "Peter", date: Date(), text: "It’s a lot."),
-                               Message(author: "Abe", date: Date(), text: "The Most-Used Knife In My Kitchen Only Cost $7"),
-                               Message(author: "Abe", date: Date(), text: "The Most-Used Knife In My Kitchen Only Cost $7")
-    
+let foodMessages: [[Message]] = [[Message(author: "Abe", date: Date.dateFromString("01/02/2020"), text: "Pickles, relish, lemon curd"),
+                                  Message(author: "Abe", date: Date.dateFromString("01/02/2020"), text: "Peanut butter"),
+                                  Message(author: "Abe", date: Date.dateFromString("01/02/2020"), text: "An unnecessarily long recipe for a cake that uses pre-made chocolate cake mix and canned frosting - can't make that up.")],
+                                 [Message(author: "Homer", date: Date.dateFromString("01/03/2020"), text: "3 Dishes You Don't Need to Make Right Now. Check them out"),
+                                  Message(author: "Frink", date: Date.dateFromString("01/03/2020"), text: "Just a message, it doesn't really matter, just something about food I guess."),
+                                  Message(author: "Moe", date: Date.dateFromString("01/03/2020"), text: "This hummus tastes like fireplace sweepings. Needs ketchup, bad."),
+                                  Message(author: "Moe", date: Date.dateFromString("01/03/2020"), text: "Just so you know")],
+                                 [Message(author: "Peter", date: Date.dateFromString("01/04/2020"), text: "Kale smoothies, grass-fed wheat, free range quinoa."),
+                                  Message(author: "Peter", date: Date.dateFromString("01/04/2020"), text: "Terroir of chocolate."),
+                                  Message(author: "Peter", date: Date.dateFromString("01/04/2020"), text: "Whatever.")],
+                                 [Message(author: "Abe", date: Date.dateFromString("01/05/2020"), text: "Something something mushy peas"),
+                                  Message(author: "Abe", date: Date.dateFromString("01/05/2020"), text: "Porridge and gritz.")]
 ]

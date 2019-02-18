@@ -16,3 +16,4 @@ let secondaryFontColor = #colorLiteral(red: 0.370555222, green: 0.3705646992, bl
 
 let primaryRedColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
 let secondaryRedColor = #colorLiteral(red: 1, green: 0.4932718873, blue: 0.4739984274, alpha: 1)
+let tertiaryRedColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)

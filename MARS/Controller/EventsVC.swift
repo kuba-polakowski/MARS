@@ -58,6 +58,41 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         return cell
     }
     
-
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let chosenCell = collectionView.cellForItem(at: indexPath) as! EventCell
+        animateToDetailView(cell: chosenCell, at: indexPath)
+    }
+    
+    
+    func animateToDetailView(cell: EventCell, at index: IndexPath) {
+        UIView.animate(withDuration: 0.1, animations: { [unowned self] in
+            self.navigationController?.navigationBar.alpha = 0
+        }) { (_) in
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
+                cell.frame.origin.y = self.collectionView.contentOffset.y
+                cell.backgroundColor = primaryColor
+            }, completion: { (_) in
+                cell.clipsToBounds = false
+                cell.leadingThumbnailConstraint.constant = -15
+                cell.trailingThumbnailConstraint.constant = 15
+                cell.heightThumbnailConstraint.constant += 10
+                cell.dateLabelLeadingConstraint.constant = cell.frame.width - 110
+                UIView.animate(withDuration: 4) {
+                    cell.layoutIfNeeded()
+                    cell.titleLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                }
+            })
+        }
+        
+        for cell in collectionView.visibleCells as! [EventCell]{
+            UIView.animate(withDuration: 0.5) {
+                if !cell.isSelected {
+                    cell.alpha = 0
+                }
+            }
+        }
+        
+    }
+    
     
 }

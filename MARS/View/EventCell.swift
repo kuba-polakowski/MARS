@@ -39,7 +39,10 @@ class EventCell: UICollectionViewCell {
         return label
     }()
     
-    
+    var leadingThumbnailConstraint: NSLayoutConstraint!
+    var trailingThumbnailConstraint: NSLayoutConstraint!
+    var heightThumbnailConstraint: NSLayoutConstraint!
+    var dateLabelLeadingConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,19 +55,27 @@ class EventCell: UICollectionViewCell {
         addSubview(titleLabel)
         addSubview(dateLabel)
         
-        thumbnailView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         thumbnailView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        thumbnailView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
-        thumbnailView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 9/16).isActive = true
+        heightThumbnailConstraint = thumbnailView.heightAnchor.constraint(equalToConstant: 220)
+        leadingThumbnailConstraint = thumbnailView.leadingAnchor.constraint(equalTo: leadingAnchor)
+        trailingThumbnailConstraint = thumbnailView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        
+        leadingThumbnailConstraint.isActive = true
+        trailingThumbnailConstraint.isActive = true
+        heightThumbnailConstraint.isActive = true
+        
+//        thumbnailView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 9/14).isActive = true
 
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         titleLabel.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor, constant: 10).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         
-        dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
         dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        
+        dateLabelLeadingConstraint = dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+        dateLabelLeadingConstraint.isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

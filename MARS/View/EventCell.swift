@@ -10,72 +10,31 @@ import UIKit
 
 class EventCell: UICollectionViewCell {
     
-    let thumbnailView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
+    let eventView: BaseEventView = {
+        let eventView = BaseEventView()
+        eventView.translatesAutoresizingMaskIntoConstraints = false
         
-        return imageView
+        return eventView
     }()
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
-        label.textColor = primaryFontColor
-        label.numberOfLines = 2
-        label.adjustsFontSizeToFitWidth = true
-        
-        return label
-    }()
-    
-    let dateLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
-        label.textColor = secondaryFontColor
-        
-        return label
-    }()
-    
-    var leadingThumbnailConstraint: NSLayoutConstraint!
-    var trailingThumbnailConstraint: NSLayoutConstraint!
-    var heightThumbnailConstraint: NSLayoutConstraint!
-    var dateLabelLeadingConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = secondaryColor
-        layer.cornerRadius = 15
-        layer.masksToBounds = true
-
-        addSubview(thumbnailView)
-        addSubview(titleLabel)
-        addSubview(dateLabel)
+        addSubview(eventView)
+        eventView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        eventView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        eventView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        eventView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        thumbnailView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        
-        heightThumbnailConstraint = thumbnailView.heightAnchor.constraint(equalToConstant: 220)
-        leadingThumbnailConstraint = thumbnailView.leadingAnchor.constraint(equalTo: leadingAnchor)
-        trailingThumbnailConstraint = thumbnailView.trailingAnchor.constraint(equalTo: trailingAnchor)
-        
-        leadingThumbnailConstraint.isActive = true
-        trailingThumbnailConstraint.isActive = true
-        heightThumbnailConstraint.isActive = true
-        
-//        thumbnailView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 9/14).isActive = true
-
-        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor, constant: 10).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        
-        dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-        dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        
-        dateLabelLeadingConstraint = dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
-        dateLabelLeadingConstraint.isActive = true
+    }
+    
+    func animateForTransition() {
+        eventView.animateForTransition()
+    }
+    
+    func setOriginalConstraints() {
+        eventView.animateForTransition()
     }
     
     required init?(coder aDecoder: NSCoder) {

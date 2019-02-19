@@ -56,7 +56,7 @@ class MessagesVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = MessagesHeaderView()
-        headerView.label.text = messages[section].first?.date.toString()
+        headerView.label.text = messages[section].first?.date.asString()
         return headerView
     }
     

@@ -51,9 +51,9 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: eventCellId, for: indexPath) as! EventCell
         let event = upcomingEvents[indexPath.item]
         
-        cell.thumbnailView.image = UIImage(named: event.imageName)
-        cell.titleLabel.text = event.title
-        cell.dateLabel.text = "november 12"
+        cell.eventView.thumbnailView.image = UIImage(named: event.imageName)
+        cell.eventView.titleLabel.text = event.title
+        cell.eventView.dateLabel.text = event.date.asString()
         
         return cell
     }
@@ -65,31 +65,32 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     
     func animateToDetailView(cell: EventCell, at index: IndexPath) {
-        UIView.animate(withDuration: 0.1, animations: { [unowned self] in
-            self.navigationController?.navigationBar.alpha = 0
-        }) { (_) in
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
-                cell.frame.origin.y = self.collectionView.contentOffset.y
-                cell.backgroundColor = primaryColor
+        navigationController?.navigationBar.fadeOut(duration: 0.1)
+        
+        let currentOffset = collectionView.contentOffset.y
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+            cell.frame.origin.y = currentOffset
+            cell.eventView.backgroundColor = primaryColor
             }, completion: { (_) in
-                cell.clipsToBounds = false
-                cell.leadingThumbnailConstraint.constant = -15
-                cell.trailingThumbnailConstraint.constant = 15
-                cell.heightThumbnailConstraint.constant += 10
-                cell.dateLabelLeadingConstraint.constant = cell.frame.width - 110
-                UIView.animate(withDuration: 4) {
-                    cell.layoutIfNeeded()
-                    cell.titleLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                }
-            })
-        }
+                cell.animateForTransition()
+        })
         
         for cell in collectionView.visibleCells as! [EventCell]{
-            UIView.animate(withDuration: 0.5) {
-                if !cell.isSelected {
-                    cell.alpha = 0
-                }
+            if !cell.isSelected {
+                cell.fadeOut(duration: 0.5)
             }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [unowned self] in
+            let eventDetailVC = EventDetailVC()
+            eventDetailVC.event = upcomingEvents[index.row]
+            self.navigationController?.present(eventDetailVC, animated: false, completion: nil)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
+            cell.setOriginalConstraints()
+            self.navigationController?.navigationBar.alpha = 1
+            self.collectionView.reloadData()
         }
         
     }

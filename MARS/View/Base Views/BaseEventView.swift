@@ -44,6 +44,8 @@ class BaseEventView: UIView {
     var trailingThumbnailConstraint: NSLayoutConstraint!
     var heightThumbnailConstraint: NSLayoutConstraint!
     var dateLabelLeadingConstraint: NSLayoutConstraint!
+    var titleLabelLeadingConstraint: NSLayoutConstraint!
+    var titleLabelTopConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,8 +68,11 @@ class BaseEventView: UIView {
         trailingThumbnailConstraint.isActive = true
         heightThumbnailConstraint.isActive = true
         
-        titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor, constant: 10).isActive = true
+        titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+        titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor, constant: 10)
+        titleLabelLeadingConstraint.isActive = true
+        titleLabelTopConstraint.isActive = true
+        
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         
         dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
@@ -81,7 +86,9 @@ class BaseEventView: UIView {
         clipsToBounds = false
         leadingThumbnailConstraint.constant = -15
         trailingThumbnailConstraint.constant = 15
-        heightThumbnailConstraint.constant += 10
+        heightThumbnailConstraint.constant = 230
+        titleLabelLeadingConstraint.constant = 20
+        titleLabelTopConstraint.constant = 15
         dateLabelLeadingConstraint.constant = frame.width - 110
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.layoutIfNeeded()
@@ -93,7 +100,9 @@ class BaseEventView: UIView {
         clipsToBounds = true
         leadingThumbnailConstraint.constant = 0
         trailingThumbnailConstraint.constant = 0
-        heightThumbnailConstraint.constant -= 10
+        heightThumbnailConstraint.constant = 220
+        titleLabelLeadingConstraint.constant = 10
+        titleLabelTopConstraint.constant = 10
         dateLabelLeadingConstraint.constant = 10
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [unowned self] in
             self.layoutIfNeeded()

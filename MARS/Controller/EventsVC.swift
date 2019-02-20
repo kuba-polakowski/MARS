@@ -78,6 +78,7 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         for cell in collectionView.visibleCells as! [EventCell]{
             if !cell.isSelected {
                 cell.fadeOut(duration: 0.5)
+                cell.setOriginalConstraints()
             }
         }
         
@@ -89,7 +90,7 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
             cell.setOriginalConstraints()
-            self.navigationController?.navigationBar.alpha = 1
+            self.navigationController?.navigationBar.fadeIn(duration: 0.1)
             self.collectionView.reloadData()
         }
         

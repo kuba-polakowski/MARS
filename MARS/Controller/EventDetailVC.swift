@@ -19,6 +19,19 @@ class EventDetailVC: UIViewController {
         }
     }
     
+    let goBackButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.textColor = primaryColor
+        let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
+        button.imageView?.tintColor = primaryColor
+        button.setImage(image, for: .normal)
+        button.alpha = 0
+        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        return button
+    }()
+    
     let thumbnailView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +61,7 @@ class EventDetailVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = primaryFontColor
         label.alpha = 0
         
@@ -77,10 +90,10 @@ class EventDetailVC: UIViewController {
         eventView.animateForTransition()
         
         scrollView.addSubview(detailLabel)
-        detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
+        detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
         detailLabel.topAnchor.constraint(equalTo: eventView.bottomAnchor, constant: 15).isActive = true
-        detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        detailLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -30).isActive = true
+        detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        detailLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -35).isActive = true
         
         scrollView.addSubview(thumbnailView)
         
@@ -95,7 +108,12 @@ class EventDetailVC: UIViewController {
         thumbnailView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         thumbnailView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         thumbnailView.bottomAnchor.constraint(equalTo: eventView.topAnchor, constant: 230).isActive = true
-
+        
+        view.addSubview(goBackButton)
+        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
+        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        goBackButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        goBackButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,5 +124,10 @@ class EventDetailVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         detailLabel.fadeIn(duration: 1)
+        goBackButton.fadeIn(duration: 0.5)
+    }
+    
+    @objc func goBack() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

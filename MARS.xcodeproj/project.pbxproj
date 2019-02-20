@@ -106,6 +106,15 @@
 			path = MARS;
 			sourceTree = "<group>";
 		};
+		0454A997221DA97C00EED3B1 /* Base Views */ = {
+			isa = PBXGroup;
+			children = (
+				049D3AC7221358AB0084AD45 /* BaseTableViewCell.swift */,
+				042D8B8F221C6BF00095743C /* BaseEventView.swift */,
+			);
+			path = "Base Views";
+			sourceTree = "<group>";
+		};
 		049D3ABA221348DB0084AD45 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,8 +124,7 @@
 				049D3AC32213546D0084AD45 /* ChatCategoryCell.swift */,
 				046E1829221B369E005940DA /* MessagesHeaderView.swift */,
 				04B3AD9E2214822700BB61C3 /* MessageCell.swift */,
-				049D3AC7221358AB0084AD45 /* BaseTableViewCell.swift */,
-				042D8B8F221C6BF00095743C /* BaseEventView.swift */,
+				0454A997221DA97C00EED3B1 /* Base Views */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -126,9 +134,9 @@
 			children = (
 				049D3ABE22134C6B0084AD45 /* HomeVC.swift */,
 				042478B12219C88A00878DE4 /* EventsVC.swift */,
+				042D8B8D221C6BA30095743C /* EventDetailVC.swift */,
 				049D3ABC22134C150084AD45 /* ChatVC.swift */,
 				04B3ADA02214837D00BB61C3 /* MessagesVC.swift */,
-				042D8B8D221C6BA30095743C /* EventDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

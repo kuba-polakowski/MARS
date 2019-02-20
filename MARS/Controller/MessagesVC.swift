@@ -79,7 +79,7 @@ class MessagesVC: UITableViewController {
         if indexPath.row > 0 {
             let previousMessage = messages[indexPath.section][indexPath.row - 1]
             cell.isContinuing = message.author == "Peter" || message.author == previousMessage.author
-        } else {
+        } else if message.author != "Peter" {
             cell.isContinuing = false
         }
         

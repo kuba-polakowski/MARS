@@ -34,7 +34,7 @@ class EventCell: UICollectionViewCell {
     }
     
     func setOriginalConstraints() {
-        eventView.animateForTransition()
+        eventView.setOriginalConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {

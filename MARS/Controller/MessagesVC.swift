@@ -50,10 +50,6 @@ class MessagesVC: UITableViewController {
         return messages.count
     }
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return messages[section].first?.date.toString()
-//    }
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = MessagesHeaderView()
         headerView.label.text = messages[section].first?.date.asString()
@@ -79,8 +75,8 @@ class MessagesVC: UITableViewController {
         if indexPath.row > 0 {
             let previousMessage = messages[indexPath.section][indexPath.row - 1]
             cell.isContinuing = message.author == "Peter" || message.author == previousMessage.author
-        } else if message.author != "Peter" {
-            cell.isContinuing = false
+        } else {
+            cell.isContinuing = message.author == "Peter"
         }
         
         return cell

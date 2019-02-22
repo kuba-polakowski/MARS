@@ -8,13 +8,15 @@
 
 import UIKit
 
+private let menuCellId = "menuCellId"
+private let menuHeaderId = "menuHeaderId"
+
 class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let menuCellId = "menuCellId"
-    let menuHeaderId = "menuHeaderId"
-    
     let menuItems = ["Events", "Comms", "Hydro", "LS", "Transit", "Fun", "News"]
-    
+
+    let inset: CGFloat = 15
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -23,11 +25,10 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         super.viewDidLoad()
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            let inset: CGFloat = 15
             layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
             layout.minimumLineSpacing = 20
         }
-        collectionView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        collectionView.backgroundColor = primaryColor
         collectionView.contentInsetAdjustmentBehavior = .never
         
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: menuCellId)
@@ -50,7 +51,8 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 180)
+        let width = view.frame.width < 420 ? (view.frame.width - 3 * inset) / 2 : 180
+        return CGSize(width: width, height: width)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -72,7 +74,9 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(EventsVC(collectionViewLayout: collectionViewLayout), animated: true)
         } else if chosenCell.label.text == " LS " {
-            navigationController?.pushViewController(LSVC(), animated: true)
+            let collectionViewLayout = UICollectionViewFlowLayout()
+            navigationController?.pushViewController(LSStatsVC(collectionViewLayout: collectionViewLayout), animated: true)
+//            navigationController?.pushViewController(LSVC(), animated: true)
         } else {
             navigationController?.pushViewController(ChatVC(), animated: true)
         }

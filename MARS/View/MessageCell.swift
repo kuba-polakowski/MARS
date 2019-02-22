@@ -27,7 +27,7 @@ class MessageCell: BaseTableViewCell {
     var isContinuing: Bool! {
         didSet {
             authorLabelHeightConstraint.constant = isContinuing ? 0 : 20
-            topPaddingConstraint.constant = isContinuing ? 10 : 40
+            topPaddingConstraint.constant = isContinuing ? 20 : 40
         }
     }
     

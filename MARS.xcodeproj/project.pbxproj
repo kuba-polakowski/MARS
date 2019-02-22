@@ -19,6 +19,9 @@
 		0441F6C12210984A00EAD015 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0441F6BF2210984A00EAD015 /* LaunchScreen.storyboard */; };
 		0441F6C922109F8A00EAD015 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441F6C822109F8A00EAD015 /* MenuCell.swift */; };
 		0441F6CB2210A3CC00EAD015 /* MenuHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441F6CA2210A3CC00EAD015 /* MenuHeaderView.swift */; };
+		04463C4B2220505900087EF2 /* LSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04463C4A2220505900087EF2 /* LSVC.swift */; };
+		04463C4D22205BC000087EF2 /* LSCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04463C4C22205BC000087EF2 /* LSCategory.swift */; };
+		04463C4F22205BEE00087EF2 /* LSCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04463C4E22205BEE00087EF2 /* LSCategories.swift */; };
 		046E1828221B3395005940DA /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1827221B3395005940DA /* DateFormatter.swift */; };
 		046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1829221B369E005940DA /* MessagesHeaderView.swift */; };
 		049D3ABD22134C150084AD45 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3ABC22134C150084AD45 /* ChatVC.swift */; };
@@ -48,6 +51,9 @@
 		0441F6C22210984A00EAD015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0441F6C822109F8A00EAD015 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		0441F6CA2210A3CC00EAD015 /* MenuHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderView.swift; sourceTree = "<group>"; };
+		04463C4A2220505900087EF2 /* LSVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSVC.swift; sourceTree = "<group>"; };
+		04463C4C22205BC000087EF2 /* LSCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSCategory.swift; sourceTree = "<group>"; };
+		04463C4E22205BEE00087EF2 /* LSCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSCategories.swift; sourceTree = "<group>"; };
 		046E1827221B3395005940DA /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		046E1829221B369E005940DA /* MessagesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesHeaderView.swift; sourceTree = "<group>"; };
 		049D3ABC22134C150084AD45 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 				042D8B8D221C6BA30095743C /* EventDetailVC.swift */,
 				049D3ABC22134C150084AD45 /* ChatVC.swift */,
 				04B3ADA02214837D00BB61C3 /* MessagesVC.swift */,
+				04463C4A2220505900087EF2 /* LSVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -154,6 +161,7 @@
 			children = (
 				04B3ADA322148EE100BB61C3 /* Message.swift */,
 				042478B72219CEFE00878DE4 /* Event.swift */,
+				04463C4C22205BC000087EF2 /* LSCategory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,6 +171,7 @@
 			children = (
 				04B3ADA62214916800BB61C3 /* Messages.swift */,
 				042478B92219CF3E00878DE4 /* Events.swift */,
+				04463C4E22205BEE00087EF2 /* LSCategories.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -254,14 +263,17 @@
 				04B3ADA72214916800BB61C3 /* Messages.swift in Sources */,
 				04EFF67F2219EF7100D14D3B /* Colors.swift in Sources */,
 				049D3ABF22134C6C0084AD45 /* HomeVC.swift in Sources */,
+				04463C4D22205BC000087EF2 /* LSCategory.swift in Sources */,
 				042478B82219CEFE00878DE4 /* Event.swift in Sources */,
 				0441F6CB2210A3CC00EAD015 /* MenuHeaderView.swift in Sources */,
 				042D8B8E221C6BA30095743C /* EventDetailVC.swift in Sources */,
+				04463C4F22205BEE00087EF2 /* LSCategories.swift in Sources */,
 				046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */,
 				049D3ABD22134C150084AD45 /* ChatVC.swift in Sources */,
 				042478B42219CBF300878DE4 /* EventCell.swift in Sources */,
 				049D3AC42213546D0084AD45 /* ChatCategoryCell.swift in Sources */,
 				049D3AC8221358AB0084AD45 /* BaseTableViewCell.swift in Sources */,
+				04463C4B2220505900087EF2 /* LSVC.swift in Sources */,
 				04B3ADA422148EE100BB61C3 /* Message.swift in Sources */,
 				0441F6B72210984800EAD015 /* AppDelegate.swift in Sources */,
 				042478BA2219CF3E00878DE4 /* Events.swift in Sources */,

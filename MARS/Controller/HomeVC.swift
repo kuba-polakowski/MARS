@@ -71,6 +71,8 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         if chosenCell.label.text == " Events " {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(EventsVC(collectionViewLayout: collectionViewLayout), animated: true)
+        } else if chosenCell.label.text == " LS " {
+            navigationController?.pushViewController(LSVC(), animated: true)
         } else {
             navigationController?.pushViewController(ChatVC(), animated: true)
         }

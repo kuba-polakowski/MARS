@@ -22,7 +22,6 @@ class EventDetailVC: UIViewController {
     let goBackButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.textColor = primaryColor
         let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
         button.imageView?.tintColor = primaryColor
         button.setImage(image, for: .normal)

@@ -60,7 +60,9 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: menuCellId, for: indexPath) as! MenuCell
         cell.label.text = " " + menuItems[indexPath.item] + " "
-        
+        if let image = UIImage(named: menuItems[indexPath.item].lowercased()) {
+            cell.imageView.image = image.withRenderingMode(.alwaysTemplate)
+        }
         return cell
     }
     

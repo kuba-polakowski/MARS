@@ -76,7 +76,8 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         } else if chosenCell.label.text == " LS " {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(LSStatsVC(collectionViewLayout: collectionViewLayout), animated: true)
-//            navigationController?.pushViewController(LSVC(), animated: true)
+        } else if chosenCell.label.text == " Transit " {
+            navigationController?.pushViewController(TransitVC(), animated: true)
         } else {
             navigationController?.pushViewController(ChatVC(), animated: true)
         }

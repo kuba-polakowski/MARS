@@ -28,6 +28,9 @@
 		049D3AC1221352A50084AD45 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3AC0221352A50084AD45 /* BaseTableViewController.swift */; };
 		049D3AC42213546D0084AD45 /* ChatCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3AC32213546D0084AD45 /* ChatCategoryCell.swift */; };
 		049D3AC8221358AB0084AD45 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3AC7221358AB0084AD45 /* BaseTableViewCell.swift */; };
+		04A58EAF222170C500142885 /* TransitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A58EAE222170C500142885 /* TransitVC.swift */; };
+		04A58EB12221712A00142885 /* TransitMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A58EB02221712A00142885 /* TransitMenuView.swift */; };
+		04A58EB322217D2500142885 /* TransitMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A58EB222217D2500142885 /* TransitMenuCell.swift */; };
 		04ACDDE0222072BC00B94CF3 /* LSStatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACDDDF222072BC00B94CF3 /* LSStatCell.swift */; };
 		04ACDDE22220752300B94CF3 /* LSStatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ACDDE12220752300B94CF3 /* LSStatsVC.swift */; };
 		04B3AD9F2214822700BB61C3 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3AD9E2214822700BB61C3 /* MessageCell.swift */; };
@@ -61,6 +64,9 @@
 		049D3AC0221352A50084AD45 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		049D3AC32213546D0084AD45 /* ChatCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCategoryCell.swift; sourceTree = "<group>"; };
 		049D3AC7221358AB0084AD45 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		04A58EAE222170C500142885 /* TransitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitVC.swift; sourceTree = "<group>"; };
+		04A58EB02221712A00142885 /* TransitMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitMenuView.swift; sourceTree = "<group>"; };
+		04A58EB222217D2500142885 /* TransitMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitMenuCell.swift; sourceTree = "<group>"; };
 		04ACDDDF222072BC00B94CF3 /* LSStatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSStatCell.swift; sourceTree = "<group>"; };
 		04ACDDE12220752300B94CF3 /* LSStatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSStatsVC.swift; sourceTree = "<group>"; };
 		04B3AD9E2214822700BB61C3 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
@@ -133,6 +139,8 @@
 				046E1829221B369E005940DA /* MessagesHeaderView.swift */,
 				04B3AD9E2214822700BB61C3 /* MessageCell.swift */,
 				04ACDDDF222072BC00B94CF3 /* LSStatCell.swift */,
+				04A58EB02221712A00142885 /* TransitMenuView.swift */,
+				04A58EB222217D2500142885 /* TransitMenuCell.swift */,
 				0454A997221DA97C00EED3B1 /* Base Views */,
 			);
 			path = View;
@@ -147,6 +155,7 @@
 				049D3ABC22134C150084AD45 /* ChatVC.swift */,
 				04B3ADA02214837D00BB61C3 /* MessagesVC.swift */,
 				04ACDDE12220752300B94CF3 /* LSStatsVC.swift */,
+				04A58EAE222170C500142885 /* TransitVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,11 +273,14 @@
 				042478B22219C88A00878DE4 /* EventsVC.swift in Sources */,
 				042D8B8C221C679F0095743C /* FadeAnimations.swift in Sources */,
 				049D3AC1221352A50084AD45 /* BaseTableViewController.swift in Sources */,
+				04A58EB12221712A00142885 /* TransitMenuView.swift in Sources */,
+				04A58EB322217D2500142885 /* TransitMenuCell.swift in Sources */,
 				04B3ADA72214916800BB61C3 /* Messages.swift in Sources */,
 				04EFF67F2219EF7100D14D3B /* Colors.swift in Sources */,
 				049D3ABF22134C6C0084AD45 /* HomeVC.swift in Sources */,
 				04463C4D22205BC000087EF2 /* LSCategory.swift in Sources */,
 				042478B82219CEFE00878DE4 /* Event.swift in Sources */,
+				04A58EAF222170C500142885 /* TransitVC.swift in Sources */,
 				04ACDDE0222072BC00B94CF3 /* LSStatCell.swift in Sources */,
 				0441F6CB2210A3CC00EAD015 /* MenuHeaderView.swift in Sources */,
 				042D8B8E221C6BA30095743C /* EventDetailVC.swift in Sources */,

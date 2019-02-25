@@ -68,15 +68,14 @@ class MessagesVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: messagesCellId, for: indexPath) as! MessageCell
         let message = messages[indexPath.section][indexPath.row]
         
-        cell.label.text = message.text
         cell.authorLabel.text = message.author
         cell.isIncoming = message.author != "Peter"
+        cell.label.text = message.text
         
+        cell.isContinuing = message.author == "Peter"
         if indexPath.row > 0 {
             let previousMessage = messages[indexPath.section][indexPath.row - 1]
-            cell.isContinuing = message.author == "Peter" || message.author == previousMessage.author
-        } else {
-            cell.isContinuing = message.author == "Peter"
+            cell.isContinuing = message.author == previousMessage.author
         }
         
         return cell

@@ -10,6 +10,12 @@ import UIKit
 
 class TransitMenuCell: UICollectionViewCell {
     
+    var count: Int! {
+        didSet {
+            setColors()
+        }
+    }
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,13 +30,22 @@ class TransitMenuCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 25)
         label.textColor = primaryFontColor
-        label.text = "WOOHOO"
+        
+        return label
+    }()
+    
+    let countLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = primaryFontColor
         
         return label
     }()
     
     override var isSelected: Bool {
         didSet {
+            guard count != 0 else { return }
             imageView.tintColor = isSelected ? tertiaryRedColor : primaryFontColor
             label.textColor = isSelected ? primaryRedColor : primaryFontColor
         }
@@ -40,6 +55,7 @@ class TransitMenuCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor = .clear
+        layer.cornerRadius = 10
         
         addSubview(imageView)
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
@@ -48,12 +64,27 @@ class TransitMenuCell: UICollectionViewCell {
         imageView.widthAnchor.constraint(equalTo: heightAnchor, constant: -20).isActive = true
         
         addSubview(label)
-        label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10).isActive = true
+        label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
         label.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        label.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        addSubview(countLabel)
+        countLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        countLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        countLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
+    private func setColors() {
+        if count != 0 {
+            backgroundColor = .clear
+            imageView.tintColor = secondaryFontColor
+            label.textColor = primaryFontColor
+        } else {
+            backgroundColor = secondaryColor
+            imageView.tintColor = primaryColor
+            label.textColor = secondaryColor
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

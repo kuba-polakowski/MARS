@@ -14,26 +14,52 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     
     var selectedItemIndexPath: IndexPath?
     
-    let imageNames = ["transit-bike", "transit-bicycle", "transit-quad", "transit-car", "transit-helicopter"]
-    
     let upIcon = #imageLiteral(resourceName: "up-icon").withRenderingMode(.alwaysTemplate)
     let downIcon = #imageLiteral(resourceName: "down-icon").withRenderingMode(.alwaysTemplate)
 
-    var isExpanded = false {
+    var vehicleIsAvailable = false {
         didSet {
-            collectionView.isScrollEnabled = isExpanded
-            topIcon.image = isExpanded ? downIcon : upIcon
+            summonVehicleButton.isEnabled = vehicleIsAvailable
+            animateSummonButton()
         }
     }
     
-    let topIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = tertiaryRedColor
-        imageView.image = #imageLiteral(resourceName: "up-icon").withRenderingMode(.alwaysTemplate)
+    var isExpanded = false {
+        didSet {
+            collectionView.isScrollEnabled = isExpanded
+            let topIconImage = isExpanded ? downIcon : upIcon
+            expandButton.setImage(topIconImage, for: .normal)
+        }
+    }
+    
+    let summonVehicleButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = secondaryFontColor
+        button.titleLabel?.textColor = primaryColor
+        button.setTitle("Summon Vehicle", for: .normal)
+        button.layer.cornerRadius = 15
+        button.layer.masksToBounds = true
+        button.isEnabled = false
         
-        return imageView
+        return button
+    }()
+    
+    let containerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = primaryColor
+        
+        return view
+    }()
+    
+    let expandButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentMode = .scaleAspectFit
+        button.tintColor = tertiaryRedColor
+        
+        return button
     }()
     
     let collectionView: UICollectionView = {
@@ -45,30 +71,48 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         return collectionView
     }()
     
-    var collectionViewHeightConstraint: NSLayoutConstraint!
+    var summonButtonHeightConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = primaryColor
 
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.isScrollEnabled = false
         
-        addSubview(topIcon)
-        topIcon.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        topIcon.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        topIcon.widthAnchor.constraint(equalToConstant: 25).isActive = true
-        topIcon.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        addSubview(summonVehicleButton)
+        summonVehicleButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        summonVehicleButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        summonVehicleButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        summonVehicleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        addSubview(containerView)
+        containerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
+        
+        containerView.addSubview(expandButton)
+        expandButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        expandButton.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        expandButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        expandButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
 
-        addSubview(collectionView)
+        containerView.addSubview(collectionView)
         collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
+        collectionView.topAnchor.constraint(equalTo: expandButton.bottomAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         
         collectionView.register(TransitMenuCell.self, forCellWithReuseIdentifier: transitCellId)
+    }
+    
+    func animateSummonButton() {
+        let canSummonVehicle = vehicleIsAvailable
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: { [unowned self] in
+            self.summonVehicleButton.backgroundColor = canSummonVehicle ? tertiaryRedColor : secondaryFontColor
+        })
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -90,11 +134,19 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: transitCellId, for: indexPath) as! TransitMenuCell
-        if let image = UIImage(named: imageNames[indexPath.item]) {
+        
+        let vehicle = vehicles[indexPath.item]
+        
+        if let image = UIImage(named: "transit-\(vehicle.name.lowercased())") {
             cell.imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
+        cell.count = vehicles[indexPath.item].count
         if isExpanded {
-            cell.label.text = imageNames[indexPath.item].split(separator: "-")[1].capitalized
+            cell.label.text = vehicle.name
+            cell.countLabel.text = vehicle.count > 0 ? String(vehicle.count) : "(unavailable)"
+        } else {
+            cell.label.text = ""
+            cell.countLabel.text = ""
         }
         if selectedItemIndexPath != nil {
             cell.isSelected = indexPath == selectedItemIndexPath
@@ -106,6 +158,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.reloadData()
         selectedItemIndexPath = indexPath
+        vehicleIsAvailable = vehicles[indexPath.item].count != 0
     }
     
     required init?(coder aDecoder: NSCoder) {

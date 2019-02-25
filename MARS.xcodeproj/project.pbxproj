@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041A4C3D22242E1400567728 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041A4C3C22242E1400567728 /* Vehicle.swift */; };
+		041A4C3F22242E5F00567728 /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041A4C3E22242E5F00567728 /* Vehicles.swift */; };
 		042478B22219C88A00878DE4 /* EventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042478B12219C88A00878DE4 /* EventsVC.swift */; };
 		042478B42219CBF300878DE4 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042478B32219CBF300878DE4 /* EventCell.swift */; };
 		042478B82219CEFE00878DE4 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042478B72219CEFE00878DE4 /* Event.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		041A4C3C22242E1400567728 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		041A4C3E22242E5F00567728 /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
 		042478B12219C88A00878DE4 /* EventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsVC.swift; sourceTree = "<group>"; };
 		042478B32219CBF300878DE4 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		042478B72219CEFE00878DE4 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -174,6 +178,7 @@
 				04B3ADA322148EE100BB61C3 /* Message.swift */,
 				042478B72219CEFE00878DE4 /* Event.swift */,
 				04463C4C22205BC000087EF2 /* LSCategory.swift */,
+				041A4C3C22242E1400567728 /* Vehicle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				04B3ADA62214916800BB61C3 /* Messages.swift */,
 				042478B92219CF3E00878DE4 /* Events.swift */,
 				04463C4E22205BEE00087EF2 /* LSCategories.swift */,
+				041A4C3E22242E5F00567728 /* Vehicles.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 				042D8B8E221C6BA30095743C /* EventDetailVC.swift in Sources */,
 				04463C4F22205BEE00087EF2 /* LSCategories.swift in Sources */,
 				046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */,
+				041A4C3D22242E1400567728 /* Vehicle.swift in Sources */,
 				049D3ABD22134C150084AD45 /* ChatVC.swift in Sources */,
 				042478B42219CBF300878DE4 /* EventCell.swift in Sources */,
 				049D3AC42213546D0084AD45 /* ChatCategoryCell.swift in Sources */,
@@ -294,6 +301,7 @@
 				0441F6B72210984800EAD015 /* AppDelegate.swift in Sources */,
 				042478BA2219CF3E00878DE4 /* Events.swift in Sources */,
 				042D8B90221C6BF00095743C /* BaseEventView.swift in Sources */,
+				041A4C3F22242E5F00567728 /* Vehicles.swift in Sources */,
 				0441F6C922109F8A00EAD015 /* MenuCell.swift in Sources */,
 				04B3ADA12214837D00BB61C3 /* MessagesVC.swift in Sources */,
 				04B3AD9F2214822700BB61C3 /* MessageCell.swift in Sources */,

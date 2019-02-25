@@ -45,6 +45,7 @@ class MessageCell: BaseTableViewCell {
     
     var authorLabelHeightConstraint: NSLayoutConstraint!
     var topPaddingConstraint: NSLayoutConstraint!
+    var bottomConstraint: NSLayoutConstraint!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -57,7 +58,9 @@ class MessageCell: BaseTableViewCell {
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         label.numberOfLines = 0
 
-        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        bottomConstraint = label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+        bottomConstraint.priority = .defaultLow
+        bottomConstraint.isActive = true
 
         label.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.75).isActive = true
         

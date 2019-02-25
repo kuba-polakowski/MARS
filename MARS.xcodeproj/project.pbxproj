@@ -39,6 +39,10 @@
 		04B3ADA12214837D00BB61C3 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA02214837D00BB61C3 /* MessagesVC.swift */; };
 		04B3ADA422148EE100BB61C3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA322148EE100BB61C3 /* Message.swift */; };
 		04B3ADA72214916800BB61C3 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA62214916800BB61C3 /* Messages.swift */; };
+		04C679D122246F5200F997E1 /* HydroGardenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D022246F5200F997E1 /* HydroGardenVC.swift */; };
+		04C679D3222470CF00F997E1 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D2222470CF00F997E1 /* Weather.swift */; };
+		04C679D5222472C700F997E1 /* WeatherSituations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D4222472C700F997E1 /* WeatherSituations.swift */; };
+		04C679D722247CD700F997E1 /* HydroGardenWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D622247CD700F997E1 /* HydroGardenWeatherCell.swift */; };
 		04EFF67F2219EF7100D14D3B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFF67E2219EF7100D14D3B /* Colors.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +81,10 @@
 		04B3ADA02214837D00BB61C3 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		04B3ADA322148EE100BB61C3 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		04B3ADA62214916800BB61C3 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		04C679D022246F5200F997E1 /* HydroGardenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroGardenVC.swift; sourceTree = "<group>"; };
+		04C679D2222470CF00F997E1 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		04C679D4222472C700F997E1 /* WeatherSituations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSituations.swift; sourceTree = "<group>"; };
+		04C679D622247CD700F997E1 /* HydroGardenWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroGardenWeatherCell.swift; sourceTree = "<group>"; };
 		04EFF67E2219EF7100D14D3B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +153,7 @@
 				04ACDDDF222072BC00B94CF3 /* LSStatCell.swift */,
 				04A58EB02221712A00142885 /* TransitMenuView.swift */,
 				04A58EB222217D2500142885 /* TransitMenuCell.swift */,
+				04C679D622247CD700F997E1 /* HydroGardenWeatherCell.swift */,
 				0454A997221DA97C00EED3B1 /* Base Views */,
 			);
 			path = View;
@@ -160,6 +169,7 @@
 				04B3ADA02214837D00BB61C3 /* MessagesVC.swift */,
 				04ACDDE12220752300B94CF3 /* LSStatsVC.swift */,
 				04A58EAE222170C500142885 /* TransitVC.swift */,
+				04C679D022246F5200F997E1 /* HydroGardenVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,6 +189,7 @@
 				042478B72219CEFE00878DE4 /* Event.swift */,
 				04463C4C22205BC000087EF2 /* LSCategory.swift */,
 				041A4C3C22242E1400567728 /* Vehicle.swift */,
+				04C679D2222470CF00F997E1 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -190,6 +201,7 @@
 				042478B92219CF3E00878DE4 /* Events.swift */,
 				04463C4E22205BEE00087EF2 /* LSCategories.swift */,
 				041A4C3E22242E5F00567728 /* Vehicles.swift */,
+				04C679D4222472C700F997E1 /* WeatherSituations.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -296,14 +308,18 @@
 				049D3ABD22134C150084AD45 /* ChatVC.swift in Sources */,
 				042478B42219CBF300878DE4 /* EventCell.swift in Sources */,
 				049D3AC42213546D0084AD45 /* ChatCategoryCell.swift in Sources */,
+				04C679D722247CD700F997E1 /* HydroGardenWeatherCell.swift in Sources */,
 				049D3AC8221358AB0084AD45 /* BaseTableViewCell.swift in Sources */,
 				04B3ADA422148EE100BB61C3 /* Message.swift in Sources */,
 				0441F6B72210984800EAD015 /* AppDelegate.swift in Sources */,
+				04C679D3222470CF00F997E1 /* Weather.swift in Sources */,
 				042478BA2219CF3E00878DE4 /* Events.swift in Sources */,
 				042D8B90221C6BF00095743C /* BaseEventView.swift in Sources */,
 				041A4C3F22242E5F00567728 /* Vehicles.swift in Sources */,
 				0441F6C922109F8A00EAD015 /* MenuCell.swift in Sources */,
 				04B3ADA12214837D00BB61C3 /* MessagesVC.swift in Sources */,
+				04C679D5222472C700F997E1 /* WeatherSituations.swift in Sources */,
+				04C679D122246F5200F997E1 /* HydroGardenVC.swift in Sources */,
 				04B3AD9F2214822700BB61C3 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

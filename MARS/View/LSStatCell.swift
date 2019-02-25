@@ -66,11 +66,11 @@ class LSStatCell: UICollectionViewCell {
         animation.fillMode = CAMediaTimingFillMode.forwards
         animation.isRemovedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + delay) { [unowned self] in
-            self.circleLayer.add(animation, forKey: "animateValue")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + delay) { [weak self] in
+            self?.circleLayer.add(animation, forKey: "animateValue")
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 + delay) { [unowned self] in
-            self.percentageLabel.fadeIn(duration: 1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 + delay) { [weak self] in
+            self?.percentageLabel.fadeIn(duration: 1)
         }
     }
     

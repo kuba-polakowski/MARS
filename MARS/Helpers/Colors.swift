@@ -9,7 +9,7 @@
 import UIKit
 
 let primaryColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
-let secondaryColor = #colorLiteral(red: 0.9507449093, green: 0.9601582253, blue: 0.9601582253, alpha: 1)
+let secondaryColor = #colorLiteral(red: 0.9413315934, green: 0.9601582253, blue: 0.9601582253, alpha: 1)
 
 let primaryFontColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
 let secondaryFontColor = #colorLiteral(red: 0.370555222, green: 0.3705646992, blue: 0.3705595732, alpha: 1)

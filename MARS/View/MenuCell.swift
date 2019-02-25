@@ -13,7 +13,7 @@ class MenuCell: UICollectionViewCell {
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 50, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 40)
         label.textColor = primaryFontColor
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
@@ -25,7 +25,7 @@ class MenuCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = secondaryFontColor
+        imageView.tintColor = primaryRedColor
         
         return imageView
     }()
@@ -38,16 +38,17 @@ class MenuCell: UICollectionViewCell {
         layer.masksToBounds = true
         
         addSubview(imageView)
-        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
+//        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
         
         contentMode = .bottomLeft
         addSubview(label)
-        label.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         label.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

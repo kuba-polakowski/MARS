@@ -23,7 +23,7 @@ class ChatCategoryCell: BaseTableViewCell {
         cellShapeView.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 10).isActive = true
         cellShapeView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
         
-        label.font = UIFont.systemFont(ofSize: 50, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 40, weight: .semibold)
     }    
     
     required init?(coder aDecoder: NSCoder) {

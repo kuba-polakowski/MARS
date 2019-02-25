@@ -8,10 +8,10 @@
 
 import UIKit
 
+private let eventCellId = "EventCellId"
+
 class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    let eventCellId = "EventCellId"
-    
     let inset: CGFloat = 15
 
     override func viewDidLoad() {

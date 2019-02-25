@@ -73,6 +73,9 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         if chosenCell.label.text == " Events " {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(EventsVC(collectionViewLayout: collectionViewLayout), animated: true)
+        } else if chosenCell.label.text == " Hydro " {
+            let collectionViewLayout = UICollectionViewFlowLayout()
+            navigationController?.pushViewController(HydroGardenVC(collectionViewLayout: collectionViewLayout), animated: true)
         } else if chosenCell.label.text == " LS " {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(LSStatsVC(collectionViewLayout: collectionViewLayout), animated: true)

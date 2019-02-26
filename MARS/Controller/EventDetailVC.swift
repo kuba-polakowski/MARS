@@ -19,6 +19,20 @@ class EventDetailVC: UIViewController {
         }
     }
     
+    let addReminderButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = secondaryRedColor
+        button.layer.cornerRadius = 17
+        button.titleLabel?.textColor = primaryColor
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.setTitle("Set Reminder", for: .normal)
+        button.addTarget(self, action: #selector(addEventReminder), for: .touchUpInside)
+        button.alpha = 0
+        
+        return button
+    }()
+    
     let goBackButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +83,8 @@ class EventDetailVC: UIViewController {
 
     var thumbnailTopConstraint: NSLayoutConstraint!
     var thumbnailHeightConstraint: NSLayoutConstraint!
+    var reminderButtonTopConstraint: NSLayoutConstraint!
+    var reminderButtonBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,9 +126,22 @@ class EventDetailVC: UIViewController {
         
         view.addSubview(goBackButton)
         goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        goBackButton.topAnchor.constraint(equalTo: thumbnailView.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         goBackButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         goBackButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        scrollView.addSubview(addReminderButton)
+        reminderButtonTopConstraint = addReminderButton.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+        reminderButtonTopConstraint.priority = .required
+        reminderButtonTopConstraint.isActive = true
+        
+        reminderButtonBottomConstraint = addReminderButton.bottomAnchor.constraint(equalTo: thumbnailView.bottomAnchor, constant: -10)
+        reminderButtonBottomConstraint.priority = .defaultHigh
+        reminderButtonBottomConstraint.isActive = true
+        
+        addReminderButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+        addReminderButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        addReminderButton.widthAnchor.constraint(equalToConstant: 130).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,9 +153,14 @@ class EventDetailVC: UIViewController {
         super.viewDidAppear(animated)
         detailLabel.fadeIn(duration: 1)
         goBackButton.fadeIn(duration: 0.5)
+        addReminderButton.fadeIn(duration: 1.5)
     }
     
-    @objc func goBack() {
+    @objc private func addEventReminder() {
+        print("ADDING A REMINDER TO CALENDAR")
+    }
+    
+    @objc private func goBack() {
         self.dismiss(animated: true, completion: nil)
     }
 }

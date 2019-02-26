@@ -68,7 +68,7 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         navigationController?.navigationBar.fadeOut(duration: 0.1)
         
         let currentOffset = collectionView.contentOffset.y
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             cell.frame.origin.y = currentOffset
             cell.eventView.backgroundColor = primaryColor
             }, completion: { (_) in
@@ -77,7 +77,7 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         for cell in collectionView.visibleCells as! [EventCell]{
             if !cell.isSelected {
-                cell.fadeOut(duration: 0.5)
+                cell.fadeOut(duration: 0.2)
                 cell.setOriginalConstraints()
             }
         }

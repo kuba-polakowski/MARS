@@ -54,11 +54,12 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: hydroGardenCellId, for: indexPath) as! HydroGardenWeatherCell
         let garden = gardens[indexPath.item]
-        cell.label.text = garden.name
-        cell.gradient.colors = garden.colors
+        cell.gardenNameLabel.text = garden.name
+        cell.colors = garden.colors
+        cell.weather = weatherSituations[indexPath.item]
         
         if let image = UIImage(named: "weather-\(iconNames[indexPath.item])") {
-            cell.icon.image = image.withRenderingMode(.alwaysTemplate)
+            cell.weatherIconImageView.image = image.withRenderingMode(.alwaysTemplate)
         }
 
         return cell

@@ -10,6 +10,6 @@ import Foundation
 
 let weatherSituations: [Weather] = [Weather(temperature: 15, windSpeed: 10, precipitation: .drizzle, cloudCover: .partial),
                                     Weather(temperature: 31, windSpeed: 15, precipitation: .none, cloudCover: .none),
-                                    Weather(temperature: 23, windSpeed: 20, precipitation: .rain, cloudCover: .partial),
-                                    Weather(temperature: -5, windSpeed: 4, precipitation: .rain, cloudCover: .full),
+                                    Weather(temperature: 23, windSpeed: 30, precipitation: .rain, cloudCover: .partial),
+                                    Weather(temperature: -5, windSpeed: 4, precipitation: .snow, cloudCover: .full),
 ]

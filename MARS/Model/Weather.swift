@@ -9,7 +9,7 @@
 import Foundation
 
 enum Precipitation {
-    case rain, drizzle, none
+    case rain, drizzle, snow, none
 }
 
 enum CloudCover {
@@ -28,5 +28,39 @@ struct Weather {
     
     func windSpeedInMph() -> Int {
         return Int(Double(windSpeed) * 0.62)
+    }
+    
+    func weatherDescription() -> String {
+        var descriptionString = ""
+        switch cloudCover {
+        case .full:
+            descriptionString.append("Cloudy")
+        case .partial:
+            descriptionString.append("A few clouds")
+        case .none:
+            descriptionString.append("Clear skies")
+        }
+        switch precipitation {
+        case .rain:
+            descriptionString.append(" with heavy rain")
+        case .drizzle:
+            descriptionString.append(" with light drizzle")
+        case .snow:
+            descriptionString.append(" with snowfall")
+        case .none:
+            descriptionString.append("")
+        }
+        if windSpeed >= 30 {
+            descriptionString.append(" and strong wind.")
+        } else if windSpeed > 10 {
+            descriptionString.append(", windy.")
+        } else if windSpeed > 5 {
+            descriptionString.append(", slow wind.")
+        } else {
+            descriptionString.append(", no wind.")
+        }
+
+
+        return descriptionString
     }
 }

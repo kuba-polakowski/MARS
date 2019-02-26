@@ -13,6 +13,8 @@
 		042478B42219CBF300878DE4 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042478B32219CBF300878DE4 /* EventCell.swift */; };
 		042478B82219CEFE00878DE4 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042478B72219CEFE00878DE4 /* Event.swift */; };
 		042478BA2219CF3E00878DE4 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042478B92219CF3E00878DE4 /* Events.swift */; };
+		042558212225762900EB5FC6 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042558202225762900EB5FC6 /* Garden.swift */; };
+		04255825222576B200EB5FC6 /* Gardens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04255824222576B200EB5FC6 /* Gardens.swift */; };
 		042D8B8C221C679F0095743C /* FadeAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D8B8B221C679F0095743C /* FadeAnimations.swift */; };
 		042D8B8E221C6BA30095743C /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D8B8D221C6BA30095743C /* EventDetailVC.swift */; };
 		042D8B90221C6BF00095743C /* BaseEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D8B8F221C6BF00095743C /* BaseEventView.swift */; };
@@ -53,6 +55,8 @@
 		042478B32219CBF300878DE4 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		042478B72219CEFE00878DE4 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		042478B92219CF3E00878DE4 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		042558202225762900EB5FC6 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
+		04255824222576B200EB5FC6 /* Gardens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gardens.swift; sourceTree = "<group>"; };
 		042D8B8B221C679F0095743C /* FadeAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeAnimations.swift; sourceTree = "<group>"; };
 		042D8B8D221C6BA30095743C /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		042D8B8F221C6BF00095743C /* BaseEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventView.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				04463C4C22205BC000087EF2 /* LSCategory.swift */,
 				041A4C3C22242E1400567728 /* Vehicle.swift */,
 				04C679D2222470CF00F997E1 /* Weather.swift */,
+				042558202225762900EB5FC6 /* Garden.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				04463C4E22205BEE00087EF2 /* LSCategories.swift */,
 				041A4C3E22242E5F00567728 /* Vehicles.swift */,
 				04C679D4222472C700F997E1 /* WeatherSituations.swift */,
+				04255824222576B200EB5FC6 /* Gardens.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -298,12 +304,14 @@
 				049D3ABF22134C6C0084AD45 /* HomeVC.swift in Sources */,
 				04463C4D22205BC000087EF2 /* LSCategory.swift in Sources */,
 				042478B82219CEFE00878DE4 /* Event.swift in Sources */,
+				042558212225762900EB5FC6 /* Garden.swift in Sources */,
 				04A58EAF222170C500142885 /* TransitVC.swift in Sources */,
 				04ACDDE0222072BC00B94CF3 /* LSStatCell.swift in Sources */,
 				0441F6CB2210A3CC00EAD015 /* MenuHeaderView.swift in Sources */,
 				042D8B8E221C6BA30095743C /* EventDetailVC.swift in Sources */,
 				04463C4F22205BEE00087EF2 /* LSCategories.swift in Sources */,
 				046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */,
+				04255825222576B200EB5FC6 /* Gardens.swift in Sources */,
 				041A4C3D22242E1400567728 /* Vehicle.swift in Sources */,
 				049D3ABD22134C150084AD45 /* ChatVC.swift in Sources */,
 				042478B42219CBF300878DE4 /* EventCell.swift in Sources */,

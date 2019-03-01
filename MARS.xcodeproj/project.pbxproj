@@ -129,7 +129,6 @@
 				04EFF6822219EF9A00D14D3B /* Helpers */,
 				04B3ADA52214915900BB61C3 /* Data */,
 				04B3ADA222148ED500BB61C3 /* Model */,
-				049D3AC2221352B00084AD45 /* GenericController */,
 				049D3ABB22134BF10084AD45 /* Controller */,
 				049D3ABA221348DB0084AD45 /* View */,
 				0441F6B62210984800EAD015 /* AppDelegate.swift */,
@@ -178,6 +177,7 @@
 				04ACDDE12220752300B94CF3 /* LSStatsVC.swift */,
 				04A58EAE222170C500142885 /* TransitVC.swift */,
 				04C679D022246F5200F997E1 /* HydroGardenVC.swift */,
+				049D3AC2221352B00084AD45 /* GenericController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

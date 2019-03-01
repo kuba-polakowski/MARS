@@ -43,6 +43,11 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         collectionView.register(HydroGardenWeatherCell.self, forCellWithReuseIdentifier: hydroGardenCellId)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return view.frame.size
     }
@@ -54,9 +59,14 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: hydroGardenCellId, for: indexPath) as! HydroGardenWeatherCell
         let garden = gardens[indexPath.item]
+        let weather = weatherSituations[indexPath.item]
+        
         cell.gardenNameLabel.text = garden.name
         cell.colors = garden.colors
-        cell.weather = weatherSituations[indexPath.item]
+        
+        cell.weather = weather
+        cell.temperatureLabel.text = "\(weather.temperature)"
+        cell.weatherDescriptionLabel.text = weather.weatherDescription()
         
         if let image = UIImage(named: "weather-\(iconNames[indexPath.item])") {
             cell.weatherIconImageView.image = image.withRenderingMode(.alwaysTemplate)

@@ -32,11 +32,11 @@ class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
 
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             let padding: CGFloat = 50
-            layout.sectionInset = UIEdgeInsets(top: navigationController!.navigationBar.frame.height + 1.5 * padding, left: inset, bottom: 2 * inset, right: inset)
+            layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
             layout.minimumLineSpacing = padding
         }
         collectionView.backgroundColor = primaryColor
-        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.contentInsetAdjustmentBehavior = .always
         
         collectionView.register(LSStatCell.self, forCellWithReuseIdentifier: lSStatCellId)
     }

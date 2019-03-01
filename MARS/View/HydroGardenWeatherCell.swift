@@ -16,12 +16,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         }
     }
     
-    var weather: Weather! {
-        didSet {
-            temperatureLabel.text = "\(weather.temperature)°"
-            weatherDescriptionLabel.text = weather.weatherDescription()
-        }
-    }
+    var weather: Weather!
     
     let precipitationView: ParticleView = {
         let particleView = ParticleView()
@@ -149,9 +144,9 @@ class HydroGardenWeatherCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         precipitationView.addEmitterCells(for: weather)
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

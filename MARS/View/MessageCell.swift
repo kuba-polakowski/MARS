@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MessageCell: BaseTableViewCell {
+class MessageCell: UITableViewCell {
     
     var isIncoming: Bool! {
         didSet {
             cellShapeView.backgroundColor = isIncoming ? secondaryColor : primaryRedColor
-            label.textColor = isIncoming ? primaryFontColor : primaryColor
+            messageTextLabel.textColor = isIncoming ? primaryFontColor : primaryColor
             if isIncoming {
                 NSLayoutConstraint.deactivate(trailingConstraints)
                 NSLayoutConstraint.activate(leadingConstraints)
@@ -30,6 +30,21 @@ class MessageCell: BaseTableViewCell {
             topPaddingConstraint.constant = isContinuing ? 20 : 40
         }
     }
+    
+    let cellShapeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 15
+
+        return view
+    }()
+    
+    let messageTextLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }()
     
     let authorLabel: UILabel = {
         let label = UILabel()
@@ -50,33 +65,38 @@ class MessageCell: BaseTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        selectionStyle = .none
+        
+        addSubview(cellShapeView)
+        addSubview(messageTextLabel)
+
         addSubview(authorLabel)
-        authorLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+        authorLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         authorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         authorLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 100).isActive = true
         
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.numberOfLines = 0
+        messageTextLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        messageTextLabel.numberOfLines = 0
 
-        bottomConstraint = label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+        bottomConstraint = messageTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         bottomConstraint.priority = .defaultLow
         bottomConstraint.isActive = true
 
-        label.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.75).isActive = true
+        messageTextLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.75).isActive = true
         
-        cellShapeView.leadingAnchor.constraint(equalTo: label.leadingAnchor, constant: -10).isActive = true
-        cellShapeView.topAnchor.constraint(equalTo: label.topAnchor, constant: -10).isActive = true
-        cellShapeView.trailingAnchor.constraint(equalTo: label.trailingAnchor, constant: 10).isActive = true
-        cellShapeView.bottomAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
+        cellShapeView.leadingAnchor.constraint(equalTo: messageTextLabel.leadingAnchor, constant: -10).isActive = true
+        cellShapeView.topAnchor.constraint(equalTo: messageTextLabel.topAnchor, constant: -10).isActive = true
+        cellShapeView.trailingAnchor.constraint(equalTo: messageTextLabel.trailingAnchor, constant: 10).isActive = true
+        cellShapeView.bottomAnchor.constraint(equalTo: messageTextLabel.bottomAnchor, constant: 10).isActive = true
         
         authorLabelHeightConstraint = authorLabel.heightAnchor.constraint(equalToConstant: 0)
-        topPaddingConstraint = label.topAnchor.constraint(equalTo: topAnchor, constant: 20)
+        topPaddingConstraint = messageTextLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20)
         authorLabelHeightConstraint.isActive = true
         topPaddingConstraint.isActive = true
         
-        leadingConstraints.append(label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20))
+        leadingConstraints.append(messageTextLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20))
         
-        trailingConstraints.append(label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20))
+        trailingConstraints.append(messageTextLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20))
         
     }
     

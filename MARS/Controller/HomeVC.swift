@@ -29,7 +29,8 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             layout.minimumLineSpacing = 20
         }
         collectionView.backgroundColor = primaryColor
-        collectionView.contentInsetAdjustmentBehavior = .never
+        
+        collectionView.contentInsetAdjustmentBehavior = .always
         
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: menuCellId)
         collectionView.register(MenuHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: menuHeaderId)

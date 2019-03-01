@@ -8,11 +8,18 @@
 
 import UIKit
 
-class MessagesVC: UITableViewController {
+private let messagesCellId = "messagesCellId"
+
+class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let messages = foodMessages
     
-    let messagesCellId = "messagesCellId"
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +35,16 @@ class MessagesVC: UITableViewController {
         
         navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        view.addSubview(tableView)
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         tableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         tableView.separatorStyle = .none
@@ -46,31 +63,31 @@ class MessagesVC: UITableViewController {
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return messages.count
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = MessagesHeaderView()
         headerView.label.text = messages[section].first?.date.asString()
         return headerView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages[section].count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: messagesCellId, for: indexPath) as! MessageCell
         let message = messages[indexPath.section][indexPath.row]
         
         cell.authorLabel.text = message.author
         cell.isIncoming = message.author != "Peter"
-        cell.label.text = message.text
+        cell.messageTextLabel.text = message.text
         
         cell.isContinuing = message.author == "Peter"
         if indexPath.row > 0 {

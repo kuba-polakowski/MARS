@@ -97,17 +97,17 @@ class EventDetailVC: UIViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         scrollView.addSubview(eventView)
-        eventView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        eventView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         eventView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        eventView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        eventView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
         eventView.heightAnchor.constraint(equalToConstant: 325).isActive = true
         
-        eventView.animateForTransition()
+        eventView.animateForTransition(withInsets: view.safeAreaInsets)
         
         scrollView.addSubview(detailLabel)
-        detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        detailLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         detailLabel.topAnchor.constraint(equalTo: eventView.bottomAnchor, constant: 15).isActive = true
-        detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+        detailLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
         detailLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -35).isActive = true
         
         scrollView.addSubview(thumbnailView)
@@ -126,7 +126,7 @@ class EventDetailVC: UIViewController {
         
         view.addSubview(goBackButton)
         goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        goBackButton.topAnchor.constraint(equalTo: thumbnailView.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        goBackButton.topAnchor.constraint(equalTo: thumbnailView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         goBackButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
         goBackButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         

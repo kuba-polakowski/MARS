@@ -23,7 +23,7 @@ class BaseTableViewCell: UITableViewCell {
         addSubview(cellShapeView)
         addSubview(label)
         
-        cellShapeView.layer.cornerRadius = 10
+        cellShapeView.layer.cornerRadius = 15
         
         backgroundColor = .clear
         cellShapeView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)

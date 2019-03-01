@@ -68,28 +68,28 @@ class BaseEventView: UIView {
         trailingThumbnailConstraint.isActive = true
         heightThumbnailConstraint.isActive = true
         
-        titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+        titleLabelLeadingConstraint = titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10)
         titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: thumbnailView.bottomAnchor, constant: 10)
         titleLabelLeadingConstraint.isActive = true
         titleLabelTopConstraint.isActive = true
         
-        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         
         dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-        dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        dateLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         
-        dateLabelLeadingConstraint = dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
+        dateLabelLeadingConstraint = dateLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10)
         dateLabelLeadingConstraint.isActive = true
     }
     
-    func animateForTransition() {
+    func animateForTransition(withInsets: UIEdgeInsets) {
         clipsToBounds = false
-        leadingThumbnailConstraint.constant = -15
-        trailingThumbnailConstraint.constant = 15
+        leadingThumbnailConstraint.constant = -15 - withInsets.left
+        trailingThumbnailConstraint.constant = 15 + withInsets.right
         heightThumbnailConstraint.constant = 230
         titleLabelLeadingConstraint.constant = 20
         titleLabelTopConstraint.constant = 15
-        dateLabelLeadingConstraint.constant = frame.width - 110
+        dateLabelLeadingConstraint.isActive = false
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.titleLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
@@ -103,7 +103,7 @@ class BaseEventView: UIView {
         heightThumbnailConstraint.constant = 220
         titleLabelLeadingConstraint.constant = 10
         titleLabelTopConstraint.constant = 10
-        dateLabelLeadingConstraint.constant = 10
+        dateLabelLeadingConstraint.isActive = true
         UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.titleLabel.transform = .identity

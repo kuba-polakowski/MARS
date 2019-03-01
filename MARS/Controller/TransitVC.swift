@@ -53,6 +53,12 @@ class TransitVC: UIViewController {
         addSwipeMenuGestureRecognizers()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        menuView.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     private func addSwipeMenuGestureRecognizers() {
         let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(expandMenu))
         swipeUpRecognizer.direction = .up

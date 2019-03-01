@@ -14,6 +14,7 @@ class MenuHeaderView: UICollectionReusableView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageView.image = #imageLiteral(resourceName: "menuHeader")
         
         return imageView
@@ -22,10 +23,9 @@ class MenuHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        layer.masksToBounds = true
         addSubview(imageView)
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: frame.height * 2).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }

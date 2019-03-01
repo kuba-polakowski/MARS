@@ -22,15 +22,15 @@ class EventCell: UICollectionViewCell {
         super.init(frame: frame)
         
         addSubview(eventView)
-        eventView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        eventView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         eventView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        eventView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        eventView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         eventView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
     }
     
-    func animateForTransition() {
-        eventView.animateForTransition()
+    func animateForTransition(withInsets: UIEdgeInsets) {
+        eventView.animateForTransition(withInsets: withInsets)
     }
     
     func setOriginalConstraints() {

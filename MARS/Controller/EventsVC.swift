@@ -26,21 +26,28 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }
         navigationItem.title = "Upcoming Events"
         
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
+//        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: navigationController!.navigationBar.frame.height + 60, left: inset, bottom: 2 * inset, right: inset)
+            layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
             layout.minimumLineSpacing = 20
         }
-        collectionView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
-        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.backgroundColor = primaryColor
+        collectionView.contentInsetAdjustmentBehavior = .always
         
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: eventCellId)
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width - 2 * inset, height: 325)
+        let width = view.frame.width - 2 * inset - view.safeAreaInsets.left - view.safeAreaInsets.right
+        print(width)
+        return CGSize(width: width, height: 325)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -67,14 +74,6 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     func animateToDetailView(cell: EventCell, at index: IndexPath) {
         navigationController?.navigationBar.fadeOut(duration: 0.1)
         
-        let currentOffset = collectionView.contentOffset.y
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            cell.frame.origin.y = currentOffset
-            cell.eventView.backgroundColor = primaryColor
-            }, completion: { (_) in
-                cell.animateForTransition()
-        })
-        
         for cell in collectionView.visibleCells as! [EventCell]{
             if !cell.isSelected {
                 cell.fadeOut(duration: 0.2)
@@ -82,13 +81,21 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [unowned self] in
+        let currentOffset = collectionView.contentOffset.y
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            cell.frame.origin.y = currentOffset
+            cell.eventView.backgroundColor = primaryColor
+            }, completion: { (_) in
+                cell.animateForTransition(withInsets: self.view.safeAreaInsets)
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [unowned self] in
             let eventDetailVC = EventDetailVC()
             eventDetailVC.event = upcomingEvents[index.row]
             self.navigationController?.present(eventDetailVC, animated: false, completion: nil)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [unowned self] in
             cell.setOriginalConstraints()
             self.navigationController?.navigationBar.fadeIn(duration: 0.1)
             self.collectionView.reloadData()

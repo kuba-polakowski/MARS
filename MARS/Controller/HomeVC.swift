@@ -28,7 +28,7 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
             layout.minimumLineSpacing = 20
         }
-        collectionView.backgroundColor = primaryColor
+        collectionView.backgroundColor = secondaryColor
         
         collectionView.contentInsetAdjustmentBehavior = .always
         
@@ -83,7 +83,7 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         } else if chosenCell.label.text == " Transit " {
             navigationController?.pushViewController(TransitVC(), animated: true)
         } else {
-            navigationController?.pushViewController(ChatVC(), animated: true)
+            navigationController?.pushViewController(ChatCategoriesVC(), animated: true)
         }
     }
 

@@ -12,7 +12,7 @@ private let lSStatCellId = "LSStatCell"
 
 class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    let inset: CGFloat = 15
+    let inset: CGFloat = 20
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +40,19 @@ class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         collectionView.register(LSStatCell.self, forCellWithReuseIdentifier: lSStatCellId)
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.reloadData()
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.width < 420 ? (view.frame.width - 3 * inset) / 2 : 180
+        let width = view.frame.width < view.frame.height ? (view.frame.width - 3 * inset) / 2 : (view.frame.width - 5 * inset) / 4
         return CGSize(width: width, height: width)
     }
 
@@ -60,6 +66,7 @@ class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         cell.titleLabel.text = category.title
         cell.percentageLabel.text = "\(category.value * 100)%"
         cell.circleLayer.strokeColor = category.color.cgColor
+        cell.circleLayer.removeAllAnimations()
         cell.animateCircle(after: Double(indexPath.item) * 0.3, toValue: category.value - 0.17)
         
         return cell

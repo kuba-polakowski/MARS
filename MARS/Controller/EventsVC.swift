@@ -26,14 +26,13 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         }
         navigationItem.title = "Upcoming Events"
         
-//        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
             layout.minimumLineSpacing = 20
         }
-        collectionView.backgroundColor = primaryColor
+        collectionView.backgroundColor = secondaryColor
         collectionView.contentInsetAdjustmentBehavior = .always
         
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: eventCellId)
@@ -46,7 +45,6 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width - 2 * inset - view.safeAreaInsets.left - view.safeAreaInsets.right
-        print(width)
         return CGSize(width: width, height: 325)
     }
     
@@ -87,6 +85,9 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             cell.eventView.backgroundColor = primaryColor
             }, completion: { (_) in
                 cell.animateForTransition(withInsets: self.view.safeAreaInsets)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.collectionView.backgroundColor = primaryColor
+                })
         })
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [unowned self] in
@@ -97,6 +98,7 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [unowned self] in
             cell.setOriginalConstraints()
+            self.collectionView.backgroundColor = secondaryColor
             self.navigationController?.navigationBar.fadeIn(duration: 0.1)
             self.collectionView.reloadData()
         }

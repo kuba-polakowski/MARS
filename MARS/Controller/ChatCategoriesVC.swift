@@ -10,9 +10,9 @@ import UIKit
 
 private let chatCellId = "chatCellId"
 
-class ChatVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ChatCategoriesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let chatSubjects = ["Work", "Food", "Recreation", "Transit", "Movies"]
+    let chatSubjects = ["Work", "Food", "Recreation", "Transit"]
     
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -33,7 +33,7 @@ class ChatVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
         navigationItem.title = "Communications"
         
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
+        navigationController?.navigationBar.backgroundColor = tertiaryRedColor
         navigationController?.navigationBar.prefersLargeTitles = true
         
         view.addSubview(tableView)
@@ -45,15 +45,12 @@ class ChatVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        tableView.rowHeight = 120
+        tableView.backgroundColor = secondaryColor
         tableView.separatorStyle = .none
         tableView.contentInset.top = 20
         
         tableView.register(ChatCategoryCell.self, forCellReuseIdentifier: chatCellId)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -66,6 +63,9 @@ class ChatVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: chatCellId, for: indexPath) as! ChatCategoryCell
+        let event = upcomingEvents[indexPath.item % 3]
+        
+        cell.categoryImageView.image = UIImage(named: event.imageName)
         cell.label.text = chatSubjects[indexPath.row]
 
         return cell

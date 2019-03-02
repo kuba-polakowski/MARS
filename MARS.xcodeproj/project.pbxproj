@@ -29,7 +29,7 @@
 		04463C4F22205BEE00087EF2 /* LSCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04463C4E22205BEE00087EF2 /* LSCategories.swift */; };
 		046E1828221B3395005940DA /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1827221B3395005940DA /* DateFormatter.swift */; };
 		046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1829221B369E005940DA /* MessagesHeaderView.swift */; };
-		049D3ABD22134C150084AD45 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3ABC22134C150084AD45 /* ChatVC.swift */; };
+		049D3ABD22134C150084AD45 /* ChatCategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3ABC22134C150084AD45 /* ChatCategoriesVC.swift */; };
 		049D3ABF22134C6C0084AD45 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3ABE22134C6B0084AD45 /* HomeVC.swift */; };
 		049D3AC1221352A50084AD45 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3AC0221352A50084AD45 /* BaseTableViewController.swift */; };
 		049D3AC42213546D0084AD45 /* ChatCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D3AC32213546D0084AD45 /* ChatCategoryCell.swift */; };
@@ -75,7 +75,7 @@
 		04463C4E22205BEE00087EF2 /* LSCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSCategories.swift; sourceTree = "<group>"; };
 		046E1827221B3395005940DA /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		046E1829221B369E005940DA /* MessagesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesHeaderView.swift; sourceTree = "<group>"; };
-		049D3ABC22134C150084AD45 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		049D3ABC22134C150084AD45 /* ChatCategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCategoriesVC.swift; sourceTree = "<group>"; };
 		049D3ABE22134C6B0084AD45 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		049D3AC0221352A50084AD45 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		049D3AC32213546D0084AD45 /* ChatCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCategoryCell.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 				049D3ABE22134C6B0084AD45 /* HomeVC.swift */,
 				042478B12219C88A00878DE4 /* EventsVC.swift */,
 				042D8B8D221C6BA30095743C /* EventDetailVC.swift */,
-				049D3ABC22134C150084AD45 /* ChatVC.swift */,
+				049D3ABC22134C150084AD45 /* ChatCategoriesVC.swift */,
 				04B3ADA02214837D00BB61C3 /* MessagesVC.swift */,
 				04ACDDE12220752300B94CF3 /* LSStatsVC.swift */,
 				04A58EAE222170C500142885 /* TransitVC.swift */,
@@ -321,7 +321,7 @@
 				046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */,
 				04255825222576B200EB5FC6 /* Gardens.swift in Sources */,
 				041A4C3D22242E1400567728 /* Vehicle.swift in Sources */,
-				049D3ABD22134C150084AD45 /* ChatVC.swift in Sources */,
+				049D3ABD22134C150084AD45 /* ChatCategoriesVC.swift in Sources */,
 				042478B42219CBF300878DE4 /* EventCell.swift in Sources */,
 				049D3AC42213546D0084AD45 /* ChatCategoryCell.swift in Sources */,
 				04C679D722247CD700F997E1 /* HydroGardenWeatherCell.swift in Sources */,

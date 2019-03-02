@@ -24,9 +24,10 @@ class BaseTableViewCell: UITableViewCell {
         addSubview(label)
         
         cellShapeView.layer.cornerRadius = 15
+        cellShapeView.clipsToBounds = true
         
         backgroundColor = .clear
-        cellShapeView.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        cellShapeView.backgroundColor = primaryColor
         label.textColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
 
         selectionStyle = .none

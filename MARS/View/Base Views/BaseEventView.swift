@@ -33,7 +33,7 @@ class BaseEventView: UIView {
     let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = secondaryFontColor
         
         return label
@@ -50,7 +50,7 @@ class BaseEventView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = secondaryColor
+        backgroundColor = primaryColor
         layer.cornerRadius = 15
         layer.masksToBounds = true
         

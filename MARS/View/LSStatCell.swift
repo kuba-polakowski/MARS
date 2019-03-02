@@ -49,13 +49,16 @@ class LSStatCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 40).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.65).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
 
         addSubview(percentageLabel)
         percentageLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         percentageLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         percentageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
-
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         addCircle()
     }
     

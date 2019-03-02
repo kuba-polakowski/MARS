@@ -13,7 +13,7 @@ class MenuCell: UICollectionViewCell {
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 40)
+        label.font = UIFont.systemFont(ofSize: 30)
         label.textColor = primaryFontColor
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
@@ -33,22 +33,21 @@ class MenuCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = secondaryColor
+        backgroundColor = primaryColor
         layer.cornerRadius = 15
         layer.masksToBounds = true
         
         addSubview(imageView)
-        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-//        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4).isActive = true
-        imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30).isActive = true
+        imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
+        imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
         
         contentMode = .bottomLeft
         addSubview(label)
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
         label.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

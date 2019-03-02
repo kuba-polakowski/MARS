@@ -85,7 +85,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
     let gardenNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 35)
+        label.font = UIFont.systemFont(ofSize: 40)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.textColor = primaryColor
@@ -115,9 +115,14 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         effectView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         effectView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
+        addSubview(gardenNameLabel)
+        gardenNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        gardenNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        gardenNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        
         addSubview(weatherIconImageView)
         weatherIconImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        weatherIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -100).isActive = true
+        weatherIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -30).isActive = true
         weatherIconImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         weatherIconImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
@@ -131,11 +136,6 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         weatherDescriptionLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         weatherDescriptionLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 30).isActive = true
 
-        addSubview(gardenNameLabel)
-        gardenNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        gardenNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        gardenNameLabel.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -100).isActive = true
-        
         weatherIconImageView.fadeIn(duration: 1)
         temperatureLabel.fadeIn(duration: 1.2)
         weatherDescriptionLabel.fadeIn(duration: 1.3)

@@ -20,7 +20,7 @@ class TransitMenuCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = secondaryFontColor
+        imageView.tintColor = tertiaryFontColor
         
         return imageView
     }()
@@ -46,7 +46,7 @@ class TransitMenuCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             guard count != 0 else { return }
-            imageView.tintColor = isSelected ? tertiaryRedColor : primaryFontColor
+            imageView.tintColor = isSelected ? primaryRedColor : tertiaryFontColor
             label.textColor = isSelected ? primaryRedColor : primaryFontColor
         }
     }
@@ -58,10 +58,10 @@ class TransitMenuCell: UICollectionViewCell {
         layer.cornerRadius = 10
         
         addSubview(imageView)
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        imageView.widthAnchor.constraint(equalTo: heightAnchor, constant: -20).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+        imageView.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
+        imageView.widthAnchor.constraint(equalTo: heightAnchor, constant: -30).isActive = true
         
         addSubview(label)
         label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true

@@ -33,7 +33,6 @@ class ChatCategoriesVC: UIViewController, UITableViewDataSource, UITableViewDele
         }
         navigationItem.title = "Communications"
         
-        navigationController?.navigationBar.backgroundColor = tertiaryRedColor
         navigationController?.navigationBar.prefersLargeTitles = true
         
         view.addSubview(tableView)

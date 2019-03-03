@@ -28,6 +28,7 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
             layout.minimumLineSpacing = 20
         }
+        
         collectionView.backgroundColor = secondaryColor
         
         collectionView.contentInsetAdjustmentBehavior = .always

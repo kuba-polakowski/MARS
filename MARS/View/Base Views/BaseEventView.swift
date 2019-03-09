@@ -97,7 +97,6 @@ class BaseEventView: UIView {
     }
     
     func setOriginalConstraints() {
-        clipsToBounds = true
         leadingThumbnailConstraint.constant = 0
         trailingThumbnailConstraint.constant = 0
         heightThumbnailConstraint.constant = 220

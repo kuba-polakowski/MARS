@@ -10,9 +10,12 @@ import UIKit
 
 class EventDetailVC: UIViewController {
     
+    var animationOffset: CGFloat!
+    
     var event: Event! {
         didSet {
             thumbnailView.image = UIImage(named: event.imageName)
+            eventView.thumbnailView.image = UIImage(named: event.imageName)
             eventView.titleLabel.text = event.title
             eventView.dateLabel.text = event.date.asString()
             detailLabel.text = event.details
@@ -81,6 +84,7 @@ class EventDetailVC: UIViewController {
         return label
     }()
 
+    var eventViewTopConstraint: NSLayoutConstraint!
     var thumbnailTopConstraint: NSLayoutConstraint!
     var thumbnailHeightConstraint: NSLayoutConstraint!
     var reminderButtonTopConstraint: NSLayoutConstraint!
@@ -98,9 +102,11 @@ class EventDetailVC: UIViewController {
         
         scrollView.addSubview(eventView)
         eventView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        eventView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         eventView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
         eventView.heightAnchor.constraint(equalToConstant: 325).isActive = true
+        
+        eventViewTopConstraint = eventView.topAnchor.constraint(equalTo: scrollView.topAnchor)
+        eventViewTopConstraint.isActive = true
         
         eventView.animateForTransition(withInsets: view.safeAreaInsets)
         
@@ -151,16 +157,29 @@ class EventDetailVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        detailLabel.fadeIn(duration: 1)
         goBackButton.fadeIn(duration: 0.5)
+        detailLabel.fadeIn(duration: 1)
         addReminderButton.fadeIn(duration: 1.5)
     }
     
     @objc private func addEventReminder() {
         print("ADDING A REMINDER TO CALENDAR")
     }
-    
+        
     @objc private func goBack() {
-        self.dismiss(animated: true, completion: nil)
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        thumbnailView.alpha = 0
+        goBackButton.fadeOut(duration: 0.3)
+        detailLabel.fadeOut(duration: 0.5)
+        addReminderButton.fadeOut(duration: 0.7)
+        eventViewTopConstraint.constant = animationOffset
+        eventView.setOriginalConstraints()
+
+        UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseInOut, animations: { [unowned self] in
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            self.eventView.clipsToBounds = true
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

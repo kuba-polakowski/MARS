@@ -42,6 +42,14 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         navigationController?.navigationBar.isHidden = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        if onboarding {
+//            present(OnboardingVC(), animated: false)
+//            onboarding = false
+//        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: menuHeaderId, for: indexPath)
         

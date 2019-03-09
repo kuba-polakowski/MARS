@@ -76,7 +76,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        tableViewBottomConstraint = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45)
+        tableViewBottomConstraint = tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         tableViewBottomConstraint.isActive = true
         
         
@@ -98,7 +98,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         typingViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         typingViewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        typingViewTopConstraint = typingViewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -45)
+        typingViewTopConstraint = typingViewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         typingViewTopConstraint.isActive = true
         
         typingTextView.delegate = self
@@ -138,9 +138,13 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     @objc private func keyboardWillAppear(notification: NSNotification) {
-        if let keyboardHeightOffset = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height {
-            typingViewTopConstraint.constant = -15 - keyboardHeightOffset
-            tableViewBottomConstraint.constant = -15 - keyboardHeightOffset
+        if let keyboardHeightOffset = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
+            var bottomPadding: CGFloat = view.safeAreaInsets.left == 0 ? -15 : -30
+            if view.safeAreaInsets.bottom == 0 {
+                bottomPadding = -50
+            }
+            typingViewTopConstraint.constant = bottomPadding - keyboardHeightOffset
+            tableViewBottomConstraint.constant = bottomPadding - keyboardHeightOffset
             UIView.animate(withDuration: 2) {
                 self.view.layoutIfNeeded()
             }
@@ -149,8 +153,8 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        typingViewTopConstraint.constant = -45
-        tableViewBottomConstraint.constant = -45
+        typingViewTopConstraint.constant = -50
+        tableViewBottomConstraint.constant = -50
         UIView.animate(withDuration: 2) {
             self.view.layoutIfNeeded()
         }

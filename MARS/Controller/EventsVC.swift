@@ -38,6 +38,15 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: eventCellId)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.backgroundColor = secondaryColor
+        if navigationController?.navigationBar.alpha == 0 {
+            navigationController?.navigationBar.fadeIn(duration: 0.5)
+        }
+        view.isUserInteractionEnabled = true
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
@@ -70,37 +79,39 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     
     func animateToDetailView(cell: EventCell, at index: IndexPath) {
+        view.isUserInteractionEnabled = false
         navigationController?.navigationBar.fadeOut(duration: 0.1)
-        
-        for cell in collectionView.visibleCells as! [EventCell]{
+
+        let originY = cell.frame.origin.y
+        let currentOffset = collectionView.contentOffset.y
+
+        for cell in collectionView.visibleCells as! [EventCell] {
             if !cell.isSelected {
                 cell.fadeOut(duration: 0.2)
-                cell.setOriginalConstraints()
             }
         }
         
-        let currentOffset = collectionView.contentOffset.y
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             cell.frame.origin.y = currentOffset
             cell.eventView.backgroundColor = primaryColor
             }, completion: { (_) in
                 cell.animateForTransition(withInsets: self.view.safeAreaInsets)
-                UIView.animate(withDuration: 0.5, animations: {
+                
+                UIView.animate(withDuration: 1, animations: { [unowned self] in
                     self.collectionView.backgroundColor = primaryColor
+                }, completion: { (_) in
+                    let eventDetailVC = EventDetailVC()
+                    eventDetailVC.event = upcomingEvents[index.row]
+                    eventDetailVC.animationOffset = originY - currentOffset
+                    eventDetailVC.modalTransitionStyle = .crossDissolve
+                    self.navigationController?.present(eventDetailVC, animated: true, completion: nil)
                 })
         })
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [unowned self] in
-            let eventDetailVC = EventDetailVC()
-            eventDetailVC.event = upcomingEvents[index.row]
-            self.navigationController?.present(eventDetailVC, animated: false, completion: nil)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [unowned self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             cell.setOriginalConstraints()
-            self.collectionView.backgroundColor = secondaryColor
-            self.navigationController?.navigationBar.fadeIn(duration: 0.1)
-            self.collectionView.reloadData()
+            cell.eventView.clipsToBounds = true
+            cell.frame.origin.y = originY
         }
         
     }

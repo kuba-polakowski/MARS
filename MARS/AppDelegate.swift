@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window?.rootViewController = UINavigationController(rootViewController: HomeVC(collectionViewLayout: menuCollectionViewLayout))
         
+
+//        let onboardingVC = OnboardingVC()
+//        window?.rootViewController = onboardingVC
+        
         return true
     }
 

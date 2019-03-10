@@ -91,6 +91,8 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             navigationController?.pushViewController(LSStatsVC(collectionViewLayout: collectionViewLayout), animated: true)
         } else if chosenCell.label.text == " Transit " {
             navigationController?.pushViewController(TransitVC(), animated: true)
+        } else if chosenCell.label.text == " Fun " {
+            navigationController?.pushViewController(EntertainmentVC(), animated: true)
         } else {
             navigationController?.pushViewController(ChatCategoriesVC(), animated: true)
         }

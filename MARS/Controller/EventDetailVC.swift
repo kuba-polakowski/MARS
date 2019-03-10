@@ -165,7 +165,7 @@ class EventDetailVC: UIViewController {
     @objc private func addEventReminder() {
         print("ADDING A REMINDER TO CALENDAR")
     }
-        
+    
     @objc private func goBack() {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         thumbnailView.alpha = 0

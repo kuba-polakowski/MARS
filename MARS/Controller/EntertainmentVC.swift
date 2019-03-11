@@ -37,21 +37,21 @@ class EntertainmentVC: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        goBackButton.fadeIn(duration: 1)
+//        goBackButton.fadeIn(duration: 1)
     }
     
     private func setupLayout() {
-        view.addSubview(goBackButton)
-        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        goBackButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        goBackButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        view.addSubview(goBackButton)
+//        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
+//        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+//        goBackButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+//        goBackButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     private func setupTabBar() {
         viewControllers = [musicPlayer, videoPlayer, activities]
         selectedViewController = musicPlayer
-        tabBar.tintColor = primaryRedColor
+        tabBar.tintColor = tertiaryRedColor
         musicPlayer.setupBarItem()
         videoPlayer.setupBarItem()
         activities.setupBarItem()

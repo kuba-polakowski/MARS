@@ -36,7 +36,6 @@ class TransitVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         if let navigationController = navigationController, navigationController.navigationBar.isHidden {
-            print("YO")
             navigationController.navigationBar.alpha = 0
             navigationController.navigationBar.isHidden = false
             UIView.animate(withDuration: 1) {

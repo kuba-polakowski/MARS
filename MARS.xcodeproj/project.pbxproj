@@ -31,6 +31,8 @@
 		0453143F222EE335006A456D /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0453143E222EE335006A456D /* UserSettings.swift */; };
 		0458977E222D59C90017AD96 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458977D222D59C90017AD96 /* OnboardingVC.swift */; };
 		04589780222D62A50017AD96 /* OnboardingMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458977F222D62A50017AD96 /* OnboardingMessages.swift */; };
+		046CA7442236A70E00D55DCB /* BasePlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046CA7432236A70E00D55DCB /* BasePlayerVC.swift */; };
+		046CA7462236B40600D55DCB /* stockVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 046CA7452236B40600D55DCB /* stockVideo.mp4 */; };
 		046D4705222C4BBC0001E824 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D4704222C4BBC0001E824 /* NavigationControllerExtension.swift */; };
 		046E1828221B3395005940DA /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1827221B3395005940DA /* DateFormatter.swift */; };
 		046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1829221B369E005940DA /* MessagesHeaderView.swift */; };
@@ -56,7 +58,6 @@
 		04DAB176223573D3004D0AFE /* MusicPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB175223573D3004D0AFE /* MusicPlayerVC.swift */; };
 		04DAB178223573DC004D0AFE /* VideoPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB177223573DC004D0AFE /* VideoPlayerVC.swift */; };
 		04DAB17A223573F0004D0AFE /* ActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB179223573F0004D0AFE /* ActivitiesVC.swift */; };
-		04DAB17D22358227004D0AFE /* BaseTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB17C22358227004D0AFE /* BaseTabBarVC.swift */; };
 		04EFF67F2219EF7100D14D3B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFF67E2219EF7100D14D3B /* Colors.swift */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,8 @@
 		0453143E222EE335006A456D /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		0458977D222D59C90017AD96 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		0458977F222D62A50017AD96 /* OnboardingMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMessages.swift; sourceTree = "<group>"; };
+		046CA7432236A70E00D55DCB /* BasePlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlayerVC.swift; sourceTree = "<group>"; };
+		046CA7452236B40600D55DCB /* stockVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = stockVideo.mp4; sourceTree = "<group>"; };
 		046D4704222C4BBC0001E824 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		046E1827221B3395005940DA /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		046E1829221B369E005940DA /* MessagesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesHeaderView.swift; sourceTree = "<group>"; };
@@ -112,7 +115,6 @@
 		04DAB175223573D3004D0AFE /* MusicPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerVC.swift; sourceTree = "<group>"; };
 		04DAB177223573DC004D0AFE /* VideoPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerVC.swift; sourceTree = "<group>"; };
 		04DAB179223573F0004D0AFE /* ActivitiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesVC.swift; sourceTree = "<group>"; };
-		04DAB17C22358227004D0AFE /* BaseTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarVC.swift; sourceTree = "<group>"; };
 		04EFF67E2219EF7100D14D3B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 		0441F6AA2210984800EAD015 = {
 			isa = PBXGroup;
 			children = (
+				046CA7452236B40600D55DCB /* stockVideo.mp4 */,
 				043D4EA9222FE48000B28797 /* onboardingVideo.mp4 */,
 				0441F6B52210984800EAD015 /* MARS */,
 				0441F6B42210984800EAD015 /* Products */,
@@ -218,8 +221,8 @@
 		049D3AC2221352B00084AD45 /* GenericController */ = {
 			isa = PBXGroup;
 			children = (
+				046CA7432236A70E00D55DCB /* BasePlayerVC.swift */,
 				049D3AC0221352A50084AD45 /* BaseTableViewController.swift */,
-				04DAB17C22358227004D0AFE /* BaseTabBarVC.swift */,
 			);
 			path = GenericController;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046CA7462236B40600D55DCB /* stockVideo.mp4 in Resources */,
 				043D4EAA222FE48000B28797 /* onboardingVideo.mp4 in Resources */,
 				0441F6C12210984A00EAD015 /* LaunchScreen.storyboard in Resources */,
 				0441F6BE2210984A00EAD015 /* Assets.xcassets in Resources */,
@@ -350,7 +354,7 @@
 				04ACDDE22220752300B94CF3 /* LSStatsVC.swift in Sources */,
 				046E1828221B3395005940DA /* DateFormatter.swift in Sources */,
 				042478B22219C88A00878DE4 /* EventsVC.swift in Sources */,
-				04DAB17D22358227004D0AFE /* BaseTabBarVC.swift in Sources */,
+				046CA7442236A70E00D55DCB /* BasePlayerVC.swift in Sources */,
 				042D8B8C221C679F0095743C /* FadeAnimations.swift in Sources */,
 				049D3AC1221352A50084AD45 /* BaseTableViewController.swift in Sources */,
 				04A58EB12221712A00142885 /* TransitMenuView.swift in Sources */,

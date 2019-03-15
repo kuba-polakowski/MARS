@@ -12,7 +12,7 @@ private let messagesCellId = "messagesCellId"
 
 class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     
-    let messages = foodMessages
+    var messages = [[Message]]()
     
     let typingViewContainer: UIView = {
         let view = UIView()
@@ -115,6 +115,8 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        getMessages()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -126,6 +128,15 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         super.viewWillDisappear(animated)
+    }
+    
+    private func getMessages() {
+        let groupedMessages = Dictionary(grouping: foodMessages, by: { (element) -> Date in
+            return element.date
+        })
+        groupedMessages.keys.sorted().forEach { (date) in
+            messages.append(groupedMessages[date] ?? [])
+        }
     }
     
     private func scrollToLastMessage() {

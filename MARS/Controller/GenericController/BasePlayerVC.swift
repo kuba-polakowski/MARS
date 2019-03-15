@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class BasePlayerVC: UIViewController {
     
@@ -25,7 +26,6 @@ class BasePlayerVC: UIViewController {
         let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
         button.imageView?.tintColor = primaryColor
         button.setImage(image, for: .normal)
-        button.alpha = 0
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
         return button
@@ -74,7 +74,12 @@ class BasePlayerVC: UIViewController {
         
         addMediaControls()
         setupMediaControlsLayout()
-        goBackButton.fadeIn(duration: 0.5)
+        hideMediaControls()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showMediaControls()
     }
     
     func addMediaControls() {
@@ -106,8 +111,36 @@ class BasePlayerVC: UIViewController {
         playPauseButton.setImage(image, for: .normal)
     }
 
+    func hideMediaControls() {
+        goBackButton.alpha = 0
+        slider.alpha = 0
+        currentTimeLabel.alpha = 0
+        totalTimeLabel.alpha = 0
+        playPauseButton.alpha = 0
+    }
+    
+    func showMediaControls() {
+        goBackButton.fadeIn(duration: 0.5)
+        slider.fadeIn(duration: 1.5)
+        currentTimeLabel.fadeIn(duration: 2)
+        totalTimeLabel.fadeIn(duration: 2.5)
+        playPauseButton.fadeIn(duration: 3)
+    }
+
     @objc func playPause() {
         isPlaying = !isPlaying
+    }
+    
+    func getFormattedTimeString(for time: CMTime) -> String {
+        let totalSeconds = Int(CMTimeGetSeconds(time))
+        
+        let seconds = totalSeconds % 60
+        let minutes = (totalSeconds - seconds) / 60
+        
+        let secondsString = String(format: "%02d", seconds)
+        let minutesString = String(format: "%02d", minutes)
+        
+        return minutesString + ":" + secondsString
     }
 
     @objc private func goBack() {

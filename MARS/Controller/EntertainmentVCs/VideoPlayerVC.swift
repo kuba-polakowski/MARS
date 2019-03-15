@@ -14,6 +14,8 @@ class VideoPlayerVC: BasePlayerVC {
     var videoPlayer: AVPlayer?
     var videoLayer: AVPlayerLayer?
     
+    var wasCurrentlyPlaying: Bool?
+    
     let videoView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -24,11 +26,8 @@ class VideoPlayerVC: BasePlayerVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        goBackButton.tintColor = primaryColor
         setupVideoView()
-        hideMediaControls()
         setupVideoPlayer()
-        showMediaControls()
         setupBackButtonLayout()
     }
     
@@ -55,20 +54,6 @@ class VideoPlayerVC: BasePlayerVC {
             videoPlayer?.play()
         }
         super.playPause()
-    }
-    
-    private func hideMediaControls() {
-        slider.alpha = 0
-        currentTimeLabel.alpha = 0
-        totalTimeLabel.alpha = 0
-        playPauseButton.alpha = 0
-    }
-    
-    private func showMediaControls() {
-        slider.fadeIn(duration: 1.5)
-        currentTimeLabel.fadeIn(duration: 2)
-        totalTimeLabel.fadeIn(duration: 2.5)
-        playPauseButton.fadeIn(duration: 3)
     }
     
     private func fadeMediaControls() {
@@ -101,8 +86,9 @@ class VideoPlayerVC: BasePlayerVC {
             self.moveSliderTo(currentTime: currentTime)
         })
         
+        slider.addTarget(self, action: #selector(trackCurrentPlayerState), for: .touchDown)
         slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
-        slider.addTarget(self, action: #selector(playPause), for: .touchUpInside)
+        slider.addTarget(self, action: #selector(resumePlayerState), for: .touchUpInside)
         
         let videoViewTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapVideoView))
         videoView.addGestureRecognizer(videoViewTapGestureRecognizer)
@@ -119,9 +105,22 @@ class VideoPlayerVC: BasePlayerVC {
         fadeMediaControls()
     }
     
-    @objc private func sliderValueChanged() {
+    @objc private func trackCurrentPlayerState() {
         videoPlayer?.pause()
+        wasCurrentlyPlaying = isPlaying
         isPlaying = false
+    }
+    
+    @objc private func resumePlayerState() {
+        isPlaying = wasCurrentlyPlaying
+        if wasCurrentlyPlaying! {
+            videoPlayer?.play()
+        } else {
+            videoPlayer?.pause()
+        }
+    }
+    
+    @objc private func sliderValueChanged() {
         if let videoDuration = videoPlayer?.currentItem?.duration {
             let time = Float64(slider.value) * CMTimeGetSeconds(videoDuration)
             let gotoTime = CMTime(value: Int64(time), timescale: 1)
@@ -141,28 +140,13 @@ class VideoPlayerVC: BasePlayerVC {
         if keyPath == "currentItem.loadedTimeRanges" {
             if let videoDuration = videoPlayer?.currentItem?.duration {
                 totalTimeLabel.text = getFormattedTimeString(for: videoDuration)
-            } else {
-                totalTimeLabel.text = "--:--"
             }
             
-            currentTimeLabel.text = "00:00"
             showMediaControls()
             
             videoPlayer?.play()
             isPlaying = true
         }
-    }
-    
-    private func getFormattedTimeString(for time: CMTime) -> String {
-        let totalSeconds = Int(CMTimeGetSeconds(time))
-        
-        let seconds = totalSeconds % 60
-        let minutes = (totalSeconds - seconds) / 60
-        
-        let secondsString = String(format: "%02d", seconds)
-        let minutesString = String(format: "%02d", minutes)
-        
-        return minutesString + ":" + secondsString
     }
     
     private func setupVideoView() {

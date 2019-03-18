@@ -25,9 +25,7 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             }
         }
         navigationItem.title = "Hydroponic Gardens"
-        
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
-        
+                
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             layout.scrollDirection = .horizontal
@@ -40,6 +38,16 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         collectionView.isPagingEnabled = true
         
         collectionView.register(HydroGardenWeatherCell.self, forCellWithReuseIdentifier: hydroGardenCellId)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 1, delay: 1, usingSpringWithDamping: 0.3, initialSpringVelocity: 5, options: .curveEaseInOut, animations: { [weak self] in
+            self?.collectionView.contentOffset.x = 50
+        })  { (_) in
+            self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

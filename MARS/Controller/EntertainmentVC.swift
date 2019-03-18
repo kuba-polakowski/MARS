@@ -23,12 +23,12 @@ class EntertainmentVC: UITabBarController {
         let activitiesVCLayout = UICollectionViewFlowLayout()
         let activities = ActivitiesVC(collectionViewLayout: activitiesVCLayout)
 
-        viewControllers = [musicPlayer, videoPlayer, activities]
-        selectedViewController = musicPlayer
+        viewControllers = [activities, musicPlayer, videoPlayer]
+        selectedViewController = activities
         tabBar.tintColor = tertiaryRedColor
+        activities.setupBarItem()
         musicPlayer.setupBarItem()
         videoPlayer.setupBarItem()
-        activities.setupBarItem()
     }
     
 }

@@ -94,10 +94,10 @@ class BasePlayerVC: UIViewController {
     
     func setupBackButtonLayout() {
         view.addSubview(goBackButton)
-        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        goBackButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        goBackButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
+        goBackButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        goBackButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     private func setupPlayButtonImage() {

@@ -21,7 +21,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
     let precipitationView: ParticleView = {
         let particleView = ParticleView()
         particleView.translatesAutoresizingMaskIntoConstraints = false
-        particleView.image = UIImage(named: "dot2")
+        particleView.image = UIImage(named: "weather-dot")
         particleView.color = UIColor.blue.cgColor
         particleView.clipsToBounds = true
         

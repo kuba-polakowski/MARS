@@ -153,7 +153,7 @@ class VideoPlayerVC: BasePlayerVC {
         videoView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         videoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         videoView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        videoView.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        videoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
     }
     
     override func setupMediaControlsLayout() {

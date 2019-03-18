@@ -55,6 +55,7 @@
 		04C679D3222470CF00F997E1 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D2222470CF00F997E1 /* Weather.swift */; };
 		04C679D5222472C700F997E1 /* WeatherSituations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D4222472C700F997E1 /* WeatherSituations.swift */; };
 		04C679D722247CD700F997E1 /* HydroGardenWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D622247CD700F997E1 /* HydroGardenWeatherCell.swift */; };
+		04DA2E53223ECD7500CDBC8B /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DA2E52223ECD7500CDBC8B /* ActivityDetailView.swift */; };
 		04DAB1742235732F004D0AFE /* EntertainmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB1732235732F004D0AFE /* EntertainmentVC.swift */; };
 		04DAB176223573D3004D0AFE /* MusicPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB175223573D3004D0AFE /* MusicPlayerVC.swift */; };
 		04DAB178223573DC004D0AFE /* VideoPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB177223573DC004D0AFE /* VideoPlayerVC.swift */; };
@@ -114,6 +115,7 @@
 		04C679D2222470CF00F997E1 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		04C679D4222472C700F997E1 /* WeatherSituations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSituations.swift; sourceTree = "<group>"; };
 		04C679D622247CD700F997E1 /* HydroGardenWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroGardenWeatherCell.swift; sourceTree = "<group>"; };
+		04DA2E52223ECD7500CDBC8B /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
 		04DAB1732235732F004D0AFE /* EntertainmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntertainmentVC.swift; sourceTree = "<group>"; };
 		04DAB175223573D3004D0AFE /* MusicPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerVC.swift; sourceTree = "<group>"; };
 		04DAB177223573DC004D0AFE /* VideoPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerVC.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				04A58EB222217D2500142885 /* TransitMenuCell.swift */,
 				04C679D622247CD700F997E1 /* HydroGardenWeatherCell.swift */,
 				04E38A902237F8D60097E98B /* ActivityCell.swift */,
+				04DA2E52223ECD7500CDBC8B /* ActivityDetailView.swift */,
 				0454A997221DA97C00EED3B1 /* Base Views */,
 			);
 			path = View;
@@ -364,6 +367,7 @@
 				046CA7442236A70E00D55DCB /* BasePlayerVC.swift in Sources */,
 				042D8B8C221C679F0095743C /* FadeAnimations.swift in Sources */,
 				049D3AC1221352A50084AD45 /* BaseTableViewController.swift in Sources */,
+				04DA2E53223ECD7500CDBC8B /* ActivityDetailView.swift in Sources */,
 				04A58EB12221712A00142885 /* TransitMenuView.swift in Sources */,
 				04A58EB322217D2500142885 /* TransitMenuCell.swift in Sources */,
 				04B3ADA72214916800BB61C3 /* Messages.swift in Sources */,

@@ -71,7 +71,7 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: menuCellId, for: indexPath) as! MenuCell
-        cell.label.text = " " + menuItems[indexPath.item] + " "
+        cell.label.text = menuItems[indexPath.item]
         if let image = UIImage(named: menuItems[indexPath.item].lowercased()) {
             cell.imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
@@ -80,18 +80,18 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let chosenCell = collectionView.cellForItem(at: indexPath) as! MenuCell
-        if chosenCell.label.text == " Events " {
+        if chosenCell.label.text == "Events" {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(EventsVC(collectionViewLayout: collectionViewLayout), animated: true)
-        } else if chosenCell.label.text == " Hydro " {
+        } else if chosenCell.label.text == "Hydro" {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(HydroGardenVC(collectionViewLayout: collectionViewLayout), animated: true)
-        } else if chosenCell.label.text == " LS " {
+        } else if chosenCell.label.text == "LS" {
             let collectionViewLayout = UICollectionViewFlowLayout()
             navigationController?.pushViewController(LSStatsVC(collectionViewLayout: collectionViewLayout), animated: true)
-        } else if chosenCell.label.text == " Transit " {
+        } else if chosenCell.label.text == "Transit" {
             navigationController?.pushViewController(TransitVC(), animated: true)
-        } else if chosenCell.label.text == " Fun " {
+        } else if chosenCell.label.text == "Fun" {
             navigationController?.pushViewController(EntertainmentVC(), animated: true)
         } else {
             navigationController?.pushViewController(ChatCategoriesVC(), animated: true)

@@ -45,7 +45,7 @@ class MenuCell: UICollectionViewCell {
         
         contentMode = .bottomLeft
         addSubview(label)
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25).isActive = true
         label.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
     }

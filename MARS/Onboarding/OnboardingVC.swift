@@ -63,6 +63,7 @@ class OnboardingVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 200, weight: .bold)
         label.textColor = primaryColor
         label.text = "MARS"
@@ -84,16 +85,22 @@ class OnboardingVC: UIViewController {
         return label
     }()
     
+    let descriptionLabelContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alpha = 0
+        
+        return view
+    }()
+    
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.contentMode = .top
         label.font = UIFont.systemFont(ofSize: 20)
         label.textColor = primaryColor
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
-        label.alpha = 0
         
         return label
     }()
@@ -113,7 +120,8 @@ class OnboardingVC: UIViewController {
     }()
     
     var subtitleConstraint: NSLayoutConstraint!
-    var descriptionConstraint: NSLayoutConstraint!
+    var descriptionTopConstraint: NSLayoutConstraint!
+    var descriptionBottomConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,12 +159,20 @@ class OnboardingVC: UIViewController {
         subtitleConstraint = subtitleLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -20)
         subtitleConstraint.isActive = true
         
-        view.addSubview(descriptionLabel)
-        descriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
-        descriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
+        view.addSubview(descriptionLabelContainer)
+        descriptionLabelContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        descriptionLabelContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
         
-        descriptionConstraint = descriptionLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 100)
-        descriptionConstraint.isActive = true
+        descriptionBottomConstraint = descriptionLabelContainer.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10)
+        descriptionBottomConstraint.isActive = true
+        descriptionTopConstraint = descriptionLabelContainer.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 100)
+        descriptionTopConstraint.isActive = true
+        
+        descriptionLabelContainer.addSubview(descriptionLabel)
+        descriptionLabel.leadingAnchor.constraint(equalTo: descriptionLabelContainer.leadingAnchor).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: descriptionLabelContainer.topAnchor).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: descriptionLabelContainer.trailingAnchor).isActive = true
+        descriptionLabel.heightAnchor.constraint(lessThanOrEqualTo: descriptionLabelContainer.heightAnchor).isActive = true
         
         view.addSubview(doneButton)
         doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -192,6 +208,11 @@ class OnboardingVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupGradient()
+        avLayer?.frame = videoView.frame
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
     }
     
     private func setupVideoPlayer() {
@@ -275,9 +296,10 @@ class OnboardingVC: UIViewController {
         })
         
         UIView.animate(withDuration: 0.8, delay: 0.5, options: .curveEaseInOut, animations: { [weak self] in
-            self?.descriptionConstraint.constant = 80
+            self?.descriptionBottomConstraint.constant = -10
+            self?.descriptionTopConstraint.constant = 80
             self?.view.layoutIfNeeded()
-            self?.descriptionLabel.alpha = 1
+            self?.descriptionLabelContainer.alpha = 1
         }) { (_) in
             self.view.isUserInteractionEnabled = true
         }
@@ -291,9 +313,10 @@ class OnboardingVC: UIViewController {
         })
         
         UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: { [weak self] in
-            self?.descriptionConstraint.constant = forward ? 60 : 100
+            self?.descriptionBottomConstraint.constant = forward ? -30 : 10
+            self?.descriptionTopConstraint.constant = forward ? 60 : 100
             self?.view.layoutIfNeeded()
-            self?.descriptionLabel.alpha = 0
+            self?.descriptionLabelContainer.alpha = 0
         }) { (_) in
             self.resetLabelConstraints(forward: forward)
         }
@@ -302,7 +325,8 @@ class OnboardingVC: UIViewController {
     
     func resetLabelConstraints(forward: Bool) {
         subtitleConstraint.constant = forward ? -20 : -60
-        descriptionConstraint.constant = forward ? 100 : 60
+        descriptionBottomConstraint.constant = forward ? 10 : -30
+        descriptionTopConstraint.constant = forward ? 100 : 60
         view.layoutIfNeeded()
     }
     

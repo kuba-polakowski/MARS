@@ -90,7 +90,7 @@ class BaseEventView: UIView {
         titleLabelLeadingConstraint.constant = 20
         titleLabelTopConstraint.constant = 15
         dateLabelLeadingConstraint.isActive = false
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.titleLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         })
@@ -103,10 +103,10 @@ class BaseEventView: UIView {
         titleLabelLeadingConstraint.constant = 10
         titleLabelTopConstraint.constant = 10
         dateLabelLeadingConstraint.isActive = true
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.titleLabel.transform = .identity
-            self?.backgroundColor = secondaryColor
+            self?.backgroundColor = primaryColor
         })
     }
     

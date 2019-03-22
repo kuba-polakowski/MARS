@@ -12,14 +12,26 @@ private let transitCellId = "transitCellId"
 
 class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    let allVehiclesByType: [[Vehicle]] = {
+        var allVehicles = [[Vehicle]]()
+        let groupedVehicles = Dictionary(grouping: vehicles) { (element) -> String in
+            return element.name
+        }
+        groupedVehicles.keys.forEach({ (vehicleType) in
+            allVehicles.append(groupedVehicles[vehicleType] ?? [])
+        })
+        return allVehicles
+    }()
+    
+    
     var selectedItemIndexPath: IndexPath?
     
     let upIcon = #imageLiteral(resourceName: "up-icon").withRenderingMode(.alwaysTemplate)
     let downIcon = #imageLiteral(resourceName: "down-icon").withRenderingMode(.alwaysTemplate)
 
-    var vehicleIsAvailable = false {
+    var selectedVehicleIsAvailable = false {
         didSet {
-            summonVehicleButton.isEnabled = vehicleIsAvailable
+            summonVehicleButton.isEnabled = selectedVehicleIsAvailable
             animateSummonButton()
         }
     }
@@ -109,14 +121,14 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     }
     
     func animateSummonButton() {
-        let canSummonVehicle = vehicleIsAvailable
+        let canSummonVehicle = selectedVehicleIsAvailable
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: { [unowned self] in
             self.summonVehicleButton.backgroundColor = canSummonVehicle ? tertiaryRedColor : secondaryFontColor
         })
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return allVehiclesByType.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -135,15 +147,16 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: transitCellId, for: indexPath) as! TransitMenuCell
         
-        let vehicle = vehicles[indexPath.item]
+        let vehicleType = allVehiclesByType[indexPath.item]
+        let vehicle = vehicleType.first!
         
         if let image = UIImage(named: "transit-\(vehicle.name.lowercased())") {
             cell.imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
-        cell.count = vehicles[indexPath.item].count
+        cell.count = vehicleType.count
         if isExpanded {
             cell.label.text = vehicle.name
-            cell.countLabel.text = vehicle.count > 0 ? String(vehicle.count) : "(unavailable)"
+            cell.countLabel.text = vehicleType.count > 0 ? String(vehicleType.count) : "(unavailable)"
         } else {
             cell.label.text = ""
             cell.countLabel.text = ""
@@ -158,7 +171,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.reloadData()
         selectedItemIndexPath = indexPath
-        vehicleIsAvailable = vehicles[indexPath.item].count != 0
+        selectedVehicleIsAvailable = allVehiclesByType[indexPath.item].count != 0
     }
     
     required init?(coder aDecoder: NSCoder) {

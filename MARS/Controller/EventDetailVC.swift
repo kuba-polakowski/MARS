@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import EventKit
 
 class EventDetailVC: UIViewController {
     
     var animationOffset: CGFloat!
+    
+    let store = EKEventStore()
     
     var event: Event! {
         didSet {
@@ -157,25 +160,46 @@ class EventDetailVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        goBackButton.fadeIn(duration: 0.5)
-        detailLabel.fadeIn(duration: 1)
-        addReminderButton.fadeIn(duration: 1.5)
+        goBackButton.fadeIn(duration: 0.1)
+        detailLabel.fadeIn(duration: 0.2)
+        addReminderButton.fadeIn(duration: 0.5)
     }
     
     @objc private func addEventReminder() {
-        print("ADDING A REMINDER TO CALENDAR")
+        createEventinTheCalendar(title: event.title, date: event.date)
+    }
+    
+    private func createEventinTheCalendar(title: String, date :Date) {
+        
+        store.requestAccess(to: .event) { (success, error) in
+            guard error == nil else { return }
+            
+            let event = EKEvent.init(eventStore: self.store)
+            event.calendar = self.store.defaultCalendarForNewEvents
+            
+            event.title = title
+            event.startDate = date
+            
+            event.endDate = date.addingTimeInterval(1 * 60 * 60)
+            
+            do {
+                try self.store.save(event, span: .thisEvent)
+            } catch let error as NSError {
+                print(error)
+            }
+        }
     }
     
     @objc private func goBack() {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         thumbnailView.alpha = 0
-        goBackButton.fadeOut(duration: 0.3)
-        detailLabel.fadeOut(duration: 0.5)
-        addReminderButton.fadeOut(duration: 0.7)
+        goBackButton.fadeOut(duration: 0.1)
+        detailLabel.fadeOut(duration: 0.3)
+        addReminderButton.fadeOut(duration: 0.2)
         eventViewTopConstraint.constant = animationOffset
         eventView.setOriginalConstraints()
 
-        UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseInOut, animations: { [unowned self] in
+        UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseInOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
         }) { (_) in
             self.eventView.clipsToBounds = true

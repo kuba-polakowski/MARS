@@ -7,15 +7,22 @@
 //
 
 import UIKit
+import MapKit
 
 class TransitVC: UIViewController {
     
-    let mapView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = secondaryRedColor
+    var vehiclesAvailable = vehicles
+    
+    let mapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        let location = CLLocation(latitude: 21.30, longitude: -157.85)
+        let regionRadius: CLLocationDistance = 10000
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
+        let vehicleLocationAnnotation = MKPointAnnotation()
         
-        return view
+        return mapView
     }()
     
     let menuView: TransitMenuView = {
@@ -32,7 +39,6 @@ class TransitVC: UIViewController {
         
         navigationItem.title = "Transit"
         
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
         
         if let navigationController = navigationController, navigationController.navigationBar.isHidden {
@@ -49,6 +55,8 @@ class TransitVC: UIViewController {
         mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -105).isActive = true
         
+        setupVehiclesOnMap()
+        
         setupMenuView()
         addSwipeMenuGestureRecognizers()
     }
@@ -57,6 +65,18 @@ class TransitVC: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         menuView.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    private func setupVehiclesOnMap() {
+        var vehiclesMapAnnotations = [MKPointAnnotation]()
+        for vehicle in vehiclesAvailable {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = vehicle.location
+            annotation.title = vehicle.name
+            annotation.subtitle = "\(vehicle.charge)% charge"
+            vehiclesMapAnnotations.append(annotation)
+        }
+        mapView.addAnnotations(vehiclesMapAnnotations)
     }
     
     private func addSwipeMenuGestureRecognizers() {
@@ -73,7 +93,6 @@ class TransitVC: UIViewController {
     }
     
     @objc private func touchedMap() {
-        print("touched the map")
     }
 
     @objc private func expandMenu() {

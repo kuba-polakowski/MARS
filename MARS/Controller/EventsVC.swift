@@ -38,9 +38,13 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: eventCellId)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.backgroundColor = secondaryColor
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView.backgroundColor = secondaryColor
         if navigationController?.navigationBar.alpha == 0 {
             navigationController?.navigationBar.fadeIn(duration: 0.5)
         }
@@ -91,20 +95,20 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             }
         }
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
             cell.frame.origin.y = currentOffset
             cell.eventView.backgroundColor = primaryColor
             }, completion: { (_) in
                 cell.animateForTransition(withInsets: self.view.safeAreaInsets)
                 
-                UIView.animate(withDuration: 1, animations: { [unowned self] in
+                UIView.animate(withDuration: 0.7, animations: { [unowned self] in
                     self.collectionView.backgroundColor = primaryColor
                 }, completion: { (_) in
                     let eventDetailVC = EventDetailVC()
                     eventDetailVC.event = upcomingEvents[index.row]
                     eventDetailVC.animationOffset = originY - currentOffset
                     eventDetailVC.modalTransitionStyle = .crossDissolve
-                    self.navigationController?.present(eventDetailVC, animated: true, completion: nil)
+                    self.navigationController?.present(eventDetailVC, animated: false, completion: nil)
                 })
         })
         

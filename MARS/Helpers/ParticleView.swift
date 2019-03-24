@@ -9,6 +9,9 @@
 import UIKit
 
 class ParticleView: UIView {
+    
+    var currentPrecipitation: Precipitation = .none
+    
     var image: UIImage?
     var color: CGColor?
     
@@ -35,11 +38,9 @@ class ParticleView: UIView {
     
     func addEmitterCells(for weather: Weather) {
         let emitterLayer = layer as! CAEmitterLayer
-        
+
         emitterLayer.emitterShape = .line
-        emitterLayer.emitterPosition = CGPoint(x: bounds.midX, y: 0)
-        emitterLayer.emitterSize = CGSize(width: 2.5 * bounds.size.width, height: 1)
-        
+
         switch weather.precipitation {
         case .drizzle:
             color = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
@@ -61,9 +62,9 @@ class ParticleView: UIView {
             let bigCell = makeEmitterCell(velocity: 120, scale: 0.2, direction: directionOfRain, directionRange: directionRange, amount: 50)
             emitterLayer.emitterCells = [smallCell, mediumCell, bigCell]
         case .none:
-            return
+            emitterLayer.emitterCells = []
         }
 
     }
-
+    
 }

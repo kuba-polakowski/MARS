@@ -70,11 +70,13 @@ class TransitVC: UIViewController {
     private func setupVehiclesOnMap() {
         var vehiclesMapAnnotations = [MKPointAnnotation]()
         for vehicle in vehiclesAvailable {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = vehicle.location
-            annotation.title = vehicle.name
-            annotation.subtitle = "\(vehicle.charge)% charge"
-            vehiclesMapAnnotations.append(annotation)
+            if vehicle.charge > 0 {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = vehicle.location
+                annotation.title = vehicle.name
+                annotation.subtitle = "\(vehicle.charge)% charge"
+                vehiclesMapAnnotations.append(annotation)
+            }
         }
         mapView.addAnnotations(vehiclesMapAnnotations)
     }

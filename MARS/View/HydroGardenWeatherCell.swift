@@ -15,9 +15,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
             (backgroundGradientView.layer as! CAGradientLayer).colors = [colors[0], colors[1]]
         }
     }
-    
-    var weather: Weather!
-    
+        
     let precipitationView: ParticleView = {
         let particleView = ParticleView()
         particleView.translatesAutoresizingMaskIntoConstraints = false
@@ -118,7 +116,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         addSubview(gardenNameLabel)
         gardenNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         gardenNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        gardenNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        gardenNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 65).isActive = true
         
         addSubview(weatherIconImageView)
         weatherIconImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -144,9 +142,13 @@ class HydroGardenWeatherCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        precipitationView.addEmitterCells(for: weather)
+        
+        let emitterLayer = precipitationView.layer as! CAEmitterLayer
+        
+        emitterLayer.emitterPosition = CGPoint(x: bounds.midX, y: 0)
+        emitterLayer.emitterSize = CGSize(width: 2.5 * bounds.size.width, height: 1)
+
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

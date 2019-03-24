@@ -10,14 +10,14 @@ import UIKit
 
 extension UIView {
     func fadeOut(duration: Double) {
-        UIView.animate(withDuration: duration) {
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
             self.alpha = 0
-        }
+        })
     }
     
     func fadeIn(duration: Double) {
-        UIView.animate(withDuration: duration) {
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
             self.alpha = 1
-        }
+        })
     }
 }

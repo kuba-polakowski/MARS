@@ -60,6 +60,8 @@
 		04DAB176223573D3004D0AFE /* MusicPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB175223573D3004D0AFE /* MusicPlayerVC.swift */; };
 		04DAB178223573DC004D0AFE /* VideoPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB177223573DC004D0AFE /* VideoPlayerVC.swift */; };
 		04DAB17A223573F0004D0AFE /* ActivitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAB179223573F0004D0AFE /* ActivitiesVC.swift */; };
+		04E093FB2247E5FB0009AB1C /* MenuCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E093FA2247E5FB0009AB1C /* MenuCategories.swift */; };
+		04E093FD2247E62C0009AB1C /* MenuCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E093FC2247E62C0009AB1C /* MenuCategory.swift */; };
 		04E38A912237F8D60097E98B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E38A902237F8D60097E98B /* ActivityCell.swift */; };
 		04EFF67F2219EF7100D14D3B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFF67E2219EF7100D14D3B /* Colors.swift */; };
 /* End PBXBuildFile section */
@@ -120,6 +122,8 @@
 		04DAB175223573D3004D0AFE /* MusicPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerVC.swift; sourceTree = "<group>"; };
 		04DAB177223573DC004D0AFE /* VideoPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerVC.swift; sourceTree = "<group>"; };
 		04DAB179223573F0004D0AFE /* ActivitiesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesVC.swift; sourceTree = "<group>"; };
+		04E093FA2247E5FB0009AB1C /* MenuCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategories.swift; sourceTree = "<group>"; };
+		04E093FC2247E62C0009AB1C /* MenuCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCategory.swift; sourceTree = "<group>"; };
 		04E38A902237F8D60097E98B /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		04EFF67E2219EF7100D14D3B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -239,6 +243,7 @@
 		04B3ADA222148ED500BB61C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				04E093FC2247E62C0009AB1C /* MenuCategory.swift */,
 				04B3ADA322148EE100BB61C3 /* Message.swift */,
 				042478B72219CEFE00878DE4 /* Event.swift */,
 				04463C4C22205BC000087EF2 /* LSCategory.swift */,
@@ -252,6 +257,7 @@
 		04B3ADA52214915900BB61C3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				04E093FA2247E5FB0009AB1C /* MenuCategories.swift */,
 				04B3ADA62214916800BB61C3 /* Messages.swift */,
 				042478B92219CF3E00878DE4 /* Events.swift */,
 				04463C4E22205BEE00087EF2 /* LSCategories.swift */,
@@ -371,6 +377,7 @@
 				04A58EB12221712A00142885 /* TransitMenuView.swift in Sources */,
 				04A58EB322217D2500142885 /* TransitMenuCell.swift in Sources */,
 				04B3ADA72214916800BB61C3 /* Messages.swift in Sources */,
+				04E093FD2247E62C0009AB1C /* MenuCategory.swift in Sources */,
 				04EFF67F2219EF7100D14D3B /* Colors.swift in Sources */,
 				049D3ABF22134C6C0084AD45 /* HomeVC.swift in Sources */,
 				04463C4D22205BC000087EF2 /* LSCategory.swift in Sources */,
@@ -381,6 +388,7 @@
 				04A58EAF222170C500142885 /* TransitVC.swift in Sources */,
 				0458977E222D59C90017AD96 /* OnboardingVC.swift in Sources */,
 				04ACDDE0222072BC00B94CF3 /* LSStatCell.swift in Sources */,
+				04E093FB2247E5FB0009AB1C /* MenuCategories.swift in Sources */,
 				0441F6CB2210A3CC00EAD015 /* MenuHeaderView.swift in Sources */,
 				042D8B8E221C6BA30095743C /* EventDetailVC.swift in Sources */,
 				04463C4F22205BEE00087EF2 /* LSCategories.swift in Sources */,

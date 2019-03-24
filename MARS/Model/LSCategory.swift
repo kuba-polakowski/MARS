@@ -11,5 +11,5 @@ import UIKit
 struct LSCategory {
     let title: String
     let color: UIColor
-    let value: CGFloat
+    var value: CGFloat
 }

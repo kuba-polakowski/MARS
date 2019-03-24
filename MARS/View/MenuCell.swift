@@ -10,6 +10,8 @@ import UIKit
 
 class MenuCell: UICollectionViewCell {
     
+    var category: Category!
+    
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,10 +45,9 @@ class MenuCell: UICollectionViewCell {
         imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.3).isActive = true
         imageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3).isActive = true
         
-        contentMode = .bottomLeft
         addSubview(label)
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25).isActive = true
-        label.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
     }
     

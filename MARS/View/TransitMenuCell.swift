@@ -10,7 +10,7 @@ import UIKit
 
 class TransitMenuCell: UICollectionViewCell {
     
-    var count: Int! {
+    var available: Bool! {
         didSet {
             setColors()
         }
@@ -45,7 +45,7 @@ class TransitMenuCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            guard count != 0 else { return }
+            guard available else { return }
             imageView.tintColor = isSelected ? primaryRedColor : tertiaryFontColor
             label.textColor = isSelected ? primaryRedColor : primaryFontColor
         }
@@ -75,7 +75,7 @@ class TransitMenuCell: UICollectionViewCell {
     }
     
     private func setColors() {
-        if count != 0 {
+        if available {
             backgroundColor = .clear
             imageView.tintColor = secondaryFontColor
             label.textColor = primaryFontColor

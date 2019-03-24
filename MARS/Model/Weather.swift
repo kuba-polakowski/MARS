@@ -16,6 +16,10 @@ enum CloudCover {
     case full, partial, none
 }
 
+enum TemperatureScale {
+    case celsius, farenheit
+}
+
 struct Weather {
     let temperature: Int
     let windSpeed: Int

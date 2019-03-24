@@ -128,38 +128,70 @@ class OnboardingVC: UIViewController {
         
         view.backgroundColor = tertiaryRedColor
         
+        setupViews()
+        setupLayout()
+        setupGestureRecognizers()
+        setupTextForCurrentPage()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupVideoPlayer()
+        titleLabel.fadeIn(duration: 2)
+        setupTextForCurrentPage()
+        setupCurrentPageDot()
+        showLabels(forward: true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupGradientFrame()
+        avLayer?.frame = videoView.frame
+    }
+    
+    private func setupViews() {
         view.addSubview(videoView)
+        view.addSubview(fadeView)
+        fadeView.layer.addSublayer(gradientLayer)
+        view.addSubview(pageIndicatorDots)
+        view.addSubview(titleLabel)
+        view.addSubview(subtitleLabel)
+        view.addSubview(descriptionLabelContainer)
+        descriptionLabelContainer.addSubview(descriptionLabel)
+        view.addSubview(doneButton)
+    }
+    
+    private func setupLayout() {
         videoView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         videoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         videoView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         videoView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        view.addSubview(fadeView)
+        
         fadeView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         fadeView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         fadeView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         fadeView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        fadeView.layer.addSublayer(gradientLayer)
         
-        view.addSubview(pageIndicatorDots)
+        
         pageIndicatorDots.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         pageIndicatorDots.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         pageIndicatorDots.heightAnchor.constraint(equalToConstant: 300).isActive = true
         pageIndicatorDots.widthAnchor.constraint(equalToConstant: 10).isActive = true
         
-        view.addSubview(titleLabel)
+        
         titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -100).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 100).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         
-        view.addSubview(subtitleLabel)
+        
         subtitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50).isActive = true
         subtitleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50).isActive = true
         
         subtitleConstraint = subtitleLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -20)
         subtitleConstraint.isActive = true
         
-        view.addSubview(descriptionLabelContainer)
+        
         descriptionLabelContainer.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
         descriptionLabelContainer.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35).isActive = true
         
@@ -168,18 +200,20 @@ class OnboardingVC: UIViewController {
         descriptionTopConstraint = descriptionLabelContainer.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 100)
         descriptionTopConstraint.isActive = true
         
-        descriptionLabelContainer.addSubview(descriptionLabel)
+        
         descriptionLabel.leadingAnchor.constraint(equalTo: descriptionLabelContainer.leadingAnchor).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: descriptionLabelContainer.topAnchor).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: descriptionLabelContainer.trailingAnchor).isActive = true
         descriptionLabel.heightAnchor.constraint(lessThanOrEqualTo: descriptionLabelContainer.heightAnchor).isActive = true
         
-        view.addSubview(doneButton)
+        
         doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         doneButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
         doneButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
         doneButton.widthAnchor.constraint(equalToConstant: 130).isActive = true
-        
+    }
+    
+    private func setupGestureRecognizers() {
         let swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeUp))
         swipeUpGestureRecognizer.direction = .up
         let swipeDownGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown))
@@ -189,81 +223,32 @@ class OnboardingVC: UIViewController {
         view.addGestureRecognizer(swipeDownGestureRecognizer)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        subtitleLabel.text = onboardingSubtitles[currentPage]
-        descriptionLabel.text = onboardingDescriptions[currentPage]
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupVideoPlayer()
-        setupGradient()
-        titleLabel.fadeIn(duration: 2)
-        setupPage()
-        setupPageDot()
-        showLabels(forward: true)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupGradient()
-        avLayer?.frame = videoView.frame
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-    }
-    
     private func setupVideoPlayer() {
         guard let path = Bundle.main.path(forResource: "onboardingVideo", ofType: ".mp4") else { return }
-        
         let url = URL(fileURLWithPath: path)
-        
         let asset = AVAsset(url: url)
         let item = AVPlayerItem(asset: asset)
         
         avPlayer = AVQueuePlayer(items: [item])
         avPlayer!.volume = 0.0
-        
         avLooper = AVPlayerLooper(player: avPlayer!, templateItem: item)
-        
         avLayer = AVPlayerLayer(player: avPlayer)
         avLayer!.frame = videoView.frame
         videoView.layer.addSublayer(avLayer!)
         avLayer!.videoGravity = .resizeAspectFill
         avPlayer!.play()
         
-        videoView.fadeIn(duration: 3)
+        videoView.fadeIn(duration: 5)
     }
     
     @objc private func didSwipeUp() {
         guard currentPage < onboardingSubtitles.count - 1 else { return }
-        view.isUserInteractionEnabled = false
-        currentPage += 1
-        
-        setupPageDot()
-        hideLabels(forward: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
-            self.setupPage()
-            self.showLabels(forward: true)
-        }
-        if currentPage == onboardingSubtitles.count - 1 {
-            doneButton.fadeIn(duration: 2)
-        }
+        didSwipe(forward: true)
     }
     
     @objc private func didSwipeDown() {
         guard currentPage > 0 else { return }
-        view.isUserInteractionEnabled = false
-        currentPage -= 1
-
-        setupPageDot()
-        hideLabels(forward: false)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
-            self.setupPage()
-            self.showLabels(forward: false)
-        }
+        didSwipe(forward: false)
     }
     
     @objc private func doneButtonPressed() {
@@ -273,13 +258,27 @@ class OnboardingVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    private func didSwipe(forward: Bool) {
+        view.isUserInteractionEnabled = false
+        currentPage += forward ? 1 : -1
+        setupCurrentPageDot()
+        hideLabels(forward: forward)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
+            self.setupTextForCurrentPage()
+            self.showLabels(forward: forward)
+        }
+        if currentPage == onboardingSubtitles.count - 1 {
+            doneButton.fadeIn(duration: 2)
+        }
+    }
         
-    private func setupPage() {
+    private func setupTextForCurrentPage() {
         subtitleLabel.text = onboardingSubtitles[currentPage]
         descriptionLabel.text = onboardingDescriptions[currentPage]
     }
     
-    private func setupPageDot() {
+    private func setupCurrentPageDot() {
         UIView.animate(withDuration: 1) { [unowned self] in
             (self.pageIndicatorDots.subviews as! [UIImageView]).forEach { (imageView) in
                 imageView.tintColor = secondaryColor
@@ -330,7 +329,7 @@ class OnboardingVC: UIViewController {
         view.layoutIfNeeded()
     }
     
-    private func setupGradient() {
+    private func setupGradientFrame() {
         gradientLayer.frame = view.frame
     }
         

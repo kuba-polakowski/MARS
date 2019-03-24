@@ -9,4 +9,6 @@
 import Foundation
 
 
-var onboarding = true
+var onboarding = false
+
+var temperatureScale: TemperatureScale = .celsius

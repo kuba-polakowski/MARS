@@ -153,10 +153,27 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         if let image = UIImage(named: "transit-\(vehicle.name.lowercased())") {
             cell.imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
-        cell.count = vehicleType.count
+        var numberOfVehiclesOutOfJuice = 0
+        var available: Bool {
+            var available = false
+            vehicleType.forEach({ (vehicle) in
+                if vehicle.charge > 0 {
+                    available = true
+                } else {
+                    numberOfVehiclesOutOfJuice += 1
+                }
+            })
+            return available
+        }
+        
+        cell.available = available
+        
         if isExpanded {
             cell.label.text = vehicle.name
-            cell.countLabel.text = vehicleType.count > 0 ? String(vehicleType.count) : "(unavailable)"
+            cell.countLabel.text = available ? String(vehicleType.count) : "(unavailable)"
+            if available && numberOfVehiclesOutOfJuice > 0 {
+                cell.countLabel.text = " \(vehicleType.count), (\(numberOfVehiclesOutOfJuice) of out of juice)"
+            }
         } else {
             cell.label.text = ""
             cell.countLabel.text = ""

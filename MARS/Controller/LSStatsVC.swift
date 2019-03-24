@@ -52,7 +52,8 @@ class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.width < view.frame.height ? (view.frame.width - 3 * inset) / 2 : (view.frame.width - 5 * inset) / 4
+        let insets = view.safeAreaInsets.left + view.safeAreaInsets.right
+        let width = view.frame.width < view.frame.height ? (view.frame.width - 3 * inset) / 2 : (view.frame.width - 4 * inset - insets) / 3
         return CGSize(width: width, height: width)
     }
 

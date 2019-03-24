@@ -8,7 +8,7 @@
 
 import Foundation
 
-let onboardingSubtitles: [String] = ["Hello there! 🧔", "Bored? 🧐", "Take a look out the window", "Privacy policy and whatnot", "Get to know everone", "That's all for now"]
+let onboardingSubtitles: [String] = ["Hi!", "Bored?", "Take a look out the window", "Privacy policy and whatnot", "Get to know everone", "That's all for now"]
 
 let onboardingDescriptions: [String] = ["To avoid noise pollution, the landing zone is 30 min away from the city. \n\nEnjoy the cruise.",
                               "You can pass the time by reading (or listening to) one of the thousands of available books, watching a movie or taking a nap.",

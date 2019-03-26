@@ -8,6 +8,8 @@
 
 import Foundation
 
+let username = "Peter"
+
 extension UserDefaults {
     
     enum keys: String {

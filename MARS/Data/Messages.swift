@@ -8,7 +8,7 @@
 
 import Foundation
 
-let foodMessages: [Message] = [Message(author: "Joe", date: Date.fromString("01/02/2020"), text: "Pickles, relish, lemon curd"),
+var foodMessages: [Message] = [Message(author: "Joe", date: Date.fromString("01/02/2020"), text: "Pickles, relish, lemon curd"),
                                  Message(author: "Joe", date: Date.fromString("01/02/2020"), text: "Peanut butter"),
                                  Message(author: "Joe", date: Date.fromString("01/02/2020"), text: "An unnecessarily long recipe for a cake that uses pre-made chocolate cake mix and canned frosting - can't make that up."),
                                  Message(author: "Homer", date: Date.fromString("01/03/2020"), text: "3 Dishes You Don't Need to Make Right Now. Check them out"),

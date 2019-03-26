@@ -96,7 +96,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
         typingViewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         typingViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        typingViewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        typingViewContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 15).isActive = true
         
         typingViewTopConstraint = typingViewContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)
         typingViewTopConstraint.isActive = true
@@ -131,6 +131,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     private func getMessages() {
+        messages = []
         let groupedMessages = Dictionary(grouping: foodMessages, by: { (element) -> Date in
             return element.date
         })
@@ -173,10 +174,12 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     }
     
     @objc private func sendMessage() {
-        print("sending: \(typingTextView.text!)")
+        foodMessages.append(Message(author: username, date: Date.fromString("05/06/2020"), text: typingTextView.text!))
         typingTextView.text = ""
         typingTextView.resignFirstResponder()
-        
+        getMessages()
+        tableView.reloadData()
+        scrollToLastMessage()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

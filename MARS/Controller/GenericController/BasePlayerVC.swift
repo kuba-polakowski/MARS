@@ -24,7 +24,7 @@ class BasePlayerVC: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
-        button.imageView?.tintColor = primaryColor
+        button.imageView?.tintColor = UIColor.white
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
@@ -35,7 +35,7 @@ class BasePlayerVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
-        label.textColor = secondaryFontColor
+        label.textColor = currentTheme.secondaryFontColor
         
         return label
     }()
@@ -44,7 +44,7 @@ class BasePlayerVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
-        label.textColor = secondaryFontColor
+        label.textColor = currentTheme.secondaryFontColor
         
         return label
     }()
@@ -52,8 +52,8 @@ class BasePlayerVC: UIViewController {
     let slider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.tintColor = tertiaryRedColor
-        slider.thumbTintColor = tertiaryRedColor
+        slider.tintColor = currentTheme.tertiaryAccentColor
+        slider.thumbTintColor = currentTheme.tertiaryAccentColor
         
         return slider
     }()
@@ -61,7 +61,7 @@ class BasePlayerVC: UIViewController {
     let playPauseButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = tertiaryRedColor
+        button.tintColor = currentTheme.tertiaryAccentColor
         button.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         
         return button

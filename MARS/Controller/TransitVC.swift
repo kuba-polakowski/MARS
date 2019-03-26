@@ -16,6 +16,7 @@ class TransitVC: UIViewController {
     let mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
+//        mapView.
         let location = CLLocation(latitude: 21.30, longitude: -157.85)
         let regionRadius: CLLocationDistance = 10000
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)

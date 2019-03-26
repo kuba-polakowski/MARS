@@ -23,7 +23,7 @@ class BaseEventView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         
@@ -34,7 +34,7 @@ class BaseEventView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = secondaryFontColor
+        label.textColor = currentTheme.secondaryFontColor
         
         return label
     }()
@@ -50,7 +50,7 @@ class BaseEventView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = primaryColor
+        backgroundColor = currentTheme.primaryColor
         layer.cornerRadius = 15
         layer.masksToBounds = true
         
@@ -106,7 +106,7 @@ class BaseEventView: UIView {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.titleLabel.transform = .identity
-            self?.backgroundColor = primaryColor
+//            self?.backgroundColor = currentTheme.secondaryColor
         })
     }
     

@@ -35,7 +35,7 @@ class MusicPlayerVC: BasePlayerVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = primaryColor
+        view.backgroundColor = currentTheme.primaryColor
         setupAlbumCoverLayout()
         setupMusicPlayer()
         setupBackButtonLayout()

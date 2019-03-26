@@ -45,7 +45,7 @@ class ChatCategoriesVC: UIViewController, UITableViewDataSource, UITableViewDele
         tableView.dataSource = self
 
         tableView.rowHeight = 120
-        tableView.backgroundColor = secondaryColor
+        tableView.backgroundColor = currentTheme.secondaryColor
         tableView.separatorStyle = .none
         tableView.contentInset.top = 20
         

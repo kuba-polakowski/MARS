@@ -27,8 +27,8 @@ class BaseTableViewCell: UITableViewCell {
         cellShapeView.clipsToBounds = true
         
         backgroundColor = .clear
-        cellShapeView.backgroundColor = primaryColor
-        label.textColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+        cellShapeView.backgroundColor = currentTheme.primaryColor
+        label.textColor = currentTheme.primaryFontColor
 
         selectionStyle = .none
     }

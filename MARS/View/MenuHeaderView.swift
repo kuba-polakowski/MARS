@@ -15,7 +15,6 @@ class MenuHeaderView: UICollectionReusableView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = #imageLiteral(resourceName: "menuHeader")
         
         return imageView
     }()

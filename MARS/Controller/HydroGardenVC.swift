@@ -14,21 +14,16 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     
     let iconNames = ["clouds", "sun", "rain", "snow"]
     
-    var temperatureScaleSymbol: String = {
-        switch temperatureScale {
-        case .celsius:
-            return "°C"
-        case .farenheit:
-            return "°F"
-        }
+    var temperatureScale: TemperatureScale = {
+        return UserDefaults.standard.currentTemperatureScale()
     }()
 
     let temperatureScaleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
-        button.setTitleColor(primaryColor, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 40)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 35)
         button.addTarget(self, action: #selector(changeTemperatureScale), for: .touchUpInside)
         button.alpha = 0
         
@@ -53,7 +48,7 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             layout.minimumLineSpacing = 0
         }
         
-        collectionView.backgroundColor = primaryColor
+        collectionView.backgroundColor = currentTheme.primaryColor
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.isPagingEnabled = true
@@ -71,11 +66,11 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         temperatureScaleButton.fadeIn(duration: 1)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-//            if self?.collectionView.contentOffset.x == 0 {
-//                self?.hintNextCollectionViewCell()
-//            }
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            if self?.collectionView.contentOffset.x == 0 {
+                self?.hintNextCollectionViewCell()
+            }
+        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -102,8 +97,8 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         cell.precipitationView.addEmitterCells(for: weather)
 
         let temperature = temperatureScale == .celsius ? weather.temperature : weather.tempInFarenheit()
-        
-        cell.temperatureLabel.text = "\(temperature)\(temperatureScaleSymbol)"
+        let temperatureSymbol = getTemperatureSymbol()
+        cell.temperatureLabel.text = "\(temperature)\(temperatureSymbol)"
         cell.weatherDescriptionLabel.text = weather.weatherDescription()
         
         if let image = UIImage(named: "weather-\(iconNames[indexPath.item])") {
@@ -114,16 +109,28 @@ class HydroGardenVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     }
     
     @objc private func changeTemperatureScale() {
-        temperatureScale = temperatureScale == .celsius ? .farenheit : .celsius
-        temperatureScaleSymbol = temperatureScale == .celsius ? "°C" : "°F"
+        UserDefaults.standard.setTemperatureScaleTo(scale: temperatureScale == .celsius ? .farenheit : .celsius)
         setupButtonTitle()
-        collectionView.reloadData()
+
+        view.setNeedsLayout()
     }
     
     private func setupButtonTitle() {
-        temperatureScaleButton.setTitle(temperatureScaleSymbol, for: .normal)
+        temperatureScaleButton.setTitle(getTemperatureSymbol(), for: .normal)
     }
-
+    
+    private func getTemperatureSymbol() -> String {
+        var symbol: String {
+            switch temperatureScale {
+            case .celsius:
+                return "C"
+            case .farenheit:
+                return "F"
+            }
+        }
+        return "°" + symbol
+    }
+    
     private func hintNextCollectionViewCell() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.collectionView.contentOffset.x = 50

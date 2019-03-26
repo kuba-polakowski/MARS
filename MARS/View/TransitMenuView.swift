@@ -47,8 +47,8 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     let summonVehicleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = secondaryFontColor
-        button.titleLabel?.textColor = primaryColor
+        button.backgroundColor = currentTheme.secondaryFontColor
+        button.titleLabel?.textColor = currentTheme.primaryColor
         button.setTitle("Summon Vehicle", for: .normal)
         button.layer.cornerRadius = 15
         button.layer.masksToBounds = true
@@ -60,7 +60,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = primaryColor
+        view.backgroundColor = currentTheme.primaryColor
         
         return view
     }()
@@ -69,7 +69,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
-        button.tintColor = tertiaryRedColor
+        button.tintColor = currentTheme.primaryAccentColor
         
         return button
     }()
@@ -123,7 +123,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     func animateSummonButton() {
         let canSummonVehicle = selectedVehicleIsAvailable
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: { [unowned self] in
-            self.summonVehicleButton.backgroundColor = canSummonVehicle ? tertiaryRedColor : secondaryFontColor
+            self.summonVehicleButton.backgroundColor = canSummonVehicle ? currentTheme.tertiaryAccentColor : currentTheme.secondaryFontColor
         })
     }
     
@@ -172,7 +172,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
             cell.label.text = vehicle.name
             cell.countLabel.text = available ? String(vehicleType.count) : "(unavailable)"
             if available && numberOfVehiclesOutOfJuice > 0 {
-                cell.countLabel.text = " \(vehicleType.count), (\(numberOfVehiclesOutOfJuice) of out of juice)"
+                cell.countLabel.text = " \(vehicleType.count) (\(numberOfVehiclesOutOfJuice) of out of juice)"
             }
         } else {
             cell.label.text = ""

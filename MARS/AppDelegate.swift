@@ -20,12 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let menuCollectionViewLayout = UICollectionViewFlowLayout()
+        
+        currentTheme = UserDefaults.standard.isThemeLight() ? lightTheme : darkTheme
+        
+        if !UserDefaults.standard.isOnboardingDone() {
+            currentTheme = lightTheme
+            UserDefaults.standard.setThemeIsLight(true)
+        }
 
         window?.rootViewController = UINavigationController(rootViewController: HomeVC(collectionViewLayout: menuCollectionViewLayout))
-        
-
-//        let onboardingVC = OnboardingVC()
-//        window?.rootViewController = onboardingVC
         
         return true
     }

@@ -35,7 +35,7 @@ class OnboardingVC: UIViewController {
     
     let gradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, secondaryRedColor.cgColor]
+        gradientLayer.colors = [UIColor.clear.cgColor, currentTheme.secondaryAccentColor.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.8)
         
@@ -65,7 +65,7 @@ class OnboardingVC: UIViewController {
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.font = UIFont.systemFont(ofSize: 200, weight: .bold)
-        label.textColor = primaryColor
+        label.textColor = currentTheme.primaryColor
         label.text = "MARS"
         label.alpha = 0
         
@@ -77,7 +77,7 @@ class OnboardingVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 25)
-        label.textColor = secondaryColor
+        label.textColor = currentTheme.secondaryColor
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.alpha = 0
@@ -98,7 +98,7 @@ class OnboardingVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = primaryColor
+        label.textColor = currentTheme.primaryColor
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         
@@ -108,9 +108,9 @@ class OnboardingVC: UIViewController {
     let doneButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = primaryRedColor
+        button.backgroundColor = currentTheme.primaryAccentColor
         button.layer.cornerRadius = 17
-        button.titleLabel?.textColor = primaryColor
+        button.titleLabel?.textColor = currentTheme.primaryColor
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.setTitle("Done!", for: .normal)
         button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
@@ -125,8 +125,7 @@ class OnboardingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = tertiaryRedColor
+        view.backgroundColor = currentTheme.tertiaryAccentColor
         
         setupViews()
         setupLayout()
@@ -254,6 +253,7 @@ class OnboardingVC: UIViewController {
     @objc private func doneButtonPressed() {
         hideLabels(forward: true)
         doneButton.fadeOut(duration: 1)
+        UserDefaults.standard.setOnboardingDone()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.dismiss(animated: true, completion: nil)
         }
@@ -281,9 +281,9 @@ class OnboardingVC: UIViewController {
     private func setupCurrentPageDot() {
         UIView.animate(withDuration: 1) { [unowned self] in
             (self.pageIndicatorDots.subviews as! [UIImageView]).forEach { (imageView) in
-                imageView.tintColor = secondaryColor
+                imageView.tintColor = currentTheme.secondaryColor
             }
-            (self.pageIndicatorDots.subviews[self.currentPage] as! UIImageView).tintColor = primaryRedColor
+            (self.pageIndicatorDots.subviews[self.currentPage] as! UIImageView).tintColor = currentTheme.primaryAccentColor
         }
     }
     

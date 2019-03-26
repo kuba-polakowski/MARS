@@ -24,7 +24,7 @@ class LSStatCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         label.adjustsFontSizeToFitWidth = true
         label.alpha = 0
         
@@ -37,7 +37,7 @@ class LSStatCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
-        label.textColor = secondaryFontColor
+        label.textColor = currentTheme.secondaryFontColor
         label.adjustsFontSizeToFitWidth = true
         
         return label
@@ -85,7 +85,7 @@ class LSStatCell: UICollectionViewCell {
         
         layer.addSublayer(shadowLayer)
         shadowLayer.lineWidth = 10
-        shadowLayer.strokeColor = secondaryColor.cgColor
+        shadowLayer.strokeColor = UIColor.gray.cgColor
         shadowLayer.lineCap = .round
         shadowLayer.fillColor = UIColor.clear.cgColor
         

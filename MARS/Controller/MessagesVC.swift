@@ -17,7 +17,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     let typingViewContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = secondaryColor
+        view.backgroundColor = currentTheme.secondaryColor
         view.layer.cornerRadius = 15
         
         return view
@@ -26,8 +26,8 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     let typingTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = primaryColor
-        textView.textColor = primaryFontColor
+        textView.backgroundColor = currentTheme.primaryColor
+        textView.textColor = currentTheme.primaryFontColor
         textView.layer.cornerRadius = 15
         
         return textView
@@ -38,7 +38,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = #imageLiteral(resourceName: "send-message-icon").withRenderingMode(.alwaysTemplate)
         button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.tintColor = primaryRedColor
+        button.imageView?.tintColor = currentTheme.primaryAccentColor
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
         
@@ -48,7 +48,8 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+        tableView.backgroundColor = currentTheme.primaryColor
+
         return tableView
     }()
     
@@ -69,7 +70,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        view.backgroundColor = primaryColor
+        view.backgroundColor = currentTheme.primaryColor
         
         view.addSubview(tableView)
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -83,7 +84,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.backgroundColor = primaryColor
         tableView.separatorStyle = .none
         tableView.contentInset.top = 20
         

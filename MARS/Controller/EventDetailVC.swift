@@ -28,9 +28,9 @@ class EventDetailVC: UIViewController {
     let addReminderButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = secondaryRedColor
+        button.backgroundColor = currentTheme.secondaryAccentColor
         button.layer.cornerRadius = 17
-        button.titleLabel?.textColor = primaryColor
+        button.titleLabel?.textColor = currentTheme.primaryColor
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.setTitle("Set Reminder", for: .normal)
         button.addTarget(self, action: #selector(addEventReminder), for: .touchUpInside)
@@ -43,7 +43,7 @@ class EventDetailVC: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
-        button.imageView?.tintColor = primaryColor
+        button.imageView?.tintColor = currentTheme.primaryColor
         button.setImage(image, for: .normal)
         button.alpha = 0
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -63,7 +63,7 @@ class EventDetailVC: UIViewController {
     let eventView: BaseEventView = {
         let eventView = BaseEventView()
         eventView.translatesAutoresizingMaskIntoConstraints = false
-        eventView.backgroundColor = primaryColor
+        eventView.backgroundColor = currentTheme.primaryColor
         
         return eventView
     }()
@@ -81,7 +81,7 @@ class EventDetailVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         label.alpha = 0
         
         return label
@@ -95,7 +95,7 @@ class EventDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = primaryColor
+        view.backgroundColor = currentTheme.primaryColor
         
         view.addSubview(scrollView)
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -201,6 +201,7 @@ class EventDetailVC: UIViewController {
 
         UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseInOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
+            self.view.backgroundColor = currentTheme.secondaryColor
         }) { (_) in
             self.eventView.clipsToBounds = true
             self.dismiss(animated: true, completion: nil)

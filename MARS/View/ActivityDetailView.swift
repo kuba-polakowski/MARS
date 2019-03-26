@@ -15,7 +15,7 @@ class ActivityDetailView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
-        view.backgroundColor = primaryColor
+        view.backgroundColor = currentTheme.primaryColor
         
         return view
     }()
@@ -35,7 +35,7 @@ class ActivityDetailView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = #imageLiteral(resourceName: "exit-icon").withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
-        button.tintColor = primaryColor
+        button.tintColor = UIColor.white
         button.addTarget(self, action: #selector(collapseAndDismiss), for: .touchUpInside)
         
         return button
@@ -45,7 +45,7 @@ class ActivityDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.text = upcomingEvents.first?.title
@@ -56,7 +56,7 @@ class ActivityDetailView: UIView {
     let separatorLine: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = tertiaryRedColor
+        view.backgroundColor = currentTheme.tertiaryAccentColor
         
         return view
     }()
@@ -72,10 +72,10 @@ class ActivityDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = secondaryFontColor
+        label.textColor = currentTheme.secondaryFontColor
         label.numberOfLines = 0
         label.text = upcomingEvents.first?.details
-        label.backgroundColor = primaryColor
+        label.backgroundColor = currentTheme.primaryColor
         
         return label
     }()
@@ -84,7 +84,7 @@ class ActivityDetailView: UIView {
         let view = GradientView()
         view.translatesAutoresizingMaskIntoConstraints = false
         (view.layer as! CAGradientLayer).locations = [0.0, 0.05, 0.95, 1.0]
-        (view.layer as! CAGradientLayer).colors = [primaryColor.cgColor, primaryColor.withAlphaComponent(0.01).cgColor, primaryColor.withAlphaComponent(0.01).cgColor, primaryColor.cgColor]
+        (view.layer as! CAGradientLayer).colors = [currentTheme.primaryColor.cgColor, currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, currentTheme.primaryColor.cgColor]
         
         return view
     }()

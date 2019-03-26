@@ -14,6 +14,19 @@ private let menuHeaderId = "menuHeaderId"
 class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let inset: CGFloat = 15
+    
+    let themeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Change Theme", for: .normal)
+        button.backgroundColor = currentTheme.tertiaryAccentColor
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.layer.cornerRadius = 15
+        
+        button.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
+        
+        return button
+    }()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -27,12 +40,18 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             layout.minimumLineSpacing = 20
         }
         
-        collectionView.backgroundColor = secondaryColor
+        collectionView.backgroundColor = currentTheme.secondaryColor
         
         collectionView.contentInsetAdjustmentBehavior = .always
         
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: menuCellId)
         collectionView.register(MenuHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: menuHeaderId)
+        
+        view.addSubview(themeButton)
+        themeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        themeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        themeButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
+        themeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,15 +61,30 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if onboarding {
+        if !UserDefaults.standard.isOnboardingDone() {
             present(OnboardingVC(), animated: false)
-            onboarding = false
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: menuHeaderId, for: indexPath)
+    @objc private func changeTheme() {
+        currentTheme = currentTheme.isLight ? darkTheme : lightTheme
+        UserDefaults.standard.setThemeIsLight(currentTheme.isLight)
         
+        themeButton.backgroundColor = currentTheme.tertiaryAccentColor
+        collectionView.backgroundColor = currentTheme.secondaryColor
+        
+        collectionView.reloadData()
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: menuHeaderId, for: indexPath) as! MenuHeaderView
+        
+        if let posterImage = UIImage(named: currentTheme.posterName) {
+            header.imageView.image = posterImage
+        } else {
+            header.imageView.image = #imageLiteral(resourceName: "macaw")
+        }
+
         return header
     }
     
@@ -84,7 +118,8 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let chosenCell = collectionView.cellForItem(at: indexPath) as! MenuCell
-        
+        let collectionViewLayout = UICollectionViewFlowLayout()
+        navigationController?.navigationBar.barTintColor = currentTheme.primaryColor
         switch chosenCell.category! {
         case .events:
             navigationController?.pushViewController(EventsVC(collectionViewLayout: collectionViewLayout), animated: true)

@@ -29,7 +29,7 @@ class ChatCategoryCell: BaseTableViewCell {
     
     let gradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, primaryColor.cgColor]
+        gradientLayer.colors = [UIColor.clear.cgColor, currentTheme.primaryColor.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.9, y: -0.2)
         gradientLayer.endPoint = CGPoint(x: 0.6, y: 1.1)
         
@@ -44,7 +44,7 @@ class ChatCategoryCell: BaseTableViewCell {
         categoryImageView.topAnchor.constraint(equalTo: cellShapeView.topAnchor).isActive = true
         categoryImageView.trailingAnchor.constraint(equalTo: cellShapeView.trailingAnchor).isActive = true
         categoryImageView.bottomAnchor.constraint(equalTo: cellShapeView.bottomAnchor).isActive = true
-        label.textColor = secondaryFontColor
+        label.textColor = currentTheme.secondaryFontColor
         
         cellShapeView.addSubview(fadeView)
         fadeView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true

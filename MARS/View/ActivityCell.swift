@@ -25,7 +25,7 @@ class ActivityCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         
         return label
     }()
@@ -37,14 +37,14 @@ class ActivityCell: UICollectionViewCell {
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
-        label.textColor = secondaryFontColor
+        label.textColor = currentTheme.secondaryFontColor
         
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = primaryColor
+        backgroundColor = currentTheme.primaryColor
         layer.cornerRadius = 15
         layer.masksToBounds = true
     }

@@ -32,15 +32,10 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
             layout.minimumLineSpacing = 20
         }
-        collectionView.backgroundColor = secondaryColor
+        collectionView.backgroundColor = currentTheme.secondaryColor
         collectionView.contentInsetAdjustmentBehavior = .always
         
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: eventCellId)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView.backgroundColor = secondaryColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,6 +44,7 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
             navigationController?.navigationBar.fadeIn(duration: 0.5)
         }
         view.isUserInteractionEnabled = true
+        collectionView.reloadData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -97,12 +93,11 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
         UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
             cell.frame.origin.y = currentOffset
-            cell.eventView.backgroundColor = primaryColor
             }, completion: { (_) in
                 cell.animateForTransition(withInsets: self.view.safeAreaInsets)
                 
                 UIView.animate(withDuration: 0.7, animations: { [unowned self] in
-                    self.collectionView.backgroundColor = primaryColor
+                    self.collectionView.backgroundColor = currentTheme.primaryColor
                 }, completion: { (_) in
                     let eventDetailVC = EventDetailVC()
                     eventDetailVC.event = upcomingEvents[index.row]
@@ -112,7 +107,8 @@ class EventsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
                 })
         })
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.collectionView.backgroundColor = currentTheme.secondaryColor
             cell.setOriginalConstraints()
             cell.eventView.clipsToBounds = true
             cell.frame.origin.y = originY

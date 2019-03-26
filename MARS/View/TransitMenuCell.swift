@@ -20,7 +20,7 @@ class TransitMenuCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = tertiaryFontColor
+        imageView.tintColor = currentTheme.tertiaryFontColor
         
         return imageView
     }()
@@ -29,7 +29,7 @@ class TransitMenuCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 25)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         
         return label
     }()
@@ -38,7 +38,7 @@ class TransitMenuCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         
         return label
     }()
@@ -46,8 +46,8 @@ class TransitMenuCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             guard available else { return }
-            imageView.tintColor = isSelected ? primaryRedColor : tertiaryFontColor
-            label.textColor = isSelected ? primaryRedColor : primaryFontColor
+            imageView.tintColor = isSelected ? currentTheme.primaryAccentColor : currentTheme.tertiaryFontColor
+            label.textColor = isSelected ? currentTheme.primaryAccentColor : currentTheme.primaryFontColor
         }
     }
     
@@ -77,12 +77,12 @@ class TransitMenuCell: UICollectionViewCell {
     private func setColors() {
         if available {
             backgroundColor = .clear
-            imageView.tintColor = secondaryFontColor
-            label.textColor = primaryFontColor
+            imageView.tintColor = currentTheme.secondaryFontColor
+            label.textColor = currentTheme.primaryFontColor
         } else {
-            backgroundColor = secondaryColor
-            imageView.tintColor = primaryColor
-            label.textColor = secondaryColor
+            backgroundColor = currentTheme.secondaryColor
+            imageView.tintColor = currentTheme.primaryColor
+            label.textColor = currentTheme.secondaryColor
         }
     }
     

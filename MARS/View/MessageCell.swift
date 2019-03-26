@@ -12,8 +12,8 @@ class MessageCell: UITableViewCell {
     
     var isIncoming: Bool! {
         didSet {
-            cellShapeView.backgroundColor = isIncoming ? secondaryColor : primaryRedColor
-            messageTextLabel.textColor = isIncoming ? primaryFontColor : primaryColor
+            cellShapeView.backgroundColor = isIncoming ? currentTheme.secondaryColor : currentTheme.primaryAccentColor
+            messageTextLabel.textColor = isIncoming ? currentTheme.primaryFontColor : currentTheme.primaryColor
             if isIncoming {
                 NSLayoutConstraint.deactivate(trailingConstraints)
                 NSLayoutConstraint.activate(leadingConstraints)
@@ -50,7 +50,7 @@ class MessageCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = primaryFontColor
+        label.textColor = currentTheme.primaryFontColor
         
         return label
     }()
@@ -66,6 +66,7 @@ class MessageCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
+        backgroundColor = currentTheme.primaryColor
         
         addSubview(cellShapeView)
         addSubview(messageTextLabel)

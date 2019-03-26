@@ -19,7 +19,6 @@ class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         navigationItem.title = "LS System Stats"
         
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
 
         if let navigationController = navigationController, navigationController.navigationBar.isHidden {
@@ -35,7 +34,7 @@ class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
             layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
             layout.minimumLineSpacing = padding
         }
-        collectionView.backgroundColor = primaryColor
+        collectionView.backgroundColor = currentTheme.primaryColor
         collectionView.contentInsetAdjustmentBehavior = .always
         
         collectionView.register(LSStatCell.self, forCellWithReuseIdentifier: lSStatCellId)

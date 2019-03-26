@@ -18,7 +18,7 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
-        button.imageView?.tintColor = primaryColor
+        button.imageView?.tintColor = UIColor.white
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
@@ -27,14 +27,13 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = secondaryColor
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
             layout.minimumLineSpacing = 20
         }
         
-        collectionView.backgroundColor = secondaryColor
+        collectionView.backgroundColor = currentTheme.secondaryColor
         
         collectionView.contentInsetAdjustmentBehavior = .always
         

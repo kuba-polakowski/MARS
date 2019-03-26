@@ -38,7 +38,8 @@ class HydroGardenWeatherCell: UICollectionViewCell {
     let effectView: UIVisualEffectView = {
         let effectView = UIVisualEffectView()
         effectView.translatesAutoresizingMaskIntoConstraints = false
-        let effect = UIBlurEffect(style: UIBlurEffect.Style.prominent)
+        let effectStyle = currentTheme.isLight ? UIBlurEffect.Style.prominent : .dark
+        let effect = UIBlurEffect(style: effectStyle)
         effectView.effect = effect
         effectView.alpha = 0.3
         
@@ -49,7 +50,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = primaryColor
+        imageView.tintColor = UIColor.white
         imageView.alpha = 0
         
         return imageView
@@ -61,7 +62,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 45)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = primaryColor
+        label.textColor = UIColor.white
         label.alpha = 0
         
         return label
@@ -74,7 +75,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         label.numberOfLines = 2
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = primaryColor
+        label.textColor = UIColor.white
         label.alpha = 0
         
         return label
@@ -86,7 +87,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 40)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = primaryColor
+        label.textColor = UIColor.white
         label.alpha = 0
         
         return label

@@ -16,7 +16,6 @@ class MenuCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 30)
-        label.textColor = primaryFontColor
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         
@@ -27,7 +26,6 @@ class MenuCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = primaryRedColor
         
         return imageView
     }()
@@ -35,7 +33,6 @@ class MenuCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = primaryColor
         layer.cornerRadius = 15
         layer.masksToBounds = true
         
@@ -49,6 +46,13 @@ class MenuCell: UICollectionViewCell {
         label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25).isActive = true
         label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = currentTheme.primaryColor
+        label.textColor = currentTheme.primaryFontColor
+        imageView.tintColor = currentTheme.primaryAccentColor
     }
     
     required init?(coder aDecoder: NSCoder) {

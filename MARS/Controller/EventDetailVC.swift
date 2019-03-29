@@ -30,10 +30,10 @@ class EventDetailVC: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = currentTheme.secondaryAccentColor
         button.layer.cornerRadius = 17
-        button.titleLabel?.textColor = currentTheme.primaryColor
+        button.setTitleColor(currentTheme.primaryColor, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.setTitle("Set Reminder", for: .normal)
-        button.addTarget(self, action: #selector(addEventReminder), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addEvent), for: .touchUpInside)
         button.alpha = 0
         
         return button
@@ -43,7 +43,7 @@ class EventDetailVC: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
-        button.imageView?.tintColor = currentTheme.primaryColor
+        button.imageView?.tintColor = UIColor.white
         button.setImage(image, for: .normal)
         button.alpha = 0
         button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -96,7 +96,22 @@ class EventDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = currentTheme.primaryColor
-        
+        setupLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        eventView.dateLabelLeadingConstraint.constant = view.frame.width - 140
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        goBackButton.fadeIn(duration: 0.1)
+        detailLabel.fadeIn(duration: 0.2)
+        addReminderButton.fadeIn(duration: 0.5)
+    }
+    
+    private func setupLayout () {
         view.addSubview(scrollView)
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -153,39 +168,35 @@ class EventDetailVC: UIViewController {
         addReminderButton.widthAnchor.constraint(equalToConstant: 130).isActive = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        eventView.dateLabelLeadingConstraint.constant = view.frame.width - 140
+    @objc private func addEvent() {
+        askToAddEvent()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        goBackButton.fadeIn(duration: 0.1)
-        detailLabel.fadeIn(duration: 0.2)
-        addReminderButton.fadeIn(duration: 0.5)
-    }
-    
-    @objc private func addEventReminder() {
-        createEventinTheCalendar(title: event.title, date: event.date)
+    private func askToAddEvent() {
+        let eventText = "\(event.title), \(event.date.asString()), (1 hour)"
+        let alert = UIAlertController(title: "Add event to calendar?", message: eventText, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.createEventinTheCalendar(title: self.event.title, date: self.event.date)
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
     
     private func createEventinTheCalendar(title: String, date :Date) {
-        
         store.requestAccess(to: .event) { (success, error) in
             guard error == nil else { return }
             
             let event = EKEvent.init(eventStore: self.store)
             event.calendar = self.store.defaultCalendarForNewEvents
-            
             event.title = title
             event.startDate = date
-            
             event.endDate = date.addingTimeInterval(1 * 60 * 60)
             
             do {
                 try self.store.save(event, span: .thisEvent)
             } catch let error as NSError {
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
@@ -196,14 +207,13 @@ class EventDetailVC: UIViewController {
         goBackButton.fadeOut(duration: 0.1)
         detailLabel.fadeOut(duration: 0.3)
         addReminderButton.fadeOut(duration: 0.2)
-        eventViewTopConstraint.constant = animationOffset
         eventView.setOriginalConstraints()
 
+        eventViewTopConstraint.constant = animationOffset
         UIView.animate(withDuration: 0.4, delay: 0.3, options: .curveEaseInOut, animations: { [unowned self] in
             self.view.layoutIfNeeded()
             self.view.backgroundColor = currentTheme.secondaryColor
         }) { (_) in
-            self.eventView.clipsToBounds = true
             self.dismiss(animated: true, completion: nil)
         }
     }

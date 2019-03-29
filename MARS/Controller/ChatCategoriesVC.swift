@@ -12,7 +12,7 @@ private let chatCellId = "chatCellId"
 
 class ChatCategoriesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    let chatSubjects = ["Work", "Food", "Recreation", "Transit"]
+    let chatSubjects = ["Work", "Food", "Recreation", "Transit", "Events"]
     
     let tableView: UITableView = {
         let tableView = UITableView()

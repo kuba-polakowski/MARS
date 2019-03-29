@@ -10,32 +10,11 @@ import UIKit
 
 private let lSStatCellId = "LSStatCell"
 
-class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-    let inset: CGFloat = 20
+class LSStatsVC: BaseCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "LS System Stats"
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-
-        if let navigationController = navigationController, navigationController.navigationBar.isHidden {
-            navigationController.navigationBar.alpha = 0
-            navigationController.navigationBar.isHidden = false
-            UIView.animate(withDuration: 1) {
-                navigationController.navigationBar.alpha = 1
-            }
-        }
-
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            let padding: CGFloat = 50
-            layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-            layout.minimumLineSpacing = padding
-        }
-        collectionView.backgroundColor = currentTheme.primaryColor
-        collectionView.contentInsetAdjustmentBehavior = .always
+        title = "LS System Stats"
         
         collectionView.register(LSStatCell.self, forCellWithReuseIdentifier: lSStatCellId)
     }
@@ -52,7 +31,7 @@ class LSStatsVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let insets = view.safeAreaInsets.left + view.safeAreaInsets.right
-        let width = view.frame.width < view.frame.height ? (view.frame.width - 3 * inset) / 2 : (view.frame.width - 4 * inset - insets) / 3
+        let width = view.frame.width < view.frame.height ? (view.frame.width - 3 * standardCollectionViewInset) / 2 : (view.frame.width - 4 * standardCollectionViewInset - insets) / 3
         return CGSize(width: width, height: width)
     }
 

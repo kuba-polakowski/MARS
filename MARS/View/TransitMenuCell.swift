@@ -37,7 +37,7 @@ class TransitMenuCell: UICollectionViewCell {
     let countLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = currentTheme.primaryFontColor
         
         return label

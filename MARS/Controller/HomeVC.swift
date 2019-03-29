@@ -11,9 +11,7 @@ import UIKit
 private let menuCellId = "menuCellId"
 private let menuHeaderId = "menuHeaderId"
 
-class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
-    let inset: CGFloat = 15
+class HomeVC: BaseCollectionViewController {
     
     let themeButton: UIButton = {
         let button = UIButton()
@@ -35,18 +33,11 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
-            layout.minimumLineSpacing = 20
-        }
-        
-        collectionView.backgroundColor = currentTheme.secondaryColor
-        
-        collectionView.contentInsetAdjustmentBehavior = .always
-        
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: menuCellId)
         collectionView.register(MenuHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: menuHeaderId)
-        
+    }
+    
+    override func setupAdditionalViews() {
         view.addSubview(themeButton)
         themeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         themeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
@@ -94,7 +85,7 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let insets = view.safeAreaInsets.left + view.safeAreaInsets.right
-        let width = view.frame.width < 420 ? (view.frame.width - 3 * inset) / 2 : (view.frame.width - 5 * inset - insets) / 4
+        let width = view.frame.width < 420 ? (view.frame.width - 3 * standardCollectionViewInset) / 2 : (view.frame.width - 5 * standardCollectionViewInset - insets) / 4
         return CGSize(width: width, height: width)
     }
     
@@ -104,7 +95,6 @@ class HomeVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: menuCellId, for: indexPath) as! MenuCell
-        
         let category = menuCategories[indexPath.item]
         
         cell.category = category.category

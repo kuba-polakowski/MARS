@@ -12,6 +12,8 @@ private let transitCellId = "transitCellId"
 
 class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var chosenVehicle: Vehicle?
+    
     let allVehiclesByType: [[Vehicle]] = {
         var allVehicles = [[Vehicle]]()
         let groupedVehicles = Dictionary(grouping: vehicles) { (element) -> String in
@@ -172,7 +174,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
             cell.label.text = vehicle.name
             cell.countLabel.text = available ? String(vehicleType.count) : "(unavailable)"
             if available && numberOfVehiclesOutOfJuice > 0 {
-                cell.countLabel.text = " \(vehicleType.count) (\(numberOfVehiclesOutOfJuice) of out of juice)"
+                cell.countLabel.text = " \(vehicleType.count) (\(numberOfVehiclesOutOfJuice) out of juice)"
             }
         } else {
             cell.label.text = ""
@@ -188,7 +190,17 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.reloadData()
         selectedItemIndexPath = indexPath
-        selectedVehicleIsAvailable = allVehiclesByType[indexPath.item].count != 0
+        
+        let availableVehicles = allVehiclesByType[indexPath.item].filter { $0.charge > 0 }
+        
+        selectedVehicleIsAvailable = availableVehicles.count > 0
+        if selectedVehicleIsAvailable {
+            print("Can do!")
+            chosenVehicle = availableVehicles.randomElement()
+        } else {
+            print("No vehicle seleted")
+            chosenVehicle = nil
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

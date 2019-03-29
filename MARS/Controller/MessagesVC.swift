@@ -26,6 +26,7 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
     let typingTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.systemFont(ofSize: 20)
         textView.backgroundColor = currentTheme.primaryColor
         textView.textColor = currentTheme.primaryFontColor
         textView.layer.cornerRadius = 15
@@ -67,7 +68,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
             }
         }
         navigationItem.title = "Food"
-        
         navigationController?.navigationBar.prefersLargeTitles = true
         
         view.backgroundColor = currentTheme.primaryColor
@@ -116,7 +116,6 @@ class MessagesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         getMessages()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {

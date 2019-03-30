@@ -44,7 +44,6 @@ class ChatCategoryCell: BaseTableViewCell {
         categoryImageView.topAnchor.constraint(equalTo: cellShapeView.topAnchor).isActive = true
         categoryImageView.trailingAnchor.constraint(equalTo: cellShapeView.trailingAnchor).isActive = true
         categoryImageView.bottomAnchor.constraint(equalTo: cellShapeView.bottomAnchor).isActive = true
-        label.textColor = currentTheme.secondaryFontColor
         
         cellShapeView.addSubview(fadeView)
         fadeView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
@@ -64,6 +63,7 @@ class ChatCategoryCell: BaseTableViewCell {
         cellShapeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         
         label.font = UIFont.systemFont(ofSize: 40, weight: .semibold)
+        label.textColor = currentTheme.secondaryFontColor
     }
     
     override func layoutSubviews() {

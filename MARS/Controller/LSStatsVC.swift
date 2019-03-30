@@ -43,10 +43,10 @@ class LSStatsVC: BaseCollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: lSStatCellId, for: indexPath) as! LSStatCell
         let category = lSCategories[indexPath.item]
         cell.titleLabel.text = category.title
-        cell.percentageLabel.text = "\(category.value * 100)%"
         cell.circleLayer.strokeColor = category.color.cgColor
-        cell.circleLayer.removeAllAnimations()
-        cell.animateCircle(after: Double(indexPath.item) * 0.3, toValue: category.value - 0.17)
+        cell.delay = Double(indexPath.item)
+        cell.value = category.value
+        cell.percentageLabel.text = "\(category.value * 100)%"
         
         return cell
     }

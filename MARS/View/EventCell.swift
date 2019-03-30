@@ -26,7 +26,6 @@ class EventCell: UICollectionViewCell {
         eventView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         eventView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         eventView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
     }
     
     func animateForTransition(withInsets: UIEdgeInsets) {

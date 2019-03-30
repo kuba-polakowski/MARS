@@ -42,6 +42,8 @@ class MessageCell: UITableViewCell {
     let messageTextLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        label.numberOfLines = 0
         
         return label
     }()
@@ -68,29 +70,30 @@ class MessageCell: UITableViewCell {
         selectionStyle = .none
         backgroundColor = currentTheme.primaryColor
         
-        addSubview(cellShapeView)
-        addSubview(messageTextLabel)
-
+        
         addSubview(authorLabel)
         authorLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         authorLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         authorLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 100).isActive = true
         
-        messageTextLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        messageTextLabel.numberOfLines = 0
+        authorLabelHeightConstraint = authorLabel.heightAnchor.constraint(equalToConstant: 0)
 
-        bottomConstraint = messageTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
-        bottomConstraint.priority = .defaultLow
-        bottomConstraint.isActive = true
-
-        messageTextLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.75).isActive = true
         
+        addSubview(cellShapeView)
+        addSubview(messageTextLabel)
+
         cellShapeView.leadingAnchor.constraint(equalTo: messageTextLabel.leadingAnchor, constant: -10).isActive = true
         cellShapeView.topAnchor.constraint(equalTo: messageTextLabel.topAnchor, constant: -10).isActive = true
         cellShapeView.trailingAnchor.constraint(equalTo: messageTextLabel.trailingAnchor, constant: 10).isActive = true
         cellShapeView.bottomAnchor.constraint(equalTo: messageTextLabel.bottomAnchor, constant: 10).isActive = true
         
-        authorLabelHeightConstraint = authorLabel.heightAnchor.constraint(equalToConstant: 0)
+        
+        messageTextLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.75).isActive = true
+
+        bottomConstraint = messageTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+        bottomConstraint.priority = .defaultLow
+        bottomConstraint.isActive = true
+        
         topPaddingConstraint = messageTextLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20)
         authorLabelHeightConstraint.isActive = true
         topPaddingConstraint.isActive = true
@@ -98,7 +101,6 @@ class MessageCell: UITableViewCell {
         leadingConstraints.append(messageTextLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20))
         
         trailingConstraints.append(messageTextLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20))
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

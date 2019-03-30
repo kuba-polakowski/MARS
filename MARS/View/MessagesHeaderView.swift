@@ -9,6 +9,7 @@
 import UIKit
 
 class paddedLabel: UILabel {
+    
     override var intrinsicContentSize: CGSize {
         let originalSize = super.intrinsicContentSize
         let newWidth = originalSize.width + 12
@@ -16,6 +17,7 @@ class paddedLabel: UILabel {
         
         return CGSize(width: newWidth, height: newHeight)
     }
+    
 }
 
 class MessagesHeaderView: UIView {

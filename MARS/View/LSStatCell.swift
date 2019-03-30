@@ -20,7 +20,6 @@ class LSStatCell: UICollectionViewCell {
     
     let percentageLabel: UILabel = {
         let label = UILabel()
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 30, weight: .bold)
@@ -33,10 +32,9 @@ class LSStatCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
         label.textColor = currentTheme.secondaryFontColor
         label.adjustsFontSizeToFitWidth = true
         
@@ -46,20 +44,22 @@ class LSStatCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(titleLabel)
-        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 40).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
-
         addSubview(percentageLabel)
         percentageLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         percentageLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         percentageLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
+
+        addSubview(titleLabel)
+        titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 30).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         addCircle()
+        circleLayer.removeAnimation(forKey: "animateCircle")
+        animateCircle(after: delay * 0.3, toValue: value - 0.17)
     }
     
     func animateCircle(after delay: Double, toValue: CGFloat) {
@@ -70,7 +70,7 @@ class LSStatCell: UICollectionViewCell {
         animation.isRemovedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 + delay) { [weak self] in
-            self?.circleLayer.add(animation, forKey: "animateValue")
+            self?.circleLayer.add(animation, forKey: "animateCircle")
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 + delay) { [weak self] in
             self?.percentageLabel.fadeIn(duration: 1)
@@ -103,6 +103,4 @@ class LSStatCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    
 }

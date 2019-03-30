@@ -124,8 +124,8 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     
     func animateSummonButton() {
         let canSummonVehicle = selectedVehicleIsAvailable
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: { [unowned self] in
-            self.summonVehicleButton.backgroundColor = canSummonVehicle ? currentTheme.tertiaryAccentColor : currentTheme.secondaryFontColor
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
+            self?.summonVehicleButton.backgroundColor = canSummonVehicle ? currentTheme.tertiaryAccentColor : currentTheme.secondaryFontColor
         })
     }
     
@@ -150,9 +150,9 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: transitCellId, for: indexPath) as! TransitMenuCell
         
         let vehicleType = allVehiclesByType[indexPath.item]
-        let vehicle = vehicleType.first!
+        let vehicleExample = vehicleType.first!
         
-        if let image = UIImage(named: "transit-\(vehicle.name.lowercased())") {
+        if let image = UIImage(named: "transit-\(vehicleExample.name.lowercased())") {
             cell.imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
         var numberOfVehiclesOutOfJuice = 0
@@ -171,7 +171,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         cell.available = available
         
         if isExpanded {
-            cell.label.text = vehicle.name
+            cell.label.text = vehicleExample.name
             cell.countLabel.text = available ? String(vehicleType.count) : "(unavailable)"
             if available && numberOfVehiclesOutOfJuice > 0 {
                 cell.countLabel.text = " \(vehicleType.count) (\(numberOfVehiclesOutOfJuice) out of juice)"
@@ -195,10 +195,8 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         
         selectedVehicleIsAvailable = availableVehicles.count > 0
         if selectedVehicleIsAvailable {
-            print("Can do!")
             chosenVehicle = availableVehicles.randomElement()
         } else {
-            print("No vehicle seleted")
             chosenVehicle = nil
         }
     }

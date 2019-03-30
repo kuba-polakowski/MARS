@@ -26,6 +26,7 @@ class ActivityCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = currentTheme.primaryFontColor
+        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -58,29 +59,26 @@ class ActivityCell: UICollectionViewCell {
     private func setupLayout() {
         addSubview(imageView)
         addSubview(titleLabel)
-        addSubview(detailLabel)
 
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 30).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: centerYAnchor, constant: 25).isActive = true
         
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 15).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
-        detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        detailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        
     }
     
     private func setupLayoutBasedOnSize() {
         titleLabel.textAlignment = isCellBig ? .left : .center
         if isCellBig {
             addSubview(detailLabel)
+            detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+            detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
+            detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+            detailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
         } else {
             detailLabel.removeFromSuperview()
         }

@@ -25,6 +25,13 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
         return button
     }()
     
+    let detailsView: ActivityDetailView = {
+        let view = ActivityDetailView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +46,7 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
         
         collectionView.register(ActivityCell.self, forCellWithReuseIdentifier: activitiesCellId)
         
-        setupBackButtonLayout()
+        setupLayout()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -65,30 +72,32 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsView = ActivityDetailView()
-        showEventDetailView(detailsView)
+        showEventDetailView()
     }
     
-    func setupBackButtonLayout() {
+    func setupLayout() {
         view.addSubview(goBackButton)
         goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         goBackButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         goBackButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    }
-
-    private func showEventDetailView(_ detailsView: UIView) {
-        detailsView.alpha = 0
         view.addSubview(detailsView)
-        detailsView.translatesAutoresizingMaskIntoConstraints = false
         detailsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25).isActive = true
         detailsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
         detailsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25).isActive = true
         detailsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25).isActive = true
+        detailsView.isHidden = true
+    }
+
+    private func showEventDetailView() {
+        guard detailsView.isHidden else { return }
+        
+        detailsView.alpha = 0
+        detailsView.isHidden = false
         detailsView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         detailsView.fadeIn(duration: 0.7)
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: {
-            detailsView.transform = .identity
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+            self?.detailsView.transform = .identity
         })
     }
     

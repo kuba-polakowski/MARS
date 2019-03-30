@@ -148,7 +148,6 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         
         emitterLayer.emitterPosition = CGPoint(x: bounds.midX, y: 0)
         emitterLayer.emitterSize = CGSize(width: 2.5 * bounds.size.width, height: 1)
-
     }
     
     required init?(coder aDecoder: NSCoder) {

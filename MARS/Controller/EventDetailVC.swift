@@ -98,12 +98,7 @@ class EventDetailVC: UIViewController {
         view.backgroundColor = currentTheme.primaryColor
         setupLayout()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        eventView.dateLabelLeadingConstraint.constant = view.frame.width - 140
-    }
-    
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         goBackButton.fadeIn(duration: 0.1)

@@ -10,27 +10,32 @@ import UIKit
 
 class BaseTableViewCell: UITableViewCell {
 
-    let label = UILabel()
+    let label: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = currentTheme.primaryFontColor
+        
+        return label
+    }()
     
-    let cellShapeView = UIView()
+    let cellShapeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 15
+        view.clipsToBounds = true
+        view.backgroundColor = currentTheme.primaryColor
+
+        return view
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        label.translatesAutoresizingMaskIntoConstraints = false
-        cellShapeView.translatesAutoresizingMaskIntoConstraints = false
-        
+        backgroundColor = .clear
+        selectionStyle = .none
+
         addSubview(cellShapeView)
         addSubview(label)
-        
-        cellShapeView.layer.cornerRadius = 15
-        cellShapeView.clipsToBounds = true
-        
-        backgroundColor = .clear
-        cellShapeView.backgroundColor = currentTheme.primaryColor
-        label.textColor = currentTheme.primaryFontColor
-
-        selectionStyle = .none
     }
     
     required init?(coder aDecoder: NSCoder) {

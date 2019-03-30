@@ -13,7 +13,7 @@ class EntertainmentVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = currentTheme.primaryColor
+        view.backgroundColor = currentTheme.secondaryColor
         setupTabBar()
     }
     

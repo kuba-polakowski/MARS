@@ -44,6 +44,7 @@ class BaseEventView: UIView {
     var trailingThumbnailConstraint: NSLayoutConstraint!
     var heightThumbnailConstraint: NSLayoutConstraint!
     var dateLabelLeadingConstraint: NSLayoutConstraint!
+    var dateLabelTrailingConstraint: NSLayoutConstraint!
     var titleLabelLeadingConstraint: NSLayoutConstraint!
     var titleLabelTopConstraint: NSLayoutConstraint!
     
@@ -80,6 +81,9 @@ class BaseEventView: UIView {
         
         dateLabelLeadingConstraint = dateLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10)
         dateLabelLeadingConstraint.isActive = true
+        
+        dateLabelTrailingConstraint = dateLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10)
+        dateLabelTrailingConstraint.isActive = false
     }
     
     func animateForTransition(withInsets: UIEdgeInsets) {
@@ -90,6 +94,7 @@ class BaseEventView: UIView {
         titleLabelLeadingConstraint.constant = 20
         titleLabelTopConstraint.constant = 15
         dateLabelLeadingConstraint.isActive = false
+        dateLabelTrailingConstraint.isActive = true
         UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.titleLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
@@ -102,11 +107,11 @@ class BaseEventView: UIView {
         heightThumbnailConstraint.constant = 220
         titleLabelLeadingConstraint.constant = 10
         titleLabelTopConstraint.constant = 10
+        dateLabelTrailingConstraint.isActive = false
         dateLabelLeadingConstraint.isActive = true
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
             self?.titleLabel.transform = .identity
-//            self?.backgroundColor = currentTheme.secondaryColor
         })
     }
     

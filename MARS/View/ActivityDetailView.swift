@@ -178,8 +178,12 @@ class ActivityDetailView: UIView {
             self.layer.shadowOpacity = 0.8
         })
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
-            self.removeFromSuperview()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            self?.isHidden = true
+            self?.alpha = 0
+            self?.containerTopConstraint.constant = 0
+            self?.containerBottomConstraint.constant = 0
+            self?.layoutIfNeeded()
         }
     }
     

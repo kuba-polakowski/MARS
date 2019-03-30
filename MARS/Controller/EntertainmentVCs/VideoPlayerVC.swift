@@ -26,6 +26,7 @@ class VideoPlayerVC: BasePlayerVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = currentTheme.secondaryColor
         setupVideoView()
         setupVideoPlayer()
         setupBackButtonLayout()

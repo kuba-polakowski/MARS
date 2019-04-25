@@ -14,17 +14,6 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
     
     let inset: CGFloat = 15
 
-    let goBackButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
-        button.imageView?.tintColor = UIColor.white
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
-        return button
-    }()
-    
     let detailsView: ActivityDetailView = {
         let view = ActivityDetailView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,28 +21,48 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
         return view
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.color = Themes.currentTheme.primaryAccentColor
+        
+        return activityIndicatorView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
-            layout.minimumLineSpacing = 20
-        }
-        
-        collectionView.backgroundColor = currentTheme.secondaryColor
-        
-        collectionView.contentInsetAdjustmentBehavior = .always
-        
-        collectionView.register(ActivityCell.self, forCellWithReuseIdentifier: activitiesCellId)
-        
+        setupCollectionView()
         setupLayout()
+        setupActivityIndicatorLayout()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width = view.frame.width < 420 ? (view.frame.width - 3 * inset) / 2 : 180
-        if indexPath.item % 3 == 0 {
-            width = 2 * width + inset
+        let insets = view.safeAreaInsets.left + view.safeAreaInsets.right
+        
+        var width: CGFloat = 0
+        if view.frame.width < 420 {
+            width = (view.frame.width - 3 * inset) / 2
+            if indexPath.item % 3 == 0 {
+                width = 2 * width + inset
+            }
+        } else if view.frame.width < 800 {
+            width = (view.frame.width - 6 * inset - insets) / 4
+            if indexPath.item % 5 == 0 {
+                width = 2 * width + inset
+            }
+        } else {
+            width = (view.frame.width - 8 * inset - insets) / 6
+            if indexPath.item % 7 == 0 {
+                width = 2 * width + inset
+            }
         }
+        
         return CGSize(width: width, height: width)
     }
     
@@ -63,24 +72,30 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: activitiesCellId, for: indexPath) as! ActivityCell
-        cell.imageView.image = #imageLiteral(resourceName: "macaw")
-        cell.isCellBig = indexPath.item % 3 == 0
-        cell.titleLabel.text = "LABEL"
-        cell.detailLabel.text = "Some random text, whatever, it's just a description, noone's going to read it anyway. Might as well write some gibberish in here. Or something."
+        if view.frame.width < 420 {
+            cell.isCellBig = indexPath.item % 3 == 0
+        } else if view.frame.width < 800 {
+            cell.isCellBig = indexPath.item % 5 == 0
+        } else {
+            cell.isCellBig = indexPath.item % 7 == 0
+        }
+        
+        cell.activity = Activities.all.randomElement()
+        
+        cell.detailLabel.text = "Some random text, whatever, it's just a boring description. Only here to fill the bigger cells. Dynamic layout and stuff. Mad advanced, I know."
         
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showEventDetailView()
+        let chosenCell = collectionView.cellForItem(at: indexPath) as! ActivityCell
+        if let title = chosenCell.titleLabel.text, let image = chosenCell.imageView.image {
+            showEventDetailView(with: title, image: image)
+            detailsView.activity = chosenCell.activity
+        }
     }
     
     func setupLayout() {
-        view.addSubview(goBackButton)
-        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
-        goBackButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        goBackButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         view.addSubview(detailsView)
         detailsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25).isActive = true
         detailsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
@@ -88,10 +103,25 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
         detailsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -25).isActive = true
         detailsView.isHidden = true
     }
+    
+    private func setupCollectionView() {
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: 2 * inset, right: inset)
+            layout.minimumLineSpacing = 20
+        }
+        
+        collectionView.backgroundColor = Themes.currentTheme.secondaryColor
+        
+        collectionView.contentInsetAdjustmentBehavior = .always
+        
+        collectionView.register(ActivityCell.self, forCellWithReuseIdentifier: activitiesCellId)
+    }
 
-    private func showEventDetailView() {
+    private func showEventDetailView(with title: String, image: UIImage) {
         guard detailsView.isHidden else { return }
         
+        detailsView.titleLabel.text = title
+        detailsView.thumbnailImageView.image = image
         detailsView.alpha = 0
         detailsView.isHidden = false
         detailsView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
@@ -101,8 +131,12 @@ class ActivitiesVC: UICollectionViewController, UICollectionViewDelegateFlowLayo
         })
     }
     
-    @objc private func goBack() {
-        navigationController?.popViewController(animated: true)
+    private func setupActivityIndicatorLayout() {
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func setupBarItem() {

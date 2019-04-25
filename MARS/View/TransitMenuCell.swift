@@ -20,7 +20,7 @@ class TransitMenuCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = currentTheme.tertiaryFontColor
+        imageView.tintColor = Themes.currentTheme.tertiaryFontColor
         
         return imageView
     }()
@@ -29,7 +29,7 @@ class TransitMenuCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 25)
-        label.textColor = currentTheme.primaryFontColor
+        label.textColor = Themes.currentTheme.primaryFontColor
         
         return label
     }()
@@ -38,7 +38,7 @@ class TransitMenuCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = currentTheme.primaryFontColor
+        label.textColor = Themes.currentTheme.primaryFontColor
         
         return label
     }()
@@ -46,8 +46,8 @@ class TransitMenuCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             guard available else { return }
-            imageView.tintColor = isSelected ? currentTheme.primaryAccentColor : currentTheme.tertiaryFontColor
-            label.textColor = isSelected ? currentTheme.primaryAccentColor : currentTheme.primaryFontColor
+            imageView.tintColor = isSelected ? Themes.currentTheme.primaryAccentColor : Themes.currentTheme.tertiaryFontColor
+            label.textColor = isSelected ? Themes.currentTheme.primaryAccentColor : Themes.currentTheme.primaryFontColor
         }
     }
     
@@ -77,12 +77,12 @@ class TransitMenuCell: UICollectionViewCell {
     private func setColors() {
         if available {
             backgroundColor = .clear
-            imageView.tintColor = currentTheme.secondaryFontColor
-            label.textColor = currentTheme.primaryFontColor
+            imageView.tintColor = Themes.currentTheme.secondaryFontColor
+            label.textColor = Themes.currentTheme.primaryFontColor
         } else {
-            backgroundColor = currentTheme.secondaryColor
-            imageView.tintColor = currentTheme.primaryColor
-            label.textColor = currentTheme.secondaryColor
+            backgroundColor = Themes.currentTheme.secondaryColor
+            imageView.tintColor = Themes.currentTheme.primaryColor
+            label.textColor = Themes.currentTheme.secondaryColor
         }
     }
     

@@ -12,5 +12,6 @@ struct Event {
     let title: String
     let date: Date
     let imageName: String
+    let imageAuthor: String
     let details: String
 }

@@ -23,7 +23,7 @@ class BaseEventView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 25, weight: .semibold)
-        label.textColor = currentTheme.primaryFontColor
+        label.textColor = Themes.currentTheme.primaryFontColor
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         
@@ -34,7 +34,7 @@ class BaseEventView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = currentTheme.secondaryFontColor
+        label.textColor = Themes.currentTheme.secondaryFontColor
         
         return label
     }()
@@ -51,7 +51,7 @@ class BaseEventView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = currentTheme.primaryColor
+        backgroundColor = Themes.currentTheme.primaryColor
         layer.cornerRadius = 15
         layer.masksToBounds = true
         
@@ -77,8 +77,6 @@ class BaseEventView: UIView {
         titleLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         
         dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
-        dateLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        
         dateLabelLeadingConstraint = dateLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 10)
         dateLabelLeadingConstraint.isActive = true
         
@@ -91,13 +89,12 @@ class BaseEventView: UIView {
         leadingThumbnailConstraint.constant = -15 - withInsets.left
         trailingThumbnailConstraint.constant = 15 + withInsets.right
         heightThumbnailConstraint.constant = 230
-        titleLabelLeadingConstraint.constant = 20
+        titleLabelLeadingConstraint.constant = 15
         titleLabelTopConstraint.constant = 15
         dateLabelLeadingConstraint.isActive = false
         dateLabelTrailingConstraint.isActive = true
-        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
-            self?.titleLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         })
     }
     
@@ -111,7 +108,6 @@ class BaseEventView: UIView {
         dateLabelLeadingConstraint.isActive = true
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
-            self?.titleLabel.transform = .identity
         })
     }
     

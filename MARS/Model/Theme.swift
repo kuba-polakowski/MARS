@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Theme {
+struct Theme {
     let primaryColor: UIColor
     let secondaryColor: UIColor
 

@@ -20,22 +20,11 @@ class BasePlayerVC: UIViewController {
         }
     }
     
-    let goBackButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
-        button.imageView?.tintColor = UIColor.white
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
-        return button
-    }()
-    
     let currentTimeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
-        label.textColor = currentTheme.secondaryFontColor
+        label.textColor = Themes.currentTheme.secondaryFontColor
         
         return label
     }()
@@ -44,7 +33,7 @@ class BasePlayerVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
-        label.textColor = currentTheme.secondaryFontColor
+        label.textColor = Themes.currentTheme.secondaryFontColor
         
         return label
     }()
@@ -52,8 +41,8 @@ class BasePlayerVC: UIViewController {
     let slider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.tintColor = currentTheme.tertiaryAccentColor
-        slider.thumbTintColor = currentTheme.tertiaryAccentColor
+        slider.tintColor = Themes.currentTheme.tertiaryAccentColor
+        slider.thumbTintColor = Themes.currentTheme.tertiaryAccentColor
         
         return slider
     }()
@@ -61,12 +50,32 @@ class BasePlayerVC: UIViewController {
     let playPauseButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = currentTheme.tertiaryAccentColor
+        button.tintColor = Themes.currentTheme.tertiaryAccentColor
         button.addTarget(self, action: #selector(playPause), for: .touchUpInside)
         
         return button
     }()
 
+    let attributionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.numberOfLines = 0
+        label.textAlignment = .right
+        label.alpha = 0
+        
+        return label
+    }()
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.color = Themes.currentTheme.primaryAccentColor
+        
+        return activityIndicatorView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,11 +84,6 @@ class BasePlayerVC: UIViewController {
         addMediaControls()
         setupMediaControlsLayout()
         hideMediaControls()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        showMediaControls()
     }
     
     func addMediaControls() {
@@ -92,12 +96,12 @@ class BasePlayerVC: UIViewController {
     func setupMediaControlsLayout() {
     }
     
-    func setupBackButtonLayout() {
-        view.addSubview(goBackButton)
-        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
-        goBackButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        goBackButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    func setupLayout() {
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     private func setupPlayButtonImage() {
@@ -112,7 +116,6 @@ class BasePlayerVC: UIViewController {
     }
 
     func hideMediaControls() {
-        goBackButton.alpha = 0
         slider.alpha = 0
         currentTimeLabel.alpha = 0
         totalTimeLabel.alpha = 0
@@ -120,7 +123,6 @@ class BasePlayerVC: UIViewController {
     }
     
     func showMediaControls() {
-        goBackButton.fadeIn(duration: 0.5)
         slider.fadeIn(duration: 1.5)
         currentTimeLabel.fadeIn(duration: 2)
         totalTimeLabel.fadeIn(duration: 2.5)
@@ -141,10 +143,6 @@ class BasePlayerVC: UIViewController {
         let minutesString = String(format: "%02d", minutes)
         
         return minutesString + ":" + secondsString
-    }
-
-    @objc private func goBack() {
-        navigationController?.popViewController(animated: true)
     }
 
 }

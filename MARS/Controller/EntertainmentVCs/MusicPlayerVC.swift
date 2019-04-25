@@ -15,6 +15,9 @@ class MusicPlayerVC: BasePlayerVC {
     
     var wasCurrentlyPlaying: Bool?
 
+    var isLoaded: Bool! = false
+    
+    
     let albumCoverView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,14 +38,22 @@ class MusicPlayerVC: BasePlayerVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = currentTheme.secondaryColor
+        view.backgroundColor = Themes.currentTheme.secondaryColor
+        attributionLabel.text = "photo by Eutah Mizushima via pixabay.com\noriginal track"
+        attributionLabel.textColor = Themes.currentTheme.tertiaryFontColor
         setupAlbumCoverLayout()
-        setupMusicPlayer()
-        setupBackButtonLayout()
+        setupLayout()
     }
     
     var portraitConstraints = [NSLayoutConstraint]()
     var landscapeConstraints = [NSLayoutConstraint]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !isLoaded {
+            getData()
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -73,6 +84,20 @@ class MusicPlayerVC: BasePlayerVC {
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.albumCoverView.transform = .identity
         })
+    }
+    
+    private func getData() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.setupMusicPlayer()
+
+            self?.activityIndicator.isHidden = true
+            self?.activityIndicator.stopAnimating()
+            self?.attributionLabel.fadeIn(duration: 0.5)
+            self?.showMediaControls()
+            self?.isLoaded = true
+        }
     }
     
     override func addMediaControls() {
@@ -111,6 +136,10 @@ class MusicPlayerVC: BasePlayerVC {
 
         portraitConstraints.append(albumCoverView.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -20))
         landscapeConstraints.append(albumCoverView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20))
+        
+        view.addSubview(attributionLabel)
+        attributionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        attributionLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
     }
     
 
@@ -143,9 +172,9 @@ class MusicPlayerVC: BasePlayerVC {
         musicPlayer?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         
         let observerInterval = CMTime(value: 1, timescale: 1)
-        musicPlayer?.addPeriodicTimeObserver(forInterval: observerInterval, queue: DispatchQueue.main, using: { (currentTime) in
-            self.currentTimeLabel.text = self.getFormattedTimeString(for: currentTime)
-            self.moveSliderTo(currentTime: currentTime)
+        musicPlayer?.addPeriodicTimeObserver(forInterval: observerInterval, queue: DispatchQueue.main, using: { [weak self] (currentTime) in
+            self?.currentTimeLabel.text = self?.getFormattedTimeString(for: currentTime)
+            self?.moveSliderTo(currentTime: currentTime)
         })
         
         slider.addTarget(self, action: #selector(trackCurrentPlayerState), for: .touchDown)
@@ -195,8 +224,6 @@ class MusicPlayerVC: BasePlayerVC {
             if let songDuration = musicPlayer?.currentItem?.duration {
                 totalTimeLabel.text = getFormattedTimeString(for: songDuration)
             }
-            
-            showMediaControls()
             
             musicPlayer?.play()
             isPlaying = true

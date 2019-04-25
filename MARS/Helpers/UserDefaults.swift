@@ -8,10 +8,10 @@
 
 import Foundation
 
-let username = "Peter"
 
 extension UserDefaults {
     
+
     enum keys: String {
         case onboarding
         case temperatureScale
@@ -27,13 +27,13 @@ extension UserDefaults {
         return bool(forKey: keys.onboarding.rawValue)
     }
     
-    func setTemperatureScaleTo(scale: TemperatureScale) {
-        set(scale, forKey: keys.temperatureScale.rawValue)
+    func setTemperatureScaleToCelsius(_ bool: Bool) {
+        set(bool, forKey: keys.temperatureScale.rawValue)
         synchronize()
     }
     
-    func currentTemperatureScale() -> TemperatureScale {
-        return value(forKey: keys.temperatureScale.rawValue) as? TemperatureScale ?? .celsius
+    func currentTemperatureScaleIsCelsius() -> Bool {
+        return bool(forKey: keys.temperatureScale.rawValue)
     }
     
     func setThemeIsLight(_ bool: Bool) {

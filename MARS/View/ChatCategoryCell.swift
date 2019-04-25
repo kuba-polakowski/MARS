@@ -29,7 +29,7 @@ class ChatCategoryCell: BaseTableViewCell {
     
     let gradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, currentTheme.primaryColor.cgColor]
+        gradientLayer.colors = [UIColor.clear.cgColor, Themes.currentTheme.primaryColor.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.9, y: -0.2)
         gradientLayer.endPoint = CGPoint(x: 0.6, y: 1.1)
         
@@ -63,7 +63,7 @@ class ChatCategoryCell: BaseTableViewCell {
         cellShapeView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         
         label.font = UIFont.systemFont(ofSize: 40, weight: .semibold)
-        label.textColor = currentTheme.secondaryFontColor
+        label.textColor = Themes.currentTheme.secondaryFontColor
     }
     
     override func layoutSubviews() {

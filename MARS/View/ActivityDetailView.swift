@@ -10,12 +10,18 @@ import UIKit
 
 class ActivityDetailView: UIView {
     
+    var activity: Activity! {
+        didSet {
+            detailLabel.text = "\(Events.upcomingEvents.first!.details)\n\nPhoto by \(activity.photoAuthor) via unsplash.com"
+        }
+    }
+    
     let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
-        view.backgroundColor = currentTheme.primaryColor
+        view.backgroundColor = Themes.currentTheme.primaryColor
         
         return view
     }()
@@ -25,7 +31,6 @@ class ActivityDetailView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = #imageLiteral(resourceName: "macaw")
         
         return imageView
     }()
@@ -45,10 +50,9 @@ class ActivityDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = currentTheme.primaryFontColor
+        label.textColor = Themes.currentTheme.primaryFontColor
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
-        label.text = upcomingEvents.first?.title
         
         return label
     }()
@@ -56,7 +60,7 @@ class ActivityDetailView: UIView {
     let separatorLine: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = currentTheme.tertiaryAccentColor
+        view.backgroundColor = Themes.currentTheme.tertiaryAccentColor
         
         return view
     }()
@@ -72,10 +76,9 @@ class ActivityDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = currentTheme.secondaryFontColor
+        label.textColor = Themes.currentTheme.secondaryFontColor
         label.numberOfLines = 0
-        label.text = upcomingEvents.first?.details
-        label.backgroundColor = currentTheme.primaryColor
+        label.backgroundColor = Themes.currentTheme.primaryColor
         
         return label
     }()
@@ -84,7 +87,7 @@ class ActivityDetailView: UIView {
         let view = GradientView()
         view.translatesAutoresizingMaskIntoConstraints = false
         (view.layer as! CAGradientLayer).locations = [0.0, 0.05, 0.95, 1.0]
-        (view.layer as! CAGradientLayer).colors = [currentTheme.primaryColor.cgColor, currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, currentTheme.primaryColor.cgColor]
+        (view.layer as! CAGradientLayer).colors = [Themes.currentTheme.primaryColor.cgColor, Themes.currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, Themes.currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, Themes.currentTheme.primaryColor.cgColor]
         
         return view
     }()

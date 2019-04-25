@@ -40,14 +40,15 @@ class ParticleView: UIView {
         let emitterLayer = layer as! CAEmitterLayer
 
         emitterLayer.emitterShape = .line
+        emitterLayer.emitterCells = []
 
         switch weather.precipitation {
         case .drizzle:
-            color = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            color = #colorLiteral(red: 0, green: 0.4184500275, blue: 0.7135548858, alpha: 0.75)
             let cell = makeEmitterCell(velocity: 700, scale: 0.035, direction: .pi, directionRange: 0, amount: 800)
             emitterLayer.emitterCells = [cell]
         case .rain:
-            color = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 0.7052921661)
+            color = #colorLiteral(red: 0.3803895375, green: 0.7398477157, blue: 0.04788162317, alpha: 0.75)
             let directionOfRain = CGFloat.pi * 1.1
             let smallCell = makeEmitterCell(velocity: 900, scale: 0.07, direction: directionOfRain, directionRange: 0, amount: 700)
             let mediumCell = makeEmitterCell(velocity: 1000, scale: 0.075, direction: directionOfRain, directionRange: 0, amount: 700)

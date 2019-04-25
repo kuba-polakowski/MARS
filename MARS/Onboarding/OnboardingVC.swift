@@ -35,7 +35,7 @@ class OnboardingVC: UIViewController {
     
     let gradientLayer: CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, currentTheme.secondaryAccentColor.cgColor]
+        gradientLayer.colors = [UIColor.clear.cgColor, Themes.currentTheme.secondaryAccentColor.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.8)
         
@@ -47,7 +47,7 @@ class OnboardingVC: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
-        for page in onboardingSubtitles {
+        for page in OnboardingMessages.subtitles {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
             let image = #imageLiteral(resourceName: "dot").withRenderingMode(.alwaysTemplate)
@@ -59,13 +59,23 @@ class OnboardingVC: UIViewController {
         return stackView
     }()
     
+    let attributionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        label.text = "video via mixkit.co"
+        
+        return label
+    }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 200, weight: .bold)
-        label.textColor = currentTheme.primaryColor
+        label.font = UIFont.systemFont(ofSize: 200, weight: .heavy)
+        label.textColor = Themes.currentTheme.primaryColor
         label.text = "MARS"
         label.alpha = 0
         
@@ -76,8 +86,8 @@ class OnboardingVC: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 25)
-        label.textColor = currentTheme.secondaryColor
+        label.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        label.textColor = Themes.currentTheme.secondaryColor
         label.numberOfLines = 1
         label.adjustsFontSizeToFitWidth = true
         label.alpha = 0
@@ -98,7 +108,7 @@ class OnboardingVC: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = currentTheme.primaryColor
+        label.textColor = Themes.currentTheme.primaryColor
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         
@@ -108,9 +118,9 @@ class OnboardingVC: UIViewController {
     let doneButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = currentTheme.primaryAccentColor
+        button.backgroundColor = Themes.currentTheme.primaryAccentColor
         button.layer.cornerRadius = 17
-        button.titleLabel?.textColor = currentTheme.primaryColor
+        button.titleLabel?.textColor = Themes.currentTheme.primaryColor
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.setTitle("Done!", for: .normal)
         button.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
@@ -125,7 +135,7 @@ class OnboardingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = currentTheme.tertiaryAccentColor
+        view.backgroundColor = Themes.currentTheme.secondaryAccentColor
         
         setupViews()
         setupLayout()
@@ -157,6 +167,7 @@ class OnboardingVC: UIViewController {
         view.addSubview(subtitleLabel)
         view.addSubview(descriptionLabelContainer)
         descriptionLabelContainer.addSubview(descriptionLabel)
+        view.addSubview(attributionLabel)
         view.addSubview(doneButton)
     }
     
@@ -202,8 +213,13 @@ class OnboardingVC: UIViewController {
         
         descriptionLabel.leadingAnchor.constraint(equalTo: descriptionLabelContainer.leadingAnchor).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: descriptionLabelContainer.topAnchor).isActive = true
+//        descriptionLabel.centerYAnchor.constraint(equalTo: descriptionLabelContainer.centerYAnchor).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: descriptionLabelContainer.trailingAnchor).isActive = true
         descriptionLabel.heightAnchor.constraint(lessThanOrEqualTo: descriptionLabelContainer.heightAnchor).isActive = true
+        
+        
+        attributionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8).isActive = true
+        attributionLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
         
         
         doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -241,7 +257,7 @@ class OnboardingVC: UIViewController {
     }
     
     @objc private func didSwipeUp() {
-        guard currentPage < onboardingSubtitles.count - 1 else { return }
+        guard currentPage < OnboardingMessages.subtitles.count - 1 else { return }
         didSwipe(forward: true)
     }
     
@@ -254,8 +270,8 @@ class OnboardingVC: UIViewController {
         hideLabels(forward: true)
         doneButton.fadeOut(duration: 1)
         UserDefaults.standard.setOnboardingDone()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         }
     }
     
@@ -264,26 +280,26 @@ class OnboardingVC: UIViewController {
         currentPage += forward ? 1 : -1
         setupCurrentPageDot()
         hideLabels(forward: forward)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned self] in
-            self.setupTextForCurrentPage()
-            self.showLabels(forward: forward)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.setupTextForCurrentPage()
+            self?.showLabels(forward: forward)
         }
-        if currentPage == onboardingSubtitles.count - 1 {
+        if currentPage == OnboardingMessages.subtitles.count - 1 {
             doneButton.fadeIn(duration: 2)
         }
     }
         
     private func setupTextForCurrentPage() {
-        subtitleLabel.text = onboardingSubtitles[currentPage]
-        descriptionLabel.text = onboardingDescriptions[currentPage]
+        subtitleLabel.text = OnboardingMessages.subtitles[currentPage]
+        descriptionLabel.text = OnboardingMessages.descriptions[currentPage]
     }
     
     private func setupCurrentPageDot() {
         UIView.animate(withDuration: 1) { [unowned self] in
             (self.pageIndicatorDots.subviews as! [UIImageView]).forEach { (imageView) in
-                imageView.tintColor = currentTheme.secondaryColor
+                imageView.tintColor = Themes.currentTheme.secondaryColor
             }
-            (self.pageIndicatorDots.subviews[self.currentPage] as! UIImageView).tintColor = currentTheme.primaryAccentColor
+            (self.pageIndicatorDots.subviews[self.currentPage] as! UIImageView).tintColor = Themes.currentTheme.primaryAccentColor
         }
     }
     
@@ -295,8 +311,8 @@ class OnboardingVC: UIViewController {
         })
         
         UIView.animate(withDuration: 0.8, delay: 0.5, options: .curveEaseInOut, animations: { [weak self] in
-            self?.descriptionBottomConstraint.constant = -10
-            self?.descriptionTopConstraint.constant = 80
+            self?.descriptionBottomConstraint.constant = -30
+            self?.descriptionTopConstraint.constant = 50
             self?.view.layoutIfNeeded()
             self?.descriptionLabelContainer.alpha = 1
         }) { (_) in
@@ -312,8 +328,8 @@ class OnboardingVC: UIViewController {
         })
         
         UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: { [weak self] in
-            self?.descriptionBottomConstraint.constant = forward ? -30 : 10
-            self?.descriptionTopConstraint.constant = forward ? 60 : 100
+            self?.descriptionBottomConstraint.constant = forward ? -50 : -10
+            self?.descriptionTopConstraint.constant = forward ? 30 : 70
             self?.view.layoutIfNeeded()
             self?.descriptionLabelContainer.alpha = 0
         }) { (_) in
@@ -324,8 +340,8 @@ class OnboardingVC: UIViewController {
     
     func resetLabelConstraints(forward: Bool) {
         subtitleConstraint.constant = forward ? -20 : -60
-        descriptionBottomConstraint.constant = forward ? 10 : -30
-        descriptionTopConstraint.constant = forward ? 100 : 60
+        descriptionBottomConstraint.constant = forward ? -10 : -50
+        descriptionTopConstraint.constant = forward ? 70 : 30
         view.layoutIfNeeded()
     }
     

@@ -9,7 +9,7 @@
 import Foundation
 
 enum Category {
-    case events, comms, hydro, ls, transit, fun
+    case events, comms, hydro, systems, transit, fun
 }
 
 struct MenuCategory {
@@ -27,8 +27,8 @@ struct MenuCategory {
                 return "Comms"
             case .hydro:
                 return "Weather"
-            case .ls:
-                return "LS"
+            case .systems:
+                return "Systems"
             case .transit:
                 return "Transit"
             case .fun:

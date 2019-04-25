@@ -10,11 +10,30 @@ import UIKit
 
 class EntertainmentVC: UITabBarController {
     
+    let goBackButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let image = #imageLiteral(resourceName: "back-icon").withRenderingMode(.alwaysTemplate)
+        button.imageView?.tintColor = UIColor.white
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = currentTheme.secondaryColor
+        view.backgroundColor = Themes.currentTheme.secondaryColor
         setupTabBar()
+        setupbackButtonLayout()
+    }
+    
+    func setupbackButtonLayout() {
+        view.addSubview(goBackButton)
+        goBackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25).isActive = true
+        goBackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        goBackButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        goBackButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     private func setupTabBar() {
@@ -25,11 +44,16 @@ class EntertainmentVC: UITabBarController {
 
         viewControllers = [activities, musicPlayer, videoPlayer]
         selectedViewController = activities
-        tabBar.barTintColor = currentTheme.primaryColor
-        tabBar.tintColor = currentTheme.primaryAccentColor
+        tabBar.barTintColor = Themes.currentTheme.primaryColor
+        tabBar.tintColor = Themes.currentTheme.primaryAccentColor
         activities.setupBarItem()
         musicPlayer.setupBarItem()
         videoPlayer.setupBarItem()
     }
     
+    
+    @objc private func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
+
 }

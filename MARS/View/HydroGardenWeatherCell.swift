@@ -38,7 +38,7 @@ class HydroGardenWeatherCell: UICollectionViewCell {
     let effectView: UIVisualEffectView = {
         let effectView = UIVisualEffectView()
         effectView.translatesAutoresizingMaskIntoConstraints = false
-        let effectStyle = currentTheme.isLight ? UIBlurEffect.Style.prominent : .dark
+        let effectStyle = Themes.currentTheme.isLight ? UIBlurEffect.Style.prominent : .dark
         let effect = UIBlurEffect(style: effectStyle)
         effectView.effect = effect
         effectView.alpha = 0.3
@@ -117,13 +117,13 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         addSubview(gardenNameLabel)
         gardenNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         gardenNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        gardenNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 65).isActive = true
+        gardenNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
         
         addSubview(weatherIconImageView)
         weatherIconImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        weatherIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -30).isActive = true
-        weatherIconImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        weatherIconImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        weatherIconImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        weatherIconImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        weatherIconImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
         addSubview(temperatureLabel)
         temperatureLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
@@ -134,17 +134,21 @@ class HydroGardenWeatherCell: UICollectionViewCell {
         weatherDescriptionLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         weatherDescriptionLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         weatherDescriptionLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 30).isActive = true
+        weatherDescriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
 
-        weatherIconImageView.fadeIn(duration: 1)
-        temperatureLabel.fadeIn(duration: 1.2)
-        weatherDescriptionLabel.fadeIn(duration: 1.3)
         gardenNameLabel.fadeIn(duration: 1.5)
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         let emitterLayer = precipitationView.layer as! CAEmitterLayer
+        if temperatureLabel.alpha == 0, weatherDescriptionLabel.alpha == 0, temperatureLabel.text != nil, weatherDescriptionLabel.text != nil {
+            weatherIconImageView.fadeIn(duration: 1)
+            temperatureLabel.fadeIn(duration: 1.2)
+            weatherDescriptionLabel.fadeIn(duration: 1.3)
+        }
         
         emitterLayer.emitterPosition = CGPoint(x: bounds.midX, y: 0)
         emitterLayer.emitterSize = CGSize(width: 2.5 * bounds.size.width, height: 1)

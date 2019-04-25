@@ -12,8 +12,8 @@ class MessageCell: UITableViewCell {
     
     var isIncoming: Bool! {
         didSet {
-            cellShapeView.backgroundColor = isIncoming ? currentTheme.secondaryColor : currentTheme.primaryAccentColor
-            messageTextLabel.textColor = isIncoming ? currentTheme.primaryFontColor : currentTheme.primaryColor
+            cellShapeView.backgroundColor = isIncoming ? Themes.currentTheme.secondaryColor : Themes.currentTheme.primaryAccentColor
+            messageTextLabel.textColor = isIncoming ? Themes.currentTheme.primaryFontColor : Themes.currentTheme.primaryColor
             if isIncoming {
                 NSLayoutConstraint.deactivate(trailingConstraints)
                 NSLayoutConstraint.activate(leadingConstraints)
@@ -52,7 +52,7 @@ class MessageCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = currentTheme.primaryFontColor
+        label.textColor = Themes.currentTheme.primaryFontColor
         
         return label
     }()
@@ -68,7 +68,7 @@ class MessageCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
-        backgroundColor = currentTheme.primaryColor
+        backgroundColor = Themes.currentTheme.primaryColor
         
         
         addSubview(authorLabel)
@@ -89,6 +89,7 @@ class MessageCell: UITableViewCell {
         
         
         messageTextLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.75).isActive = true
+        messageTextLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true
 
         bottomConstraint = messageTextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
         bottomConstraint.priority = .defaultLow

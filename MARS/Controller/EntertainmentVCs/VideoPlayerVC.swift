@@ -16,6 +16,8 @@ class VideoPlayerVC: BasePlayerVC {
     
     var wasCurrentlyPlaying: Bool?
     
+    var isLoaded: Bool! = false
+    
     let videoView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -26,21 +28,51 @@ class VideoPlayerVC: BasePlayerVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = currentTheme.secondaryColor
+        view.backgroundColor = Themes.currentTheme.secondaryColor
+        attributionLabel.text = "video via mixkit.co"
         setupVideoView()
-        setupVideoPlayer()
-        setupBackButtonLayout()
+        setupLayout()
+        setupLabelLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !isLoaded {
+            getData()
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        videoLayer!.frame = videoView.frame
+        videoLayer?.frame = videoView.frame
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         isPlaying = false
         videoPlayer?.pause()
         super.viewWillDisappear(animated)
+    }
+    
+    private func setupLabelLayout() {
+        view.addSubview(attributionLabel)
+        attributionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        attributionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+    }
+    
+    private func getData() {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        
+        setupVideoPlayer()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.activityIndicator.isHidden = true
+            self?.activityIndicator.stopAnimating()
+            self?.attributionLabel.fadeIn(duration: 0.5)
+            self?.videoView.fadeIn(duration: 2)
+            self?.showMediaControls()
+            self?.isLoaded = true
+        }
     }
     
     override func addMediaControls() {
@@ -59,11 +91,11 @@ class VideoPlayerVC: BasePlayerVC {
     
     private func fadeMediaControls() {
         if playPauseButton.alpha == 0 {
-            goBackButton.fadeIn(duration: 1)
+            attributionLabel.fadeIn(duration: 1)
             slider.fadeIn(duration: 1)
             playPauseButton.fadeIn(duration: 1)
         } else if playPauseButton.alpha == 1 {
-            goBackButton.fadeOut(duration: 1)
+            attributionLabel.fadeOut(duration: 1)
             slider.fadeOut(duration: 1)
             playPauseButton.fadeOut(duration: 1)
         }
@@ -77,14 +109,13 @@ class VideoPlayerVC: BasePlayerVC {
         videoLayer = AVPlayerLayer(player: videoPlayer)
         videoView.layer.addSublayer(videoLayer!)
         videoLayer!.videoGravity = .resizeAspectFill
-        videoView.fadeIn(duration: 2)
         
         videoPlayer?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         
         let observerInterval = CMTime(value: 1, timescale: 1)
-        videoPlayer?.addPeriodicTimeObserver(forInterval: observerInterval, queue: DispatchQueue.main, using: { (currentTime) in
-            self.currentTimeLabel.text = self.getFormattedTimeString(for: currentTime)
-            self.moveSliderTo(currentTime: currentTime)
+        videoPlayer?.addPeriodicTimeObserver(forInterval: observerInterval, queue: DispatchQueue.main, using: { [weak self] (currentTime) in
+            self?.currentTimeLabel.text = self?.getFormattedTimeString(for: currentTime)
+            self?.moveSliderTo(currentTime: currentTime)
         })
         
         slider.addTarget(self, action: #selector(trackCurrentPlayerState), for: .touchDown)
@@ -99,6 +130,14 @@ class VideoPlayerVC: BasePlayerVC {
         if let videoDuration = videoPlayer?.currentItem?.duration {
             let value = Float(CMTimeGetSeconds(currentTime) / CMTimeGetSeconds(videoDuration))
             self.slider.setValue(value, animated: true)
+            
+            if value == 1 {
+                isPlaying = false
+                fadeMediaControls()
+                videoPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1), completionHandler: { (_) in
+                    self.slider.setValue(0, animated: true)
+                })
+            }
         }
     }
     
@@ -128,13 +167,6 @@ class VideoPlayerVC: BasePlayerVC {
             videoPlayer?.seek(to: gotoTime, completionHandler: { (_) in
             })
         }
-        if slider.value == 1 {
-            isPlaying = false
-            fadeMediaControls()
-            videoPlayer?.seek(to: CMTime(seconds: 0, preferredTimescale: 1), completionHandler: { (_) in
-                self.slider.setValue(0, animated: true)
-            })
-        }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -142,8 +174,6 @@ class VideoPlayerVC: BasePlayerVC {
             if let videoDuration = videoPlayer?.currentItem?.duration {
                 totalTimeLabel.text = getFormattedTimeString(for: videoDuration)
             }
-            
-            showMediaControls()
             
             videoPlayer?.play()
             isPlaying = true

@@ -12,6 +12,13 @@ class ActivityCell: UICollectionViewCell {
     
     var isCellBig: Bool!
     
+    var activity: Activity! {
+        didSet {
+            imageView.image = UIImage(named: activity.name.lowercased())
+            titleLabel.text = activity.name
+        }
+    }
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,8 +31,8 @@ class ActivityCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        label.textColor = currentTheme.primaryFontColor
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        label.textColor = Themes.currentTheme.primaryFontColor
         label.adjustsFontSizeToFitWidth = true
         
         return label
@@ -34,32 +41,36 @@ class ActivityCell: UICollectionViewCell {
     let detailLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 17)
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 0
-        label.textColor = currentTheme.secondaryFontColor
+        label.numberOfLines = 4
+        label.textColor = Themes.currentTheme.secondaryFontColor
         
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = currentTheme.primaryColor
+        backgroundColor = Themes.currentTheme.primaryColor
         layer.cornerRadius = 15
         layer.masksToBounds = true
+        addSubview(imageView)
+        addSubview(titleLabel)
+        setupLayout()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupLayout()
+        if isCellBig {
+            addSubview(detailLabel)
+        } else {
+            detailLabel.removeFromSuperview()
+        }
         setupLayoutBasedOnSize()
     }
     
     private func setupLayout() {
-        addSubview(imageView)
-        addSubview(titleLabel)
-
         imageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
@@ -68,19 +79,16 @@ class ActivityCell: UICollectionViewCell {
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     private func setupLayoutBasedOnSize() {
         titleLabel.textAlignment = isCellBig ? .left : .center
+        titleLabel.font = isCellBig ? UIFont.systemFont(ofSize: 25, weight: .semibold) : UIFont.systemFont(ofSize: 22, weight: .semibold)
         if isCellBig {
-            addSubview(detailLabel)
             detailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
             detailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5).isActive = true
             detailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
             detailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-        } else {
-            detailLabel.removeFromSuperview()
         }
     }
     

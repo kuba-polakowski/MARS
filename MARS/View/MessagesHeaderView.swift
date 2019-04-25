@@ -25,11 +25,11 @@ class MessagesHeaderView: UIView {
     let label: paddedLabel = {
         let label = paddedLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = currentTheme.primaryColor
+        label.textColor = Themes.currentTheme.primaryColor
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14)
         
-        label.backgroundColor = currentTheme.secondaryAccentColor
+        label.backgroundColor = Themes.currentTheme.secondaryAccentColor
         label.layer.cornerRadius = 12
         label.layer.masksToBounds = true
         

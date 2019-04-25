@@ -11,15 +11,15 @@ import UIKit
 private let transitCellId = "transitCellId"
 
 class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
-    
+        
     var chosenVehicle: Vehicle?
     
     let allVehiclesByType: [[Vehicle]] = {
         var allVehicles = [[Vehicle]]()
-        let groupedVehicles = Dictionary(grouping: vehicles) { (element) -> String in
+        let groupedVehicles = Dictionary(grouping: Vehicles.all) { (element) -> String in
             return element.name
         }
-        groupedVehicles.keys.forEach({ (vehicleType) in
+        groupedVehicles.keys.sorted().forEach({ (vehicleType) in
             allVehicles.append(groupedVehicles[vehicleType] ?? [])
         })
         return allVehicles
@@ -49,8 +49,9 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     let summonVehicleButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = currentTheme.secondaryFontColor
-        button.titleLabel?.textColor = currentTheme.primaryColor
+        button.backgroundColor = Themes.currentTheme.secondaryFontColor
+        button.titleLabel?.textColor = Themes.currentTheme.primaryColor
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitle("Summon Vehicle", for: .normal)
         button.layer.cornerRadius = 15
         button.layer.masksToBounds = true
@@ -62,7 +63,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = currentTheme.primaryColor
+        view.backgroundColor = Themes.currentTheme.primaryColor
         
         return view
     }()
@@ -71,7 +72,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
-        button.tintColor = currentTheme.primaryAccentColor
+        button.tintColor = Themes.currentTheme.primaryAccentColor
         
         return button
     }()
@@ -96,8 +97,8 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         collectionView.isScrollEnabled = false
         
         addSubview(summonVehicleButton)
-        summonVehicleButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        summonVehicleButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        summonVehicleButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 50).isActive = true
+        summonVehicleButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -50).isActive = true
         summonVehicleButton.topAnchor.constraint(equalTo: topAnchor).isActive = true
         summonVehicleButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
@@ -125,7 +126,7 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     func animateSummonButton() {
         let canSummonVehicle = selectedVehicleIsAvailable
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: { [weak self] in
-            self?.summonVehicleButton.backgroundColor = canSummonVehicle ? currentTheme.tertiaryAccentColor : currentTheme.secondaryFontColor
+            self?.summonVehicleButton.backgroundColor = canSummonVehicle ? Themes.currentTheme.tertiaryAccentColor : Themes.currentTheme.secondaryFontColor
         })
     }
     
@@ -148,7 +149,6 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: transitCellId, for: indexPath) as! TransitMenuCell
-        
         let vehicleType = allVehiclesByType[indexPath.item]
         let vehicleExample = vehicleType.first!
         
@@ -156,18 +156,15 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
             cell.imageView.image = image.withRenderingMode(.alwaysTemplate)
         }
         var numberOfVehiclesOutOfJuice = 0
-        var available: Bool {
-            var available = false
-            vehicleType.forEach({ (vehicle) in
-                if vehicle.charge > 0 {
-                    available = true
-                } else {
-                    numberOfVehiclesOutOfJuice += 1
-                }
-            })
-            return available
+        var available = false
+        for vehicle in vehicleType {
+            if vehicle.charge == 0 {
+                numberOfVehiclesOutOfJuice += 1
+            } else {
+                available = true
+            }
         }
-        
+
         cell.available = available
         
         if isExpanded {
@@ -183,7 +180,6 @@ class TransitMenuView: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
         if selectedItemIndexPath != nil {
             cell.isSelected = indexPath == selectedItemIndexPath
         }
-        
         return cell
     }
     

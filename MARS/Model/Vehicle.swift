@@ -8,7 +8,7 @@
 
 import MapKit
 
-class Vehicle {
+struct Vehicle {
     let name: String
     var charge: Int
     var location: CLLocationCoordinate2D

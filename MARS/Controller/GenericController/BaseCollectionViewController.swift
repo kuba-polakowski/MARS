@@ -12,13 +12,23 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
 
     let standardCollectionViewInset: CGFloat = 15
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.color = Themes.currentTheme.primaryAccentColor
+        
+        return activityIndicatorView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = Themes.currentTheme.secondaryColor
         setupNavigationBar()
         setupFlowLayout()
         setupCollectionViewLayout()
         setupAdditionalViews()
+        setupActivityIndicatorLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,12 +49,19 @@ class BaseCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     func setupCollectionViewLayout() {
-        collectionView.backgroundColor = currentTheme.secondaryColor
+        collectionView.backgroundColor = Themes.currentTheme.secondaryColor
         collectionView.contentInsetAdjustmentBehavior = .always
     }
     
     func setupAdditionalViews() {
-        
+    }
+    
+    private func setupActivityIndicatorLayout() {
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func setupNavigationBar() {

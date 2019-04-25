@@ -45,7 +45,7 @@ class ChatCategoriesVC: UIViewController, UITableViewDataSource, UITableViewDele
         tableView.dataSource = self
 
         tableView.rowHeight = 120
-        tableView.backgroundColor = currentTheme.secondaryColor
+        tableView.backgroundColor = Themes.currentTheme.secondaryColor
         tableView.separatorStyle = .none
         tableView.contentInset.top = 20
         
@@ -62,7 +62,7 @@ class ChatCategoriesVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: chatCellId, for: indexPath) as! ChatCategoryCell
-        let event = upcomingEvents[indexPath.item % 3]
+        let event = Events.upcomingEvents[indexPath.item % 3]
         
         cell.categoryImageView.image = UIImage(named: event.imageName)
         cell.label.text = chatSubjects[indexPath.row]
@@ -71,7 +71,10 @@ class ChatCategoriesVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(MessagesVC(), animated: true)
+        let chosenCategory = tableView.cellForRow(at: indexPath) as! ChatCategoryCell
+        let messagesVC = MessagesVC()
+        messagesVC.title = chosenCategory.label.text
+        navigationController?.pushViewController(messagesVC, animated: true)
     }
 
 

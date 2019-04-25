@@ -21,6 +21,7 @@ enum TemperatureScale {
 }
 
 struct Weather {
+    let gardenName: GardenName
     let temperature: Int
     let windSpeed: Int
     let precipitation: Precipitation

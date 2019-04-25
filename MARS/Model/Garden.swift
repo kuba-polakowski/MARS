@@ -9,6 +9,10 @@
 import UIKit
 
 struct Garden {
-    let name: String
+    let name: GardenName
     let colors: [CGColor]
+}
+
+enum GardenName: String {
+    case temperate, drought, tropical, snowy
 }

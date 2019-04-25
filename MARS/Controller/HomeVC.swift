@@ -13,13 +13,25 @@ private let menuHeaderId = "menuHeaderId"
 
 class HomeVC: BaseCollectionViewController {
     
+    let menuCategories: [MenuCategory] = [MenuCategory(.events),
+                                          MenuCategory(.comms),
+                                          MenuCategory(.hydro),
+                                          MenuCategory(.systems),
+                                          MenuCategory(.transit),
+                                          MenuCategory(.fun)
+        
+    ]
+
     let themeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Change Theme", for: .normal)
-        button.backgroundColor = currentTheme.tertiaryAccentColor
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 20
+        
+        button.layer.borderColor = Themes.currentTheme.tertiaryAccentColor.cgColor
+        button.setTitleColor(Themes.currentTheme.tertiaryAccentColor, for: .normal)
+        button.layer.borderWidth = 2
+        
         
         button.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
         
@@ -27,7 +39,7 @@ class HomeVC: BaseCollectionViewController {
     }()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
     
     override func viewDidLoad() {
@@ -41,8 +53,8 @@ class HomeVC: BaseCollectionViewController {
         view.addSubview(themeButton)
         themeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         themeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        themeButton.widthAnchor.constraint(equalToConstant: 135).isActive = true
-        themeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        themeButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        themeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,11 +70,12 @@ class HomeVC: BaseCollectionViewController {
     }
     
     @objc private func changeTheme() {
-        currentTheme = currentTheme.isLight ? darkTheme : lightTheme
-        UserDefaults.standard.setThemeIsLight(currentTheme.isLight)
+        Themes.currentTheme = Themes.currentTheme.isLight ? Themes.darkTheme : Themes.lightTheme
+        UserDefaults.standard.setThemeIsLight(Themes.currentTheme.isLight)
         
-        themeButton.backgroundColor = currentTheme.tertiaryAccentColor
-        collectionView.backgroundColor = currentTheme.secondaryColor
+        themeButton.layer.borderColor = Themes.currentTheme.tertiaryAccentColor.cgColor
+        themeButton.setTitleColor(Themes.currentTheme.tertiaryAccentColor, for: .normal)
+        collectionView.backgroundColor = Themes.currentTheme.secondaryColor
         
         collectionView.reloadData()
     }
@@ -70,7 +83,8 @@ class HomeVC: BaseCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: menuHeaderId, for: indexPath) as! MenuHeaderView
         
-        if let posterImage = UIImage(named: currentTheme.posterName) {
+        header.attributionLabel.textColor = Themes.currentTheme.primaryFontColor
+        if let posterImage = UIImage(named: Themes.currentTheme.posterName) {
             header.imageView.image = posterImage
         } else {
             header.imageView.image = #imageLiteral(resourceName: "macaw")
@@ -85,7 +99,14 @@ class HomeVC: BaseCollectionViewController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let insets = view.safeAreaInsets.left + view.safeAreaInsets.right
-        let width = view.frame.width < 420 ? (view.frame.width - 3 * standardCollectionViewInset) / 2 : (view.frame.width - 5 * standardCollectionViewInset - insets) / 4
+        var width: CGFloat = 0
+        if view.frame.width < 420 {
+            width = (view.frame.width - 3 * standardCollectionViewInset) / 2
+        } else if view.frame.width < 1000 {
+            width = (view.frame.width - 6 * standardCollectionViewInset - insets) / 4
+        } else {
+            width = (view.frame.width - 8 * standardCollectionViewInset - insets) / 6
+        }
         return CGSize(width: width, height: width)
     }
     
@@ -109,7 +130,7 @@ class HomeVC: BaseCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let chosenCell = collectionView.cellForItem(at: indexPath) as! MenuCell
         let collectionViewLayout = UICollectionViewFlowLayout()
-        navigationController?.navigationBar.barTintColor = currentTheme.primaryColor
+        navigationController?.navigationBar.barTintColor = Themes.currentTheme.primaryColor
         switch chosenCell.category! {
         case .events:
             navigationController?.pushViewController(EventsVC(collectionViewLayout: collectionViewLayout), animated: true)
@@ -117,7 +138,7 @@ class HomeVC: BaseCollectionViewController {
             navigationController?.pushViewController(ChatCategoriesVC(), animated: true)
         case .hydro:
             navigationController?.pushViewController(HydroGardenVC(collectionViewLayout: collectionViewLayout), animated: true)
-        case .ls:
+        case .systems:
             navigationController?.pushViewController(LSStatsVC(collectionViewLayout: collectionViewLayout), animated: true)
         case .transit:
             navigationController?.pushViewController(TransitVC(), animated: true)

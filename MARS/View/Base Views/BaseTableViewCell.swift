@@ -13,7 +13,7 @@ class BaseTableViewCell: UITableViewCell {
     let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = currentTheme.primaryFontColor
+        label.textColor = Themes.currentTheme.primaryFontColor
         
         return label
     }()
@@ -23,7 +23,7 @@ class BaseTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
-        view.backgroundColor = currentTheme.primaryColor
+        view.backgroundColor = Themes.currentTheme.primaryColor
 
         return view
     }()

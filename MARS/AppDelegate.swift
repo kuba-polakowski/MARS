@@ -21,10 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let menuCollectionViewLayout = UICollectionViewFlowLayout()
         
-        currentTheme = UserDefaults.standard.isThemeLight() ? lightTheme : darkTheme
+        Themes.currentTheme = UserDefaults.standard.isThemeLight() ? Themes.lightTheme : Themes.darkTheme
         
         if !UserDefaults.standard.isOnboardingDone() {
-            currentTheme = lightTheme
+            Themes.currentTheme = Themes.lightTheme
             UserDefaults.standard.setThemeIsLight(true)
         }
 

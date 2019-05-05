@@ -37,7 +37,6 @@
 		0458977E222D59C90017AD96 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458977D222D59C90017AD96 /* OnboardingVC.swift */; };
 		04589780222D62A50017AD96 /* OnboardingMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458977F222D62A50017AD96 /* OnboardingMessages.swift */; };
 		046CA7442236A70E00D55DCB /* BasePlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046CA7432236A70E00D55DCB /* BasePlayerVC.swift */; };
-		046CA7462236B40600D55DCB /* stockVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 046CA7452236B40600D55DCB /* stockVideo.mp4 */; };
 		046D4705222C4BBC0001E824 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D4704222C4BBC0001E824 /* NavigationControllerExtension.swift */; };
 		046E1828221B3395005940DA /* DateFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1827221B3395005940DA /* DateFormatterExtension.swift */; };
 		046E182A221B369E005940DA /* MessagesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E1829221B369E005940DA /* MessagesHeaderView.swift */; };
@@ -55,6 +54,7 @@
 		04B3ADA12214837D00BB61C3 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA02214837D00BB61C3 /* MessagesVC.swift */; };
 		04B3ADA422148EE100BB61C3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA322148EE100BB61C3 /* Message.swift */; };
 		04B3ADA72214916800BB61C3 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA62214916800BB61C3 /* Messages.swift */; };
+		04B89644227F4FAA002BFCA4 /* stockVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04B89643227F4FAA002BFCA4 /* stockVideo.mp4 */; };
 		04C679D122246F5200F997E1 /* HydroGardenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D022246F5200F997E1 /* HydroGardenVC.swift */; };
 		04C679D3222470CF00F997E1 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D2222470CF00F997E1 /* Weather.swift */; };
 		04C679D5222472C700F997E1 /* WeatherSituations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D4222472C700F997E1 /* WeatherSituations.swift */; };
@@ -103,7 +103,6 @@
 		0458977D222D59C90017AD96 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		0458977F222D62A50017AD96 /* OnboardingMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMessages.swift; sourceTree = "<group>"; };
 		046CA7432236A70E00D55DCB /* BasePlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlayerVC.swift; sourceTree = "<group>"; };
-		046CA7452236B40600D55DCB /* stockVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = stockVideo.mp4; sourceTree = "<group>"; };
 		046D4704222C4BBC0001E824 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		046E1827221B3395005940DA /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
 		046E1829221B369E005940DA /* MessagesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesHeaderView.swift; sourceTree = "<group>"; };
@@ -121,6 +120,7 @@
 		04B3ADA02214837D00BB61C3 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		04B3ADA322148EE100BB61C3 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		04B3ADA62214916800BB61C3 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		04B89643227F4FAA002BFCA4 /* stockVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = stockVideo.mp4; sourceTree = "<group>"; };
 		04C679D022246F5200F997E1 /* HydroGardenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroGardenVC.swift; sourceTree = "<group>"; };
 		04C679D2222470CF00F997E1 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		04C679D4222472C700F997E1 /* WeatherSituations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSituations.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				04F3B4102273816900387C54 /* music.mp3 */,
-				046CA7452236B40600D55DCB /* stockVideo.mp4 */,
+				04B89643227F4FAA002BFCA4 /* stockVideo.mp4 */,
 				043D4EA9222FE48000B28797 /* onboardingVideo.mp4 */,
 				0441F6B52210984800EAD015 /* MARS */,
 				0441F6B42210984800EAD015 /* Products */,
@@ -364,10 +364,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F3B4112273816900387C54 /* music.mp3 in Resources */,
-				046CA7462236B40600D55DCB /* stockVideo.mp4 in Resources */,
 				043D4EAA222FE48000B28797 /* onboardingVideo.mp4 in Resources */,
 				0441F6C12210984A00EAD015 /* LaunchScreen.storyboard in Resources */,
 				0441F6BE2210984A00EAD015 /* Assets.xcassets in Resources */,
+				04B89644227F4FAA002BFCA4 /* stockVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -557,7 +557,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

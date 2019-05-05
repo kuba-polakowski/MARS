@@ -164,7 +164,7 @@ class MusicPlayerVC: BasePlayerVC {
     }
     
     private func setupMusicPlayer() {
-        guard let path = Bundle.main.path(forResource: "not-of-this-earth", ofType: ".mp3") else { return }
+        guard let path = Bundle.main.path(forResource: "music", ofType: ".mp3") else { return }
         let url = URL(fileURLWithPath: path)
         
         musicPlayer = AVPlayer(url: url)

@@ -32,7 +32,6 @@ class HomeVC: BaseCollectionViewController {
         button.setTitleColor(Themes.currentTheme.tertiaryAccentColor, for: .normal)
         button.layer.borderWidth = 2
         
-        
         button.addTarget(self, action: #selector(changeTheme), for: .touchUpInside)
         
         return button

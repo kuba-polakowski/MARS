@@ -86,7 +86,7 @@ class ActivityDetailView: UIView {
     let bottomFadeGradientView: GradientView = {
         let view = GradientView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        (view.layer as! CAGradientLayer).locations = [0.0, 0.05, 0.95, 1.0]
+        (view.layer as! CAGradientLayer).locations = [0.0, 0.03, 0.97, 1.0]
         (view.layer as! CAGradientLayer).colors = [Themes.currentTheme.primaryColor.cgColor, Themes.currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, Themes.currentTheme.primaryColor.withAlphaComponent(0.01).cgColor, Themes.currentTheme.primaryColor.cgColor]
         
         return view

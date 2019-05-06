@@ -1,4 +1,4 @@
-//\\ Coming next week: using CloudKit for chat messages and Events, and Firebase for videos //\\
+//\\ Coming next week: using CloudKit for chat messages and events, and Firebase for videos //\\
 
 # MARS
 #### A showcase App (Swift)
@@ -7,7 +7,7 @@
 
 App made only to showcase my coding abilities.
 
-
+-----------------------
 MVC architecture
 
 UI - 100% in-code using Auto Layout.

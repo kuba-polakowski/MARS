@@ -19,6 +19,7 @@
 		042478BA2219CF3E00878DE4 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042478B92219CF3E00878DE4 /* Events.swift */; };
 		042558212225762900EB5FC6 /* Garden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042558202225762900EB5FC6 /* Garden.swift */; };
 		04255825222576B200EB5FC6 /* Gardens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04255824222576B200EB5FC6 /* Gardens.swift */; };
+		0426A5A722802DEE00605CDC /* stockVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0426A5A622802DEE00605CDC /* stockVideo.mp4 */; };
 		042D8B8C221C679F0095743C /* FadeAnimationsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D8B8B221C679F0095743C /* FadeAnimationsExtension.swift */; };
 		042D8B8E221C6BA30095743C /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D8B8D221C6BA30095743C /* EventDetailVC.swift */; };
 		042D8B90221C6BF00095743C /* BaseEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D8B8F221C6BF00095743C /* BaseEventView.swift */; };
@@ -54,7 +55,6 @@
 		04B3ADA12214837D00BB61C3 /* MessagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA02214837D00BB61C3 /* MessagesVC.swift */; };
 		04B3ADA422148EE100BB61C3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA322148EE100BB61C3 /* Message.swift */; };
 		04B3ADA72214916800BB61C3 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B3ADA62214916800BB61C3 /* Messages.swift */; };
-		04B89644227F4FAA002BFCA4 /* stockVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04B89643227F4FAA002BFCA4 /* stockVideo.mp4 */; };
 		04C679D122246F5200F997E1 /* HydroGardenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D022246F5200F997E1 /* HydroGardenVC.swift */; };
 		04C679D3222470CF00F997E1 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D2222470CF00F997E1 /* Weather.swift */; };
 		04C679D5222472C700F997E1 /* WeatherSituations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C679D4222472C700F997E1 /* WeatherSituations.swift */; };
@@ -83,6 +83,7 @@
 		042478B92219CF3E00878DE4 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		042558202225762900EB5FC6 /* Garden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Garden.swift; sourceTree = "<group>"; };
 		04255824222576B200EB5FC6 /* Gardens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gardens.swift; sourceTree = "<group>"; };
+		0426A5A622802DEE00605CDC /* stockVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = stockVideo.mp4; sourceTree = "<group>"; };
 		042D8B8B221C679F0095743C /* FadeAnimationsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeAnimationsExtension.swift; sourceTree = "<group>"; };
 		042D8B8D221C6BA30095743C /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		042D8B8F221C6BF00095743C /* BaseEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEventView.swift; sourceTree = "<group>"; };
@@ -120,7 +121,6 @@
 		04B3ADA02214837D00BB61C3 /* MessagesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesVC.swift; sourceTree = "<group>"; };
 		04B3ADA322148EE100BB61C3 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		04B3ADA62214916800BB61C3 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
-		04B89643227F4FAA002BFCA4 /* stockVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = stockVideo.mp4; sourceTree = "<group>"; };
 		04C679D022246F5200F997E1 /* HydroGardenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydroGardenVC.swift; sourceTree = "<group>"; };
 		04C679D2222470CF00F997E1 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		04C679D4222472C700F997E1 /* WeatherSituations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSituations.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				04F3B4102273816900387C54 /* music.mp3 */,
-				04B89643227F4FAA002BFCA4 /* stockVideo.mp4 */,
+				0426A5A622802DEE00605CDC /* stockVideo.mp4 */,
 				043D4EA9222FE48000B28797 /* onboardingVideo.mp4 */,
 				0441F6B52210984800EAD015 /* MARS */,
 				0441F6B42210984800EAD015 /* Products */,
@@ -367,7 +367,7 @@
 				043D4EAA222FE48000B28797 /* onboardingVideo.mp4 in Resources */,
 				0441F6C12210984A00EAD015 /* LaunchScreen.storyboard in Resources */,
 				0441F6BE2210984A00EAD015 /* Assets.xcassets in Resources */,
-				04B89644227F4FAA002BFCA4 /* stockVideo.mp4 in Resources */,
+				0426A5A722802DEE00605CDC /* stockVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

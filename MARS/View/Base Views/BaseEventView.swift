@@ -93,7 +93,7 @@ class BaseEventView: UIView {
         titleLabelTopConstraint.constant = 15
         dateLabelLeadingConstraint.isActive = false
         dateLabelTrailingConstraint.isActive = true
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: { [weak self] in
+        UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseOut, animations: { [weak self] in
             self?.layoutIfNeeded()
         })
     }

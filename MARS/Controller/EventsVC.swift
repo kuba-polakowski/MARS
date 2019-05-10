@@ -80,12 +80,12 @@ class EventsVC: BaseCollectionViewController {
             }
         }
         
-        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: {
             chosenCell.frame.origin.y = currentOffset
             }, completion: { (_) in
                 chosenCell.animateForTransition(withInsets: self.view.safeAreaInsets)
                 
-                UIView.animate(withDuration: 0.5, animations: { [unowned self] in
+                UIView.animate(withDuration: 0.8, animations: { [unowned self] in
                     self.collectionView.backgroundColor = Themes.currentTheme.primaryColor
                 }, completion: { (_) in
                     let eventDetailVC = EventDetailVC()
@@ -96,7 +96,7 @@ class EventsVC: BaseCollectionViewController {
                 })
         })
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) { [weak self] in
             self?.collectionView.backgroundColor = Themes.currentTheme.secondaryColor
             chosenCell.setOriginalConstraints()
             chosenCell.eventView.clipsToBounds = true

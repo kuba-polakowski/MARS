@@ -39,6 +39,11 @@ Includes adding the chosen event to iOS calendar.
 
 - An Entertainment section (tabs) - Music Player, Video Player and a collection view with variable cell sizes and a swipe-to-dismiss detail view
 
+![iPhone Xs Max, light theme](/git-screenshots/screenshots-xs-light.png?raw=true)
+iPhone Xs Max, light theme - Onboarding screen, Chat, Maps (route calculation)
+
+![iPhone SE, dark theme](/git-screenshots/screenshots-se-dark.png?raw=true)
+iPhone SE, dark theme - Chat, Music player, Event detail view
 
 
 ________________________________________

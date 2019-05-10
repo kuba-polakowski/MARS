@@ -102,6 +102,7 @@
 		0454D46E2271BC7700D34F19 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0458977D222D59C90017AD96 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		0458977F222D62A50017AD96 /* OnboardingMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMessages.swift; sourceTree = "<group>"; };
+		046345592285B51500BDA7DF /* git-screenshots */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "git-screenshots"; sourceTree = "<group>"; };
 		046CA7432236A70E00D55DCB /* BasePlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePlayerVC.swift; sourceTree = "<group>"; };
 		046D4704222C4BBC0001E824 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		046E1827221B3395005940DA /* DateFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterExtension.swift; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 		0441F6AA2210984800EAD015 = {
 			isa = PBXGroup;
 			children = (
+				046345592285B51500BDA7DF /* git-screenshots */,
 				04F3B4102273816900387C54 /* music.mp3 */,
 				049C228B22805C45005EE2C6 /* stockVideo.mp4 */,
 				043D4EA9222FE48000B28797 /* onboardingVideo.mp4 */,
